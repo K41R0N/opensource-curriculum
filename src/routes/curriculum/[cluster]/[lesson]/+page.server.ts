@@ -2,14 +2,30 @@ import type { PageServerLoad } from './$types';
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { marked } from 'marked';
+
+/**
+ * Configure marked for safe HTML output
+ */
+marked.setOptions({
+	gfm: true,
+	breaks: false
+});
+
+/**
+ * Parse markdown content to HTML
+ */
+function parseMarkdown(content: string): string {
+	if (!content) return '';
+	return marked.parse(content, { async: false }) as string;
+}
 
 /**
  * Get all markdown content files from a directory
- * Excludes any files with locale suffixes (e.g., *.es-CO.md)
  */
 function getContentFiles(dir: string): string[] {
 	const allFiles = fs.readdirSync(dir).filter((f: string) => f.endsWith('.md'));
-	return allFiles.filter((f: string) => !f.match(/\.[a-z]{2}(-[A-Z]{2})?\.md$/));
+	return allFiles;
 }
 
 export const load: PageServerLoad = async ({ params }) => {
@@ -32,10 +48,27 @@ export const load: PageServerLoad = async ({ params }) => {
 
 			// Match by frontmatter cluster and slug fields
 			if (data.cluster === cluster && data.slug === lesson) {
+				// Parse markdown content to HTML
+				const parsedContent = parseMarkdown(content);
+
+				// Parse markdown in key_concepts explanations
+				const parsedConcepts = data.key_concepts?.map((concept: { name: string; explanation: string }) => ({
+					...concept,
+					explanation: parseMarkdown(concept.explanation)
+				}));
+
+				// Parse markdown in assignment instructions
+				const parsedAssignment = data.assignment ? {
+					...data.assignment,
+					instructions: parseMarkdown(data.assignment.instructions)
+				} : null;
+
 				return {
 					lesson: {
 						...data,
-						content
+						content: parsedContent,
+						key_concepts: parsedConcepts,
+						assignment: parsedAssignment
 					},
 					hasContent: true
 				};

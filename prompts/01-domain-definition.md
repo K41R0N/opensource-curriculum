@@ -4,7 +4,7 @@ Use this prompt with your AI assistant to define the scope and central question 
 
 ## The Prompt
 
-```
+```text
 I want to create a self-directed research curriculum. Help me define and scope the domain.
 
 The broad topic I'm interested in is: [YOUR TOPIC]

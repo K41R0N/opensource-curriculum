@@ -4,7 +4,7 @@ Use this prompt to organize your verified readings into a coherent curriculum st
 
 ## The Prompt
 
-```
+```text
 I have a reading list for my curriculum on [YOUR DOMAIN].
 
 Here are the readings I've selected:
@@ -86,14 +86,14 @@ Rationale: Progresses from consumption to agency
 ## Follow-Up Prompts
 
 To refine a specific cluster:
-```
+```text
 The [CLUSTER NAME] cluster feels unfocused.
 The readings are: [LIST]
 Can you suggest a tighter theme, or recommend which reading to cut?
 ```
 
 To draft lesson content:
-```
+```text
 For this reading: [CITATION]
 In the context of [CLUSTER THEME]
 
@@ -105,7 +105,7 @@ Please draft:
 ```
 
 To identify gaps:
-```
+```text
 Looking at this curriculum structure: [PASTE STRUCTURE]
 
 Are there any obvious gaps? Specifically:

@@ -138,21 +138,6 @@
 		</section>
 	{/if}
 
-	<!-- Footer -->
-	<footer class="home-footer">
-		{#if settings?.footer_text}
-			<p class="footer-tagline">{settings.footer_text}</p>
-		{/if}
-		{#if settings?.author}
-			<p class="footer-author">
-				{#if settings.substack_url}
-					<a href={settings.substack_url} target="_blank" rel="noopener">{settings.author}</a>
-				{:else}
-					{settings.author}
-				{/if}
-			</p>
-		{/if}
-	</footer>
 </main>
 
 <style>
@@ -339,33 +324,6 @@
 
 	.approach-content :global(em) {
 		font-style: italic;
-	}
-
-	/* Footer */
-	.home-footer {
-		text-align: center;
-		margin-top: 3rem;
-		padding-top: 2rem;
-		border-top: 1px solid var(--color-border);
-	}
-
-	.footer-tagline {
-		font-family: var(--font-body);
-		font-size: 0.875rem;
-		color: var(--color-text-muted);
-		margin: 0 0 0.5rem;
-	}
-
-	.footer-author {
-		margin: 0;
-	}
-
-	.footer-author a {
-		font-family: var(--font-body);
-		font-size: 0.875rem;
-		font-weight: 600;
-		color: var(--color-text);
-		text-decoration: underline;
 	}
 
 	/* Responsive */

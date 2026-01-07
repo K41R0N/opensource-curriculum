@@ -4,7 +4,7 @@ Use this prompt to discover foundational texts for your curriculum after definin
 
 ## The Prompt
 
-```
+```text
 I'm building a self-directed research curriculum on [YOUR DOMAIN].
 
 The central question is: [YOUR CENTRAL QUESTION FROM PROMPT 01]
@@ -78,7 +78,7 @@ Cut aggressively. A focused curriculum of 15 excellent texts beats 30 mediocre o
 
 If you need more suggestions for a specific area:
 
-```
+```text
 The readings you suggested for [CLUSTER THEME] feel thin.
 Can you suggest 3-5 more foundational texts specifically on [TOPIC]?
 Remember to prioritize primary sources and verify citations.
@@ -86,7 +86,7 @@ Remember to prioritize primary sources and verify citations.
 
 If you want to verify a specific text:
 
-```
+```text
 Please verify this citation is accurate and tell me:
 1. Is this a real published work?
 2. What year was it actually published?

@@ -28,12 +28,9 @@ function toValidInteger(value: unknown): number | null {
 
 /**
  * Get all markdown content files from a directory
- * Excludes any files with locale suffixes (e.g., *.es-CO.md)
  */
 function getContentFiles(dir: string): string[] {
-	const allFiles = fs.readdirSync(dir).filter((f: string) => f.endsWith('.md'));
-	// Filter out any localized files (files with locale suffix like .es-CO.md)
-	return allFiles.filter((f: string) => !f.match(/\.[a-z]{2}(-[A-Z]{2})?\.md$/));
+	return fs.readdirSync(dir).filter((f: string) => f.endsWith('.md'));
 }
 
 /**

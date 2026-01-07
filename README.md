@@ -66,7 +66,7 @@ See the "Setting Up the CMS" lesson in the curriculum for detailed instructions.
 
 ## Project Structure
 
-```
+```plaintext
 curriculum-template/
 ├── content/                    # All content (CMS-managed)
 │   ├── clusters/              # Thematic groupings
