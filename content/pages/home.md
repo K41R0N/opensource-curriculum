@@ -1,10 +1,10 @@
 ---
-title: The Device Economies Curriculum
-tagline: A self-directed research program for understanding how devices shape human reality.
-cta_text: Begin Reading
+title: Build Your Own Research Curriculum
+tagline: A platform for creating self-directed, depth-first learning experiences.
+cta_text: Start Learning
 ---
-When we went to school, teachers asked us not to use Wikipedia. What we did was cite the Wikipedia sources instead. This is the root of how digital scholarship in the algorithm age should go.
+This is both a template and a guide. The curriculum you're reading right now teaches you how to build your own.
 
-You start with the things you know you have to learn, and you branch out as you actually develop an understanding and opinions to challenge. The goal is not comprehensive coverage, but depth. Each reading opens doors to further exploration.
+Fork this repository, replace the content with your domain of expertise, and deploy your own curriculum in under an hour. No coding required.
 
-This curriculum is a foundation, not a destination. It's designed to be used actively; engaging each text by asking: _How does this illuminate the concept of the societal constructs I call Devices? What new dimensions does it reveal?_
+**Why build a curriculum?** Because depth beats breadth. In an age of infinite content, the scarce resource is structured paths through foundational texts. If you've done the work to understand a field deeply, this platform helps you share that path with others.

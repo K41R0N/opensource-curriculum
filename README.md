@@ -1,32 +1,196 @@
-# DEVICES Curriculum
+# Self-Directed Research Curriculum Template
 
-A self-directed research curriculum exploring how devices—material, conceptual, and ritual—shape human reality. Built with SvelteKit, Sveltia CMS, and a front-end agnostic content architecture.
+A fork-friendly platform for creating self-directed research curricula. Built with SvelteKit, Sveltia CMS, and a front-end agnostic content architecture.
 
 ## Deploy Your Own
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/K41R0N/devices-curriculum)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/YOUR_USERNAME/YOUR_REPO)
 
-[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/sveltia/sveltia-cms-auth)
+> **Note:** After deploying, follow the [CMS Setup](#step-3-set-up-cms-authentication) instructions to enable content editing.
 
-> **Note:** Deploy the Netlify site first, then the Cloudflare Worker for CMS authentication. See [Configuration](#configuration) below.
+## What Is This?
 
-## Overview
+This template helps you create **depth-first learning experiences**—structured paths through foundational texts that help learners go deep on a topic.
 
-This project contains **25 lessons** across **9 thematic clusters**, exploring the theoretical foundations of the DEVICES framework. The curriculum draws from sociology, philosophy, anthropology, media studies, and science & technology studies.
+**The starter content teaches you how to use it.** Read the included curriculum to learn the methodology, then replace it with your own domain of expertise.
 
-**Key Features:**
-- Dynamic content loading from Markdown files
-- Git-based CMS for content management
+**Features:**
+- Browser-based content editing (no code required)
+- Markdown + Git for version-controlled content
+- Automatic deployment on every change
 - Machine-readable APIs for programmatic access
-- Front-end agnostic architecture (redesign without changing content)
+- Mobile-responsive, accessible design
 
-## Documentation
+## Quick Start
 
-| Document | Description |
-|----------|-------------|
-| [CONTENT_ARCHITECTURE.md](./CONTENT_ARCHITECTURE.md) | Content schema, types, and component contracts |
-| [METHODOLOGY.md](./METHODOLOGY.md) | Guide to building your own curriculum with AI |
-| [AGENTS.md](./AGENTS.md) | Instructions for AI agents working on this project |
+### Step 1: Fork and Deploy
+
+1. Click "Use this template" or fork this repository
+2. Click the "Deploy to Netlify" button
+3. Wait for the initial build (~2 minutes)
+
+Your site is now live at a random Netlify URL.
+
+### Step 2: Configure Your URL
+
+1. In Netlify: Site settings → Domain management
+2. Click "Options" → "Edit site name"
+3. Choose a memorable name (e.g., `my-philosophy-curriculum`)
+4. Add environment variable: `PUBLIC_SITE_URL` = your full URL
+
+### Step 3: Set Up CMS Authentication
+
+The CMS needs OAuth to edit your GitHub repository. This requires:
+
+1. **Create a GitHub OAuth App**
+   - GitHub → Settings → Developer settings → OAuth Apps → New
+   - Set callback URL to your Cloudflare Worker (created next)
+
+2. **Deploy the Auth Worker**
+   - Go to [workers.cloudflare.com](https://workers.cloudflare.com)
+   - Create a worker with the OAuth code (see `docs/cms-setup.md`)
+   - Add your GitHub Client ID and Secret as environment variables
+
+3. **Update CMS Config**
+   - Edit `static/admin/config.yml`
+   - Set your repository and worker URL
+
+See the "Setting Up the CMS" lesson in the curriculum for detailed instructions.
+
+### Step 4: Start Creating
+
+1. Go to `your-site.netlify.app/admin/`
+2. Log in with GitHub
+3. Edit clusters, lessons, and pages
+4. Changes auto-deploy to your live site
+
+## Project Structure
+
+```plaintext
+curriculum-template/
+├── content/                    # All content (CMS-managed)
+│   ├── clusters/              # Thematic groupings
+│   ├── lessons/               # Individual lessons
+│   ├── pages/                 # Static pages (home, about)
+│   └── settings/              # Site configuration
+├── prompts/                   # AI prompts for curriculum building
+│   ├── 01-domain-definition.md
+│   ├── 02-reading-discovery.md
+│   └── 03-curriculum-structure.md
+├── src/
+│   ├── lib/
+│   │   ├── data/              # Content loading logic
+│   │   └── types/             # TypeScript definitions
+│   └── routes/                # SvelteKit pages & API endpoints
+├── static/
+│   └── admin/                 # CMS configuration
+└── docs/                      # Additional documentation
+```
+
+## Content Architecture
+
+Content is stored as Markdown files with YAML frontmatter. The CMS provides a visual editor, but you can also edit files directly.
+
+### Content Types
+
+| Type | Location | Description |
+|------|----------|-------------|
+| Cluster | `content/clusters/` | Thematic grouping of 2-5 lessons |
+| Lesson | `content/lessons/` | Individual reading with context and reflection |
+| Page | `content/pages/` | Static pages (home, about) |
+| Settings | `content/settings/` | Site title, description, author |
+
+### Lesson Structure
+
+Each lesson includes:
+- **Introduction**: Why this reading matters
+- **Key Concepts**: 3-5 ideas to focus on
+- **Assignment**: The primary reading with instructions
+- **Knowledge Check**: Reflection questions
+- **Additional Resources**: Optional further reading
+
+### Machine-Readable Endpoints
+
+| Endpoint | Format | Description |
+|----------|--------|-------------|
+| `/api/curriculum.json` | JSON | Full curriculum data |
+| `/api/manifest.json` | JSON-LD | Schema.org structured data |
+| `/feed.xml` | RSS 2.0 | Content syndication |
+| `/sitemap.xml` | XML | Search engine sitemap |
+
+## Building Your Curriculum
+
+The included starter content teaches the full methodology:
+
+1. **Getting Started** — Understanding the platform and philosophy
+2. **Building Your Curriculum** — Defining domains, finding readings, structuring content
+3. **Deployment & Customization** — Deploying, CMS setup, branding
+
+### AI-Assisted Workflow
+
+The `prompts/` directory contains ready-to-use prompts for:
+- Defining your domain and central question
+- Discovering foundational readings
+- Structuring content into clusters and lessons
+
+See [METHODOLOGY.md](./METHODOLOGY.md) for the complete curriculum-building guide.
+
+## Local Development
+
+```bash
+# Clone your fork
+git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
+cd YOUR_REPO
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+The site will be available at `http://localhost:5173`.
+
+## Customization
+
+### Site Settings
+
+Edit via CMS (Settings → Site Settings) or directly in `content/settings/site.json`:
+
+```json
+{
+  "title": "Your Curriculum Title",
+  "description": "Your curriculum description",
+  "author": "Your Name"
+}
+```
+
+### Colors and Styling
+
+Edit CSS custom properties in `src/app.css`:
+
+```css
+:root {
+  --color-primary: #2563eb;
+  --color-background: #ffffff;
+  --color-text: #1f2937;
+}
+```
+
+### Adding Content
+
+**Via CMS (recommended):**
+- Access `/admin` on your deployed site
+- Use the visual editor
+- Changes auto-commit to GitHub
+
+**Via Git:**
+- Create Markdown files in `content/`
+- Follow the frontmatter schema in existing files
+- Commit and push to trigger rebuild
 
 ## Tech Stack
 
@@ -36,214 +200,27 @@ This project contains **25 lessons** across **9 thematic clusters**, exploring t
 | CMS | [Sveltia CMS](https://github.com/sveltia/sveltia-cms) | Git-based headless CMS |
 | Auth | [Cloudflare Workers](https://workers.cloudflare.com) | OAuth for CMS |
 | Hosting | [Netlify](https://netlify.com) | Continuous deployment |
-| Types | TypeScript | Type-safe content handling |
+| Content | Markdown + YAML | Portable, version-controlled |
 
-## Quick Start
+## Documentation
 
-### Prerequisites
-
-- Node.js 20+
-- pnpm (recommended) or npm
-- Git
-
-### Local Development
-
-```bash
-# Clone the repository
-git clone https://github.com/K41R0N/devices-curriculum.git
-cd devices-curriculum
-
-# Install dependencies
-pnpm install
-
-# Start development server
-pnpm dev
-
-# Build for production
-pnpm build
-
-# Preview production build
-pnpm preview
-```
-
-The site will be available at `http://localhost:5173`.
-
-### Deploying Your Own
-
-#### Step 1: Deploy to Netlify
-
-Click the "Deploy to Netlify" button above, or:
-
-1. Fork this repository
-2. Import the repository in Netlify
-3. Build settings are pre-configured in `netlify.toml`
-
-#### Step 2: Configure Environment Variables
-
-In Netlify Dashboard → Site settings → Environment variables:
-
-| Variable | Required | Description | Example |
-|----------|----------|-------------|---------|
-| `PUBLIC_SITE_URL` | Yes | Your site's canonical URL | `https://my-curriculum.netlify.app` |
-
-#### Step 3: Deploy CMS Authentication
-
-Click the "Deploy to Cloudflare Workers" button above to deploy `sveltia-cms-auth`.
-
-During deployment, set these secrets in Cloudflare:
-
-| Secret | Description |
-|--------|-------------|
-| `GITHUB_CLIENT_ID` | From your GitHub OAuth App |
-| `GITHUB_CLIENT_SECRET` | From your GitHub OAuth App |
-| `ALLOWED_DOMAINS` | Your Netlify domain (exact, no protocol): `my-curriculum.netlify.app` |
-
-#### Step 4: Create GitHub OAuth App
-
-1. Go to GitHub → Settings → Developer settings → OAuth Apps → New OAuth App
-2. Set **Authorization callback URL** to: `https://your-worker.workers.dev/callback`
-3. Copy Client ID and Client Secret to your Cloudflare Worker secrets
-
-#### Step 5: Update CMS Configuration
-
-Edit `static/admin/config.yml`:
-
-```yaml
-backend:
-  name: github
-  repo: YOUR_USERNAME/YOUR_REPO  # Change this
-  branch: main
-  base_url: https://your-worker.workers.dev  # Your Cloudflare Worker URL
-```
-
-#### Step 6: Customize Site Settings
-
-Edit `content/settings/site.json` via CMS or directly:
-
-```json
-{
-  "title": "Your Curriculum Title",
-  "description": "Your curriculum description.",
-  "author": "Your Name"
-}
-```
-
-See [METHODOLOGY.md](./METHODOLOGY.md) for detailed curriculum building instructions.
-
-## Project Structure
-
-```
-devices-curriculum/
-├── content/                    # All content (CMS-managed)
-│   ├── clusters/              # Thematic groupings (9 files)
-│   ├── lessons/               # Individual lessons (25 files)
-│   ├── pages/                 # Static pages (home, about)
-│   └── settings/              # Site configuration
-├── src/
-│   ├── lib/
-│   │   ├── data/              # Content loading logic
-│   │   └── types/             # TypeScript definitions
-│   └── routes/                # SvelteKit pages & API endpoints
-├── static/
-│   ├── admin/                 # CMS configuration
-│   ├── fonts/                 # Custom fonts
-│   └── images/                # Static assets
-├── CONTENT_ARCHITECTURE.md    # Content schema documentation
-├── METHODOLOGY.md             # Curriculum building guide
-└── AGENTS.md                  # AI agent instructions
-```
-
-## Content Architecture
-
-Content is **front-end agnostic**—the same content can power any presentation layer.
-
-### Content Types
-
-| Type | Location | Description |
-|------|----------|-------------|
-| Cluster | `content/clusters/` | Thematic grouping of lessons |
-| Lesson | `content/lessons/` | Individual learning unit |
-| Page | `content/pages/` | Static pages |
-| Settings | `content/settings/` | Site configuration |
-
-### Machine-Readable Endpoints
-
-| Endpoint | Format | Description |
-|----------|--------|-------------|
-| `/api/curriculum.json` | JSON | Full curriculum API |
-| `/api/manifest.json` | JSON-LD | Schema.org structured data |
-| `/feed.xml` | RSS 2.0 | Content syndication |
-| `/sitemap.xml` | XML | Search engine sitemap |
-| `/llms.txt` | Text | AI agent guidance |
-
-See [CONTENT_ARCHITECTURE.md](./CONTENT_ARCHITECTURE.md) for complete schema documentation.
-
-## Curriculum Structure
-
-| # | Cluster | Lessons |
-|---|---------|---------|
-| 1 | Mediation Architecture & Reality Framing | 3 |
-| 2 | Embodiment, Repetition & Internalization | 4 |
-| 3 | Ritual Structures & Sacred Dimensions | 2 |
-| 4 | Technology, Material Culture & Non-Neutrality | 3 |
-| 5 | Adoption, Diffusion & Network Effects | 3 |
-| 6 | Language, Naming & Conceptual Devices | 1 |
-| 7 | Reality Construction & Media Devices | 3 |
-| 8 | Ideology, Power & Device Non-Neutrality | 3 |
-| 9 | Comparative Genesis & Competitive Dynamics | 3 |
-
-## For Contributors
-
-### Adding Content
-
-**Via CMS (Recommended):**
-- Access `/admin` on the deployed site
-- Use the visual editor to create/edit content
-- Changes auto-commit to GitHub
-
-**Via Git:**
-- Create Markdown files in `content/` following the schema
-- See [CONTENT_ARCHITECTURE.md](./CONTENT_ARCHITECTURE.md) for field definitions
-
-### Modifying the UI
-
-The presentation layer is separate from content. To redesign:
-
-1. Read the component contracts in [CONTENT_ARCHITECTURE.md](./CONTENT_ARCHITECTURE.md)
-2. Create new components that consume the documented data shapes
-3. Content files remain unchanged
-
-See the "Redesigning a Page Layout" section in [METHODOLOGY.md](./METHODOLOGY.md) for AI prompts.
-
-### For AI Agents
-
-See [AGENTS.md](./AGENTS.md) for:
-- Project architecture overview
-- Common tasks and how to perform them
-- Content schema reference
-- Validation rules
-
-## Building Your Own Curriculum
-
-This project is designed to be forked and adapted. See [METHODOLOGY.md](./METHODOLOGY.md) for a complete guide covering:
-
-1. **Domain Definition** — Defining your core research question
-2. **AI-Assisted Research** — Finding seminal texts with AI
-3. **Curriculum Structuring** — Organizing content in this system
-4. **Content Generation** — Using AI to create lesson content
-5. **Visual Identity** — Creating consistent imagery
-6. **Deployment** — Going live with your curriculum
+| Document | Description |
+|----------|-------------|
+| [METHODOLOGY.md](./METHODOLOGY.md) | Complete curriculum-building guide |
+| [CONTENT_ARCHITECTURE.md](./CONTENT_ARCHITECTURE.md) | Content schema and types |
+| [AGENTS.md](./AGENTS.md) | Instructions for AI agents |
 
 ## License
 
-- **Content & Curriculum**: © K41R0N — All rights reserved
 - **Code**: MIT License — Free to use, modify, and distribute
+- **Starter Content**: CC0 — Public domain, use freely
 
-## Links
+## Contributing
 
-- **Live Site**: [devices-curriculum.netlify.app](https://devices-curriculum.netlify.app)
-- **Substack**: [k41r0n.substack.com](https://k41r0n.substack.com)
-- **Sveltia CMS**: [github.com/sveltia/sveltia-cms](https://github.com/sveltia/sveltia-cms)
+Contributions welcome! Please:
+1. Fork the repository
+2. Create a feature branch
+3. Submit a pull request
 
 ---
 
