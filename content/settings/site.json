@@ -1,7 +1,6 @@
 {
-  "title": "DEVICES Curriculum",
-  "description": "A self-directed research curriculum exploring how devices—material, conceptual, and ritual—shape human reality and behavior.",
-  "author": "K41R0N",
-  "substack_url": "https://k41r0n.substack.com",
+  "title": "Curriculum Template",
+  "description": "A self-directed research curriculum platform. Fork this template to create your own depth-first learning experience.",
+  "author": "Your Name",
   "footer_text": "Built for depth, not breadth."
 }

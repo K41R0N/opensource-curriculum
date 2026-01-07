@@ -1,35 +1,46 @@
 ---
-title: About This Project
-subtitle: A research curriculum for understanding how devices shape human reality.
+title: About This Template
+subtitle: An open-source platform for building self-directed research curricula.
 ---
-## The Unified Theory of Devices
+## What Is This?
 
-Devices are a unified theory for understanding how material, conceptual, and ritual instruments shape human reality. It examines how these devices mediate our experience, become embodied through practice, and propagate through social systems.
+This is a template for creating **self-directed research curricula**—structured paths through foundational texts that help learners go deep on a topic.
 
-This curriculum is designed to provide the intellectual foundation for engaging deeply with how they're constructed and integrated into society. It is not a comprehensive survey of any single field, but a curated selection of seminal texts that illuminate the core mechanisms of how devices operate.
+The curriculum you're reading now is both the template and the guide. Follow it to learn how to build your own, then replace the content with your domain of expertise.
 
-## The Approach
+## The Philosophy
 
-When we went to school, teachers asked us not to use Wikipedia. What we did was cite the Wikipedia sources instead. This is the root of how digital scholarship in the algorithm age should go.
+In an age where content creation is heavily automated, depth distinguishes genuine scholarship from surface-level takes. An earned point of view is worth more than a thousand hot takes.
 
-You start with the things you know you have to learn, and you branch out as you actually develop an understanding and opinions to challenge. The goal is not comprehensive coverage, but depth. Each reading opens doors to further exploration.
+This platform embodies that philosophy:
+- **Primary sources over summaries**: Engage with the texts that shaped fields
+- **Depth over breadth**: 15-25 foundational readings, not 200 articles
+- **Active engagement**: Knowledge checks and reflection, not passive consumption
+- **Structured progression**: Foundations first, synthesis later
 
-In an age where content creation is heavily automated, going for depth instead of breadth is what distinguishes genuine scholarship from surface-level takes. An earned point of view is worth more than a thousand hot takes.
+## How It Works
 
-## How to Use This Curriculum
+Each curriculum consists of:
+- **Clusters**: Thematic groupings of 2-5 lessons
+- **Lessons**: Individual readings with context, key concepts, and reflection questions
+- **Prompts**: AI-assisted tools for defining your domain and discovering readings
 
-Each lesson includes:
+The technical stack:
+- **SvelteKit**: Fast, modern web framework
+- **Markdown**: Content stored as simple text files
+- **Sveltia CMS**: Browser-based editing (no code required)
+- **Netlify**: Free hosting with automatic deploys
 
-- **Introduction:** Context for why this reading matters of devices.
-- **Key Concepts:** The core ideas you need to understand
-- **Assignment:** Direct links to the primary reading
-- **Knowledge Check:** Questions to test your understanding
-- **Additional Resources:** Related readings to branch out from
+## Getting Started
 
-The curriculum is designed to be used actively—engaging each text by asking: _How does this illuminate devices as society-building constructs? What new dimensions does it reveal?_
+1. **Read the curriculum**: The lessons here teach the methodology
+2. **Fork the repository**: Copy it to your GitHub account
+3. **Deploy to Netlify**: One-click deployment
+4. **Replace the content**: Use the CMS or edit files directly
+5. **Share your expertise**: Your curriculum is live
 
-## About K41R0N
+## Who Made This?
 
-This curriculum is part of [K41R0N](https://k41r0n.substack.com)'s personal publication, which explores how devices shape human reality. The goal is to build a solid foundation for a unified theory of devices—something to project energy into from a product standpoint, from an essayist standpoint, from every angle.
+This template is open source. Fork it, modify it, make it yours.
 
-If you're building your own research curriculum, I'd love to hear about it. The new internet has space for digital scholars who go deep instead of wide.
+If you build something with it, we'd love to hear about it. The internet has room for more digital scholars who go deep instead of wide.
