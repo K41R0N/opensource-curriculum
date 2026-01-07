@@ -295,9 +295,8 @@
 		position: sticky;
 		top: 0;
 		z-index: 50;
-		background-color: rgba(243, 238, 229, 0.95);
-		backdrop-filter: blur(8px);
-		border-bottom: 1px solid rgba(208, 28, 31, 0.15);
+		background-color: var(--color-background);
+		border-bottom: 1px solid var(--color-border);
 	}
 
 	.lesson-header-content {
@@ -305,7 +304,7 @@
 		align-items: center;
 		justify-content: space-between;
 		padding: 0 1rem;
-		height: 3.5rem;
+		height: 3rem;
 	}
 
 	.header-back-btn,
@@ -315,66 +314,58 @@
 		justify-content: center;
 		width: 2.5rem;
 		height: 2.5rem;
-		color: var(--color-black-light);
+		color: var(--color-text-muted);
 		text-decoration: none;
-		border-radius: 50%;
-		transition: all 0.2s ease;
-	}
-
-	.header-back-btn:hover,
-	.header-menu-btn:hover {
-		color: var(--color-red);
-		background-color: rgba(208, 28, 31, 0.1);
 	}
 
 	.header-title {
 		font-family: var(--font-heading);
 		font-size: 1rem;
-		font-weight: 400;
-		color: var(--color-red);
-		letter-spacing: 0.05em;
+		font-weight: 600;
+		color: var(--color-text);
+		letter-spacing: 0.02em;
 		margin: 0;
 	}
 
 	.progress-bar-track {
-		height: 3px;
-		background-color: rgba(208, 28, 31, 0.15);
+		height: 2px;
+		background-color: var(--color-border-light);
 	}
 
 	.progress-bar-fill {
 		height: 100%;
-		background-color: var(--color-red);
-		transition: width 0.1s ease-out;
+		background-color: var(--color-text);
 	}
 
 	/* Main Content */
 	.lesson-main {
 		max-width: 42rem;
 		margin: 0 auto;
-		padding: 0 1.25rem 5rem;
+		padding: 0 1.25rem 3rem;
 	}
 
 	/* Hero Section */
 	.lesson-hero {
-		padding: 2rem 0;
+		padding: 1.5rem 0;
 	}
 
 	.lesson-meta {
 		display: flex;
 		align-items: center;
 		gap: 1rem;
-		margin-bottom: 1rem;
+		margin-bottom: 0.75rem;
 		flex-wrap: wrap;
 	}
 
 	.lesson-badge {
 		display: inline-block;
-		padding: 0.25rem 0.625rem;
-		background-color: rgba(208, 28, 31, 0.1);
-		color: var(--color-red);
+		padding: 0.25rem 0.5rem;
+		background-color: var(--color-surface);
+		border: 1px solid var(--color-border);
+		color: var(--color-text);
 		font-family: var(--font-body);
 		font-size: 0.75rem;
-		font-weight: 700;
+		font-weight: 600;
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
 	}
@@ -383,7 +374,7 @@
 		display: flex;
 		align-items: center;
 		gap: 0.375rem;
-		color: var(--color-black-light);
+		color: var(--color-text-muted);
 		font-size: 0.8125rem;
 	}
 
@@ -392,25 +383,25 @@
 	}
 
 	.lesson-title {
-		font-size: 2.5rem;
+		font-size: 2rem;
 		line-height: 1.15;
-		margin: 0 0 0.75rem;
+		margin: 0 0 0.5rem;
 		letter-spacing: -0.01em;
+		color: var(--color-text);
 	}
 
 	.lesson-author {
-		font-style: italic;
-		color: var(--color-black-light);
-		margin: 0 0 1.5rem;
-		font-size: 1.0625rem;
+		color: var(--color-text-muted);
+		margin: 0 0 1rem;
+		font-size: 1rem;
 	}
 
 	.lesson-featured-image {
 		position: relative;
 		width: 100%;
-		margin: 0 0 2rem;
+		margin: 0 0 1.5rem;
 		overflow: hidden;
-		border: 1px solid rgba(208, 28, 31, 0.2);
+		border: 1px solid var(--color-border);
 	}
 
 	.lesson-featured-image img {
@@ -420,16 +411,13 @@
 	}
 
 	.lesson-featured-image .image-overlay {
-		position: absolute;
-		inset: 0;
-		background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.1));
-		pointer-events: none;
+		display: none;
 	}
 
 	.lesson-description {
-		font-size: 1.1875rem;
+		font-size: 1.125rem;
 		line-height: 1.7;
-		color: var(--color-black-light);
+		color: var(--color-text-muted);
 		margin: 0;
 	}
 
@@ -439,34 +427,34 @@
 	}
 
 	.lesson-content {
-		font-size: 1.0625rem;
-		line-height: 1.85;
-		margin-bottom: 2.5rem;
+		font-size: 1rem;
+		line-height: 1.8;
+		margin-bottom: 2rem;
 	}
 
 	.lesson-content :global(p) {
-		margin-bottom: 1.5rem;
+		margin-bottom: 1.25rem;
 	}
 
 	.lesson-content :global(h2) {
-		margin-top: 2.5rem;
-		margin-bottom: 1rem;
+		margin-top: 2rem;
+		margin-bottom: 0.75rem;
 	}
 
 	.lesson-content :global(h3) {
-		margin-top: 2rem;
-		margin-bottom: 0.75rem;
+		margin-top: 1.5rem;
+		margin-bottom: 0.5rem;
 	}
 
 	/* Callouts */
 	.lesson-callout {
 		display: flex;
 		gap: 1rem;
-		background-color: var(--color-cream);
-		border: 1px solid rgba(208, 28, 31, 0.15);
-		border-left: 4px solid var(--color-red);
-		padding: 1.25rem;
-		margin: 2rem 0;
+		background-color: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-left: 3px solid var(--color-text);
+		padding: 1rem;
+		margin: 1.5rem 0;
 	}
 
 	.callout-icon {
@@ -474,16 +462,16 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 2.5rem;
-		height: 2.5rem;
-		background-color: rgba(208, 28, 31, 0.1);
-		color: var(--color-red);
-		border-radius: 0.5rem;
+		width: 2rem;
+		height: 2rem;
+		background-color: var(--color-surface);
+		border: 1px solid var(--color-border);
+		color: var(--color-text);
 	}
 
 	.callout-content h3 {
-		margin: 0 0 0.75rem;
-		font-size: 1.125rem;
+		margin: 0 0 0.5rem;
+		font-size: 1rem;
 	}
 
 	.callout-content ul {
@@ -492,7 +480,7 @@
 	}
 
 	.callout-content li {
-		margin-bottom: 0.375rem;
+		margin-bottom: 0.25rem;
 	}
 
 	.callout-content p {
@@ -501,16 +489,16 @@
 
 	/* Sections */
 	.lesson-section {
-		margin: 3rem 0;
+		margin: 2rem 0;
 	}
 
 	.lesson-section h2 {
-		margin-bottom: 1rem;
+		margin-bottom: 0.75rem;
 	}
 
 	.section-subtitle {
-		color: var(--color-black-light);
-		margin-bottom: 1.5rem;
+		color: var(--color-text-muted);
+		margin-bottom: 1rem;
 	}
 
 	/* Concept Cards */
@@ -518,10 +506,10 @@
 		position: relative;
 		display: flex;
 		gap: 1rem;
-		background-color: var(--color-cream);
-		border: 1px solid rgba(208, 28, 31, 0.15);
-		padding: 1.25rem;
-		margin-bottom: 1rem;
+		background-color: var(--color-surface);
+		border: 1px solid var(--color-border);
+		padding: 1rem;
+		margin-bottom: 0.75rem;
 		overflow: hidden;
 	}
 
@@ -529,9 +517,9 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		width: 4px;
+		width: 3px;
 		height: 100%;
-		background-color: var(--color-red);
+		background-color: var(--color-text);
 	}
 
 	.concept-icon {
@@ -539,25 +527,25 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 2.5rem;
-		height: 2.5rem;
-		background-color: rgba(208, 28, 31, 0.1);
-		color: var(--color-red);
-		border-radius: 0.5rem;
+		width: 2rem;
+		height: 2rem;
+		background-color: var(--color-surface);
+		border: 1px solid var(--color-border);
+		color: var(--color-text);
 	}
 
 	.concept-content h4 {
 		font-family: var(--font-heading);
-		font-size: 1.125rem;
-		color: var(--color-red);
-		margin: 0 0 0.5rem;
-		font-weight: 400;
+		font-size: 1rem;
+		color: var(--color-text);
+		margin: 0 0 0.375rem;
+		font-weight: 600;
 	}
 
 	.concept-explanation {
 		font-size: 0.9375rem;
 		line-height: 1.7;
-		color: var(--color-black-light);
+		color: var(--color-text-muted);
 	}
 
 	.concept-explanation :global(p) {
@@ -565,36 +553,36 @@
 	}
 
 	.concept-explanation :global(p + p) {
-		margin-top: 0.75rem;
+		margin-top: 0.5rem;
 	}
 
 	/* Assignment Card */
 	.assignment-card {
-		background-color: rgba(208, 28, 31, 0.04);
-		border: 1px solid rgba(208, 28, 31, 0.2);
-		padding: 1.5rem;
+		background-color: var(--color-surface);
+		border: 1px solid var(--color-border);
+		padding: 1.25rem;
 	}
 
 	.assignment-header {
 		display: flex;
 		align-items: center;
 		gap: 0.75rem;
-		margin-bottom: 1rem;
-		color: var(--color-red);
+		margin-bottom: 0.75rem;
+		color: var(--color-text);
 	}
 
 	.assignment-header h3 {
 		margin: 0;
-		font-size: 1.25rem;
+		font-size: 1.125rem;
 	}
 
 	.assignment-body {
-		margin-bottom: 1.25rem;
-		line-height: 1.75;
+		margin-bottom: 1rem;
+		line-height: 1.7;
 	}
 
 	.assignment-body :global(p) {
-		margin: 0 0 0.75rem;
+		margin: 0 0 0.5rem;
 	}
 
 	.assignment-link {
@@ -603,24 +591,19 @@
 		gap: 0.5rem;
 		font-family: var(--font-body);
 		font-size: 0.9375rem;
-		font-weight: 700;
-		padding: 0.75rem 1.25rem;
-		background-color: var(--color-red);
-		color: var(--color-cream);
+		font-weight: 600;
+		padding: 0.625rem 1rem;
+		background-color: var(--color-text);
+		color: var(--color-background);
 		text-decoration: none;
-		transition: all 0.2s ease;
-	}
-
-	.assignment-link:hover {
-		background-color: var(--color-red-dark);
-		color: var(--color-cream);
+		border: 1px solid var(--color-border);
 	}
 
 	/* Knowledge Check */
 	.knowledge-check-section {
-		background-color: rgba(208, 28, 31, 0.04);
-		border: 1px solid rgba(208, 28, 31, 0.15);
-		padding: 1.5rem;
+		background-color: var(--color-surface);
+		border: 1px solid var(--color-border);
+		padding: 1.25rem;
 	}
 
 	.knowledge-check-header {
@@ -628,32 +611,32 @@
 		align-items: center;
 		gap: 0.75rem;
 		margin-bottom: 0.5rem;
-		color: var(--color-red);
+		color: var(--color-text);
 	}
 
 	.knowledge-check-header h3 {
 		margin: 0;
-		font-size: 1.25rem;
+		font-size: 1.125rem;
 	}
 
 	.knowledge-check-intro {
-		color: var(--color-black-light);
-		margin: 0 0 1.25rem;
+		color: var(--color-text-muted);
+		margin: 0 0 1rem;
 		font-size: 0.9375rem;
 	}
 
 	.knowledge-check-questions {
 		display: flex;
 		flex-direction: column;
-		gap: 0.75rem;
+		gap: 0.5rem;
 	}
 
 	.question-card {
 		display: flex;
-		gap: 1rem;
-		background-color: var(--color-cream);
-		border: 1px solid rgba(208, 28, 31, 0.12);
-		padding: 1rem;
+		gap: 0.75rem;
+		background-color: var(--color-surface);
+		border: 1px solid var(--color-border);
+		padding: 0.75rem;
 	}
 
 	.question-number {
@@ -661,13 +644,14 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 1.75rem;
-		height: 1.75rem;
-		background-color: rgba(208, 28, 31, 0.1);
-		color: var(--color-red);
+		width: 1.5rem;
+		height: 1.5rem;
+		background-color: var(--color-surface);
+		border: 1px solid var(--color-border);
+		color: var(--color-text);
 		font-family: var(--font-body);
-		font-weight: 700;
-		font-size: 0.8125rem;
+		font-weight: 600;
+		font-size: 0.75rem;
 	}
 
 	.question-content {
@@ -682,64 +666,52 @@
 
 	.question-hint {
 		font-size: 0.875rem;
-		color: var(--color-black-light);
-		margin: 0.5rem 0 0;
-		font-style: italic;
+		color: var(--color-text-muted);
+		margin: 0.375rem 0 0;
 	}
 
 	.question-hint strong {
-		font-style: normal;
+		font-weight: 600;
 	}
 
 	/* Resources Grid */
 	.resources-grid {
 		display: flex;
 		flex-direction: column;
-		gap: 0.75rem;
+		gap: 0.5rem;
 	}
 
 	.resource-card {
-		background-color: var(--color-cream);
-		border: 1px solid rgba(208, 28, 31, 0.15);
-		padding: 1rem 1.25rem;
-		transition: all 0.2s ease;
-	}
-
-	.resource-card:hover {
-		border-color: var(--color-red);
-		box-shadow: 0 2px 8px rgba(208, 28, 31, 0.1);
+		background-color: var(--color-surface);
+		border: 1px solid var(--color-border);
+		padding: 0.75rem 1rem;
 	}
 
 	.resource-card h4 {
 		font-family: var(--font-heading);
-		font-size: 1.0625rem;
-		color: var(--color-red);
+		font-size: 1rem;
+		color: var(--color-text);
 		margin: 0 0 0.25rem;
-		font-weight: 400;
+		font-weight: 600;
 	}
 
 	.resource-card h4 a {
 		display: inline-flex;
 		align-items: center;
 		gap: 0.375rem;
-		text-decoration: none;
-	}
-
-	.resource-card h4 a:hover {
 		text-decoration: underline;
 	}
 
 	.resource-author {
 		font-size: 0.875rem;
-		color: var(--color-black-light);
-		font-style: italic;
-		margin: 0 0 0.375rem;
+		color: var(--color-text-muted);
+		margin: 0 0 0.25rem;
 	}
 
 	.resource-description {
 		font-size: 0.9375rem;
 		margin: 0;
-		color: var(--color-black-light);
+		color: var(--color-text-muted);
 	}
 
 	/* Navigation Footer */
@@ -747,9 +719,9 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 1.5rem;
-		margin-top: 3rem;
-		padding-top: 2rem;
-		border-top: 1px solid rgba(208, 28, 31, 0.2);
+		margin-top: 2.5rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid var(--color-border);
 	}
 
 	.nav-prev,
@@ -771,15 +743,15 @@
 	}
 
 	.nav-label {
-		font-size: 0.75rem;
+		font-size: 0.6875rem;
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
-		color: var(--color-black-light);
+		color: var(--color-text-muted);
 		margin-bottom: 0.25rem;
 	}
 
 	.nav-next .nav-label {
-		color: var(--color-red);
+		color: var(--color-text);
 		font-weight: 600;
 	}
 
@@ -788,20 +760,9 @@
 		align-items: center;
 		gap: 0.5rem;
 		font-family: var(--font-heading);
-		font-size: 1.125rem;
-		color: var(--color-black);
-		font-weight: 400;
-		transition: transform 0.2s ease;
-	}
-
-	.nav-prev:hover .nav-title {
-		transform: translateX(-4px);
-		color: var(--color-red);
-	}
-
-	.nav-next:hover .nav-title {
-		transform: translateX(4px);
-		color: var(--color-red);
+		font-size: 1rem;
+		color: var(--color-text);
+		font-weight: 600;
 	}
 
 	.nav-title svg {
@@ -811,7 +772,7 @@
 	/* Responsive */
 	@media (max-width: 640px) {
 		.lesson-title {
-			font-size: 2rem;
+			font-size: 1.75rem;
 		}
 
 		.lesson-navigation {
@@ -822,7 +783,7 @@
 			align-items: flex-start;
 			text-align: left;
 			padding-top: 1rem;
-			border-top: 1px solid rgba(208, 28, 31, 0.1);
+			border-top: 1px solid var(--color-border-light);
 		}
 
 		.nav-next .nav-title {
@@ -837,7 +798,7 @@
 		.concept-card {
 			flex-direction: column;
 			gap: 0.75rem;
-			padding-left: 1.5rem;
+			padding-left: 1.25rem;
 		}
 	}
 </style>

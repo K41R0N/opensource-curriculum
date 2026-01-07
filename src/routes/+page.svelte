@@ -158,11 +158,12 @@
 <style>
 	/* Hero Section */
 	.home-hero {
-		background-color: var(--color-parchment-dark);
-		padding: 5rem 1.5rem;
+		background-color: var(--color-background);
+		padding: 4rem 1.5rem;
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		border-bottom: 1px solid var(--color-border);
 	}
 
 	.hero-content {
@@ -172,13 +173,13 @@
 
 	/* Book Cover Card */
 	.book-cover {
-		background-color: var(--color-cream);
-		padding: 3rem 2.5rem;
-		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
+		background-color: var(--color-surface);
+		padding: 2.5rem 2rem;
+		border: 1px solid var(--color-border);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 1.5rem;
+		gap: 1.25rem;
 	}
 
 	.book-label {
@@ -186,60 +187,53 @@
 		font-size: 0.6875rem;
 		text-transform: uppercase;
 		letter-spacing: 0.2em;
-		color: var(--color-black-light);
+		color: var(--color-text-muted);
 	}
 
 	.book-title {
 		font-family: var(--font-heading);
-		font-size: 2.25rem;
+		font-size: 2rem;
 		line-height: 1.1;
-		color: var(--color-red);
+		color: var(--color-text);
 		margin: 0;
-		font-weight: 400;
+		font-weight: 600;
 	}
 
 	.book-tagline {
 		font-family: var(--font-body);
 		font-size: 1rem;
 		line-height: 1.6;
-		color: var(--color-black-light);
+		color: var(--color-text-muted);
 		margin: 0;
-		font-style: italic;
 	}
 
 	.book-cta {
 		display: inline-block;
 		font-family: var(--font-body);
 		font-size: 0.875rem;
-		font-weight: 700;
+		font-weight: 600;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
-		padding: 0.875rem 2rem;
-		background-color: var(--color-red);
-		color: var(--color-cream);
+		padding: 0.75rem 1.5rem;
+		background-color: var(--color-text);
+		color: var(--color-background);
 		text-decoration: none;
-		border: 2px solid var(--color-red);
-		transition: all 0.2s ease;
+		border: 1px solid var(--color-border);
 		margin-top: 0.5rem;
-	}
-
-	.book-cta:hover {
-		background-color: transparent;
-		color: var(--color-red);
 	}
 
 	/* Main Content */
 	.home-main {
 		max-width: 40rem;
 		margin: 0 auto;
-		padding: 4rem 1.5rem;
+		padding: 3rem 1.5rem;
 	}
 
 	.section-divider {
 		width: 60px;
 		height: 1px;
-		background-color: rgba(208, 28, 31, 0.25);
-		margin: 3rem auto;
+		background-color: var(--color-border);
+		margin: 2.5rem auto;
 	}
 
 	/* Cluster Groups */
@@ -249,44 +243,33 @@
 
 	.group-title {
 		font-family: var(--font-heading);
-		font-size: 2rem;
-		color: var(--color-red);
+		font-size: 1.75rem;
+		color: var(--color-text);
 		margin: 0 0 0.5rem;
-		font-weight: 400;
+		font-weight: 600;
 	}
 
 	.group-subtitle {
 		font-family: var(--font-body);
 		font-size: 0.9375rem;
-		font-style: italic;
-		color: var(--color-black-light);
-		margin: 0 0 2rem;
+		color: var(--color-text-muted);
+		margin: 0 0 1.5rem;
 	}
 
 	/* Cluster List */
 	.cluster-list {
 		display: flex;
 		flex-direction: column;
-		gap: 1.5rem;
+		gap: 1rem;
 	}
 
 	.cluster-item {
 		display: block;
 		text-decoration: none;
 		text-align: center;
-		padding: 1.5rem;
-		background-color: var(--color-cream);
-		border: 1px solid rgba(208, 28, 31, 0.1);
-		transition: all 0.2s ease;
-	}
-
-	.cluster-item:hover {
-		border-color: var(--color-red);
-		box-shadow: 0 4px 12px rgba(208, 28, 31, 0.1);
-	}
-
-	.cluster-item:hover .cluster-title {
-		color: var(--color-red);
+		padding: 1.25rem;
+		background-color: var(--color-surface);
+		border: 1px solid var(--color-border);
 	}
 
 	.cluster-number {
@@ -294,25 +277,24 @@
 		font-size: 0.6875rem;
 		text-transform: uppercase;
 		letter-spacing: 0.15em;
-		color: var(--color-black-light);
+		color: var(--color-text-muted);
 		display: block;
 		margin-bottom: 0.5rem;
 	}
 
 	.cluster-title {
 		font-family: var(--font-body);
-		font-size: 1.25rem;
+		font-size: 1.125rem;
 		font-weight: 600;
-		color: var(--color-black);
+		color: var(--color-text);
 		margin: 0 0 0.5rem;
 		line-height: 1.3;
-		transition: color 0.2s ease;
 	}
 
 	.cluster-description {
 		font-family: var(--font-body);
 		font-size: 0.9375rem;
-		color: var(--color-black-light);
+		color: var(--color-text-muted);
 		line-height: 1.6;
 		margin: 0 0 0.75rem;
 	}
@@ -320,7 +302,7 @@
 	.cluster-lessons {
 		font-family: var(--font-body);
 		font-size: 0.75rem;
-		color: var(--color-red);
+		color: var(--color-text);
 		font-weight: 600;
 	}
 
@@ -334,16 +316,16 @@
 	.approach-title {
 		font-family: var(--font-heading);
 		font-size: 1.5rem;
-		color: var(--color-red);
+		color: var(--color-text);
 		margin: 0 0 1.5rem;
-		font-weight: 400;
+		font-weight: 600;
 	}
 
 	.approach-content {
 		font-family: var(--font-body);
 		font-size: 1rem;
-		line-height: 1.8;
-		color: var(--color-black-light);
+		line-height: 1.7;
+		color: var(--color-text-muted);
 		text-align: left;
 	}
 
@@ -362,16 +344,15 @@
 	/* Footer */
 	.home-footer {
 		text-align: center;
-		margin-top: 4rem;
+		margin-top: 3rem;
 		padding-top: 2rem;
-		border-top: 1px solid rgba(208, 28, 31, 0.15);
+		border-top: 1px solid var(--color-border);
 	}
 
 	.footer-tagline {
 		font-family: var(--font-body);
 		font-size: 0.875rem;
-		font-style: italic;
-		color: var(--color-black-light);
+		color: var(--color-text-muted);
 		margin: 0 0 0.5rem;
 	}
 
@@ -382,12 +363,8 @@
 	.footer-author a {
 		font-family: var(--font-body);
 		font-size: 0.875rem;
-		font-weight: 700;
-		color: var(--color-red);
-		text-decoration: none;
-	}
-
-	.footer-author a:hover {
+		font-weight: 600;
+		color: var(--color-text);
 		text-decoration: underline;
 	}
 
@@ -402,7 +379,7 @@
 		}
 
 		.book-title {
-			font-size: 1.875rem;
+			font-size: 1.75rem;
 		}
 
 		.book-tagline {
@@ -410,15 +387,15 @@
 		}
 
 		.group-title {
-			font-size: 1.75rem;
+			font-size: 1.5rem;
 		}
 
 		.cluster-item {
-			padding: 1.25rem;
+			padding: 1rem;
 		}
 
 		.cluster-title {
-			font-size: 1.125rem;
+			font-size: 1rem;
 		}
 	}
 </style>

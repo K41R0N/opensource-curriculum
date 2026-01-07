@@ -123,9 +123,8 @@
 		position: sticky;
 		top: 0;
 		z-index: 50;
-		background-color: rgba(243, 238, 229, 0.95);
-		backdrop-filter: blur(8px);
-		border-bottom: 1px solid rgba(208, 28, 31, 0.15);
+		background-color: var(--color-background);
+		border-bottom: 1px solid var(--color-border);
 	}
 
 	.cluster-header-content {
@@ -133,7 +132,7 @@
 		align-items: center;
 		justify-content: space-between;
 		padding: 0 1rem;
-		height: 3.5rem;
+		height: 3rem;
 		max-width: 42rem;
 		margin: 0 auto;
 	}
@@ -145,24 +144,16 @@
 		justify-content: center;
 		width: 2.5rem;
 		height: 2.5rem;
-		color: var(--color-black-light);
+		color: var(--color-text-muted);
 		text-decoration: none;
-		border-radius: 50%;
-		transition: all 0.2s ease;
-	}
-
-	.header-back-btn:hover,
-	.header-home-btn:hover {
-		color: var(--color-red);
-		background-color: rgba(208, 28, 31, 0.1);
 	}
 
 	.header-title {
 		font-family: var(--font-heading);
 		font-size: 1rem;
-		font-weight: 400;
-		color: var(--color-red);
-		letter-spacing: 0.05em;
+		font-weight: 600;
+		color: var(--color-text);
+		letter-spacing: 0.02em;
 		margin: 0;
 	}
 
@@ -170,12 +161,12 @@
 	.cluster-main {
 		max-width: 42rem;
 		margin: 0 auto;
-		padding: 0 1.25rem 4rem;
+		padding: 0 1.25rem 3rem;
 	}
 
 	/* Hero Section */
 	.cluster-hero {
-		padding: 2.5rem 0 2rem;
+		padding: 2rem 0 1.5rem;
 		text-align: center;
 	}
 
@@ -183,26 +174,25 @@
 		display: inline-block;
 		font-family: var(--font-body);
 		font-size: 0.6875rem;
-		font-weight: 700;
+		font-weight: 600;
 		text-transform: uppercase;
 		letter-spacing: 0.2em;
-		color: var(--color-red);
-		margin-bottom: 0.75rem;
+		color: var(--color-text-muted);
+		margin-bottom: 0.5rem;
 	}
 
 	.cluster-title {
-		font-size: 2.25rem;
+		font-size: 2rem;
 		line-height: 1.15;
-		margin: 0 0 1rem;
-		color: var(--color-red);
+		margin: 0 0 0.75rem;
+		color: var(--color-text);
 	}
 
 	.cluster-description {
-		font-size: 1.0625rem;
+		font-size: 1rem;
 		line-height: 1.7;
-		color: var(--color-black-light);
-		font-style: italic;
-		margin: 0 0 1.5rem;
+		color: var(--color-text-muted);
+		margin: 0 0 1rem;
 		max-width: 32rem;
 		margin-left: auto;
 		margin-right: auto;
@@ -212,7 +202,7 @@
 		font-family: var(--font-body);
 		font-size: 0.875rem;
 		font-weight: 600;
-		color: var(--color-black-light);
+		color: var(--color-text-muted);
 		margin: 0;
 	}
 
@@ -224,39 +214,19 @@
 
 	/* Connector Line */
 	.connector-line {
-		width: 2px;
-		height: 1.25rem;
-		background-color: rgba(208, 28, 31, 0.2);
-		margin-left: 2.25rem;
+		width: 1px;
+		height: 0.75rem;
+		background-color: var(--color-border);
+		margin-left: 2rem;
 	}
 
 	/* Lesson Card */
 	.lesson-card {
 		display: block;
 		text-decoration: none;
-		background-color: var(--color-cream);
-		border: 1px solid rgba(208, 28, 31, 0.12);
-		padding: 1.25rem;
-		transition: all 0.2s ease;
-	}
-
-	.lesson-card:hover {
-		border-color: var(--color-red);
-		box-shadow: 0 4px 16px rgba(208, 28, 31, 0.12);
-	}
-
-	.lesson-card:hover .lesson-title {
-		color: var(--color-red);
-	}
-
-	.lesson-card:hover .lesson-number-badge {
-		background-color: var(--color-red);
-		color: var(--color-cream);
-	}
-
-	.lesson-card:hover .lesson-arrow {
-		transform: translateX(4px);
-		color: var(--color-red);
+		background-color: var(--color-surface);
+		border: 1px solid var(--color-border);
+		padding: 1rem;
 	}
 
 	.lesson-card-content {
@@ -270,15 +240,14 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 2.75rem;
-		height: 2.75rem;
-		background-color: rgba(208, 28, 31, 0.1);
-		color: var(--color-red);
+		width: 2.5rem;
+		height: 2.5rem;
+		background-color: var(--color-surface);
+		border: 1px solid var(--color-border);
+		color: var(--color-text);
 		font-family: var(--font-body);
-		font-weight: 700;
-		font-size: 1rem;
-		border-radius: 0.5rem;
-		transition: all 0.2s ease;
+		font-weight: 600;
+		font-size: 0.875rem;
 	}
 
 	.lesson-info {
@@ -288,24 +257,22 @@
 
 	.lesson-title {
 		font-family: var(--font-body);
-		font-size: 1.125rem;
+		font-size: 1rem;
 		font-weight: 600;
-		color: var(--color-black);
+		color: var(--color-text);
 		margin: 0 0 0.25rem;
 		line-height: 1.3;
-		transition: color 0.2s ease;
 	}
 
 	.lesson-author {
 		font-size: 0.8125rem;
-		font-style: italic;
-		color: var(--color-black-light);
+		color: var(--color-text-muted);
 		margin: 0 0 0.375rem;
 	}
 
 	.lesson-description {
 		font-size: 0.9375rem;
-		color: var(--color-black-light);
+		color: var(--color-text-muted);
 		line-height: 1.6;
 		margin: 0;
 		display: -webkit-box;
@@ -320,10 +287,8 @@
 		align-items: center;
 		justify-content: center;
 		width: 2rem;
-		height: 2.75rem;
-		color: var(--color-black-light);
-		opacity: 0.5;
-		transition: all 0.2s ease;
+		height: 2.5rem;
+		color: var(--color-text-muted);
 	}
 
 	/* Cluster Navigation */
@@ -331,9 +296,9 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 1.5rem;
-		margin-top: 3rem;
-		padding-top: 2rem;
-		border-top: 1px solid rgba(208, 28, 31, 0.2);
+		margin-top: 2.5rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid var(--color-border);
 	}
 
 	.nav-prev,
@@ -358,12 +323,12 @@
 		font-size: 0.6875rem;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
-		color: var(--color-black-light);
+		color: var(--color-text-muted);
 		margin-bottom: 0.25rem;
 	}
 
 	.nav-next .nav-label {
-		color: var(--color-red);
+		color: var(--color-text);
 		font-weight: 600;
 	}
 
@@ -373,19 +338,8 @@
 		gap: 0.5rem;
 		font-family: var(--font-heading);
 		font-size: 1rem;
-		color: var(--color-black);
-		font-weight: 400;
-		transition: transform 0.2s ease;
-	}
-
-	.nav-prev:hover .nav-cluster-title {
-		transform: translateX(-4px);
-		color: var(--color-red);
-	}
-
-	.nav-next:hover .nav-cluster-title {
-		transform: translateX(4px);
-		color: var(--color-red);
+		color: var(--color-text);
+		font-weight: 600;
 	}
 
 	.nav-cluster-title svg {
@@ -395,7 +349,7 @@
 	/* Responsive */
 	@media (max-width: 640px) {
 		.cluster-title {
-			font-size: 1.875rem;
+			font-size: 1.75rem;
 		}
 
 		.lesson-card-content {
@@ -414,7 +368,7 @@
 			align-items: flex-start;
 			text-align: left;
 			padding-top: 1rem;
-			border-top: 1px solid rgba(208, 28, 31, 0.1);
+			border-top: 1px solid var(--color-border-light);
 		}
 
 		.nav-next .nav-cluster-title {

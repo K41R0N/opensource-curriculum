@@ -178,9 +178,8 @@
 		position: sticky;
 		top: 0;
 		z-index: 50;
-		background-color: rgba(243, 238, 229, 0.95);
-		backdrop-filter: blur(8px);
-		border-bottom: 1px solid rgba(208, 28, 31, 0.15);
+		background-color: var(--color-background);
+		border-bottom: 1px solid var(--color-border);
 	}
 
 	.curriculum-header-content {
@@ -188,7 +187,7 @@
 		align-items: center;
 		justify-content: space-between;
 		padding: 0 1rem;
-		height: 3.5rem;
+		height: 3rem;
 		max-width: 48rem;
 		margin: 0 auto;
 	}
@@ -200,24 +199,16 @@
 		justify-content: center;
 		width: 2.5rem;
 		height: 2.5rem;
-		color: var(--color-black-light);
+		color: var(--color-text-muted);
 		text-decoration: none;
-		border-radius: 50%;
-		transition: all 0.2s ease;
-	}
-
-	.header-home-btn:hover,
-	.header-about-btn:hover {
-		color: var(--color-red);
-		background-color: rgba(208, 28, 31, 0.1);
 	}
 
 	.header-title {
 		font-family: var(--font-heading);
 		font-size: 1rem;
-		font-weight: 400;
-		color: var(--color-red);
-		letter-spacing: 0.05em;
+		font-weight: 600;
+		color: var(--color-text);
+		letter-spacing: 0.02em;
 		margin: 0;
 	}
 
@@ -225,28 +216,28 @@
 	.curriculum-main {
 		max-width: 48rem;
 		margin: 0 auto;
-		padding: 0 1.25rem 4rem;
+		padding: 0 1.25rem 3rem;
 	}
 
 	/* Hero Section */
 	.curriculum-hero {
 		text-align: center;
-		padding: 3rem 0 2.5rem;
-		border-bottom: 1px solid rgba(208, 28, 31, 0.1);
-		margin-bottom: 2.5rem;
+		padding: 2.5rem 0 2rem;
+		border-bottom: 1px solid var(--color-border);
+		margin-bottom: 2rem;
 	}
 
 	.curriculum-title {
-		font-size: 2.5rem;
+		font-size: 2rem;
 		line-height: 1.1;
 		margin: 0 0 1rem;
-		color: var(--color-red);
+		color: var(--color-text);
 	}
 
 	.curriculum-description {
-		font-size: 1.0625rem;
+		font-size: 1rem;
 		line-height: 1.7;
-		color: var(--color-black-light);
+		color: var(--color-text-muted);
 		margin: 0 0 1.5rem;
 		max-width: 36rem;
 		margin-left: auto;
@@ -264,16 +255,16 @@
 	.stat {
 		font-family: var(--font-body);
 		font-size: 0.9375rem;
-		color: var(--color-black-light);
+		color: var(--color-text-muted);
 	}
 
 	.stat strong {
-		color: var(--color-red);
-		font-weight: 700;
+		color: var(--color-text);
+		font-weight: 600;
 	}
 
 	.stat-divider {
-		color: rgba(208, 28, 31, 0.4);
+		color: var(--color-border-light);
 	}
 
 	.curriculum-cta {
@@ -282,20 +273,14 @@
 		gap: 0.5rem;
 		font-family: var(--font-body);
 		font-size: 0.875rem;
-		font-weight: 700;
+		font-weight: 600;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
 		padding: 0.75rem 1.5rem;
-		background-color: var(--color-red);
-		color: var(--color-cream);
+		background-color: var(--color-text);
+		color: var(--color-background);
 		text-decoration: none;
-		border: 2px solid var(--color-red);
-		transition: all 0.2s ease;
-	}
-
-	.curriculum-cta:hover {
-		background-color: transparent;
-		color: var(--color-red);
+		border: 1px solid var(--color-border);
 	}
 
 	/* Section Styles */
@@ -304,30 +289,29 @@
 	}
 
 	.section-header {
-		margin-bottom: 1.5rem;
+		margin-bottom: 1.25rem;
 	}
 
 	.section-title {
 		font-family: var(--font-heading);
-		font-size: 1.75rem;
-		color: var(--color-red);
+		font-size: 1.5rem;
+		color: var(--color-text);
 		margin: 0 0 0.5rem;
-		font-weight: 400;
+		font-weight: 600;
 	}
 
 	.section-subtitle {
 		font-family: var(--font-body);
 		font-size: 0.9375rem;
-		font-style: italic;
-		color: var(--color-black-light);
+		color: var(--color-text-muted);
 		margin: 0;
 	}
 
 	.section-divider {
 		width: 60px;
 		height: 1px;
-		background-color: rgba(208, 28, 31, 0.25);
-		margin: 2.5rem auto;
+		background-color: var(--color-border);
+		margin: 2rem auto;
 	}
 
 	/* Cluster Grid */
@@ -337,39 +321,19 @@
 	}
 
 	.cluster-connector {
-		width: 2px;
-		height: 1rem;
-		background-color: rgba(208, 28, 31, 0.2);
-		margin-left: 2.25rem;
+		width: 1px;
+		height: 0.75rem;
+		background-color: var(--color-border);
+		margin-left: 2rem;
 	}
 
 	/* Cluster Card */
 	.cluster-card {
 		display: block;
 		text-decoration: none;
-		background-color: var(--color-cream);
-		border: 1px solid rgba(208, 28, 31, 0.12);
-		padding: 1.25rem;
-		transition: all 0.2s ease;
-	}
-
-	.cluster-card:hover {
-		border-color: var(--color-red);
-		box-shadow: 0 4px 16px rgba(208, 28, 31, 0.12);
-	}
-
-	.cluster-card:hover .cluster-card-title {
-		color: var(--color-red);
-	}
-
-	.cluster-card:hover .cluster-number-badge {
-		background-color: var(--color-red);
-		color: var(--color-cream);
-	}
-
-	.cluster-card:hover .cluster-arrow {
-		transform: translateX(4px);
-		color: var(--color-red);
+		background-color: var(--color-surface);
+		border: 1px solid var(--color-border);
+		padding: 1rem;
 	}
 
 	.cluster-card-content {
@@ -383,15 +347,14 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 2.75rem;
-		height: 2.75rem;
-		background-color: rgba(208, 28, 31, 0.1);
-		color: var(--color-red);
+		width: 2.5rem;
+		height: 2.5rem;
+		background-color: var(--color-surface);
+		border: 1px solid var(--color-border);
+		color: var(--color-text);
 		font-family: var(--font-body);
-		font-weight: 700;
-		font-size: 1rem;
-		border-radius: 0.5rem;
-		transition: all 0.2s ease;
+		font-weight: 600;
+		font-size: 0.875rem;
 	}
 
 	.cluster-info {
@@ -401,17 +364,16 @@
 
 	.cluster-card-title {
 		font-family: var(--font-body);
-		font-size: 1.125rem;
+		font-size: 1rem;
 		font-weight: 600;
-		color: var(--color-black);
+		color: var(--color-text);
 		margin: 0 0 0.375rem;
 		line-height: 1.3;
-		transition: color 0.2s ease;
 	}
 
 	.cluster-card-description {
 		font-size: 0.9375rem;
-		color: var(--color-black-light);
+		color: var(--color-text-muted);
 		line-height: 1.6;
 		margin: 0 0 0.5rem;
 		display: -webkit-box;
@@ -424,7 +386,7 @@
 		font-family: var(--font-body);
 		font-size: 0.75rem;
 		font-weight: 600;
-		color: var(--color-red);
+		color: var(--color-text);
 	}
 
 	.cluster-arrow {
@@ -433,10 +395,8 @@
 		align-items: center;
 		justify-content: center;
 		width: 2rem;
-		height: 2.75rem;
-		color: var(--color-black-light);
-		opacity: 0.5;
-		transition: all 0.2s ease;
+		height: 2.5rem;
+		color: var(--color-text-muted);
 	}
 
 	/* Footer Navigation */
@@ -444,9 +404,9 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin-top: 3rem;
-		padding-top: 2rem;
-		border-top: 1px solid rgba(208, 28, 31, 0.2);
+		margin-top: 2.5rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid var(--color-border);
 	}
 
 	.footer-nav-link {
@@ -455,28 +415,23 @@
 		gap: 0.5rem;
 		font-family: var(--font-body);
 		font-size: 0.9375rem;
-		color: var(--color-black-light);
+		color: var(--color-text-muted);
 		text-decoration: none;
-		transition: color 0.2s ease;
-	}
-
-	.footer-nav-link:hover {
-		color: var(--color-red);
 	}
 
 	.footer-nav-primary {
-		color: var(--color-red);
+		color: var(--color-text);
 		font-weight: 600;
 	}
 
 	/* Responsive */
 	@media (max-width: 640px) {
 		.curriculum-title {
-			font-size: 2rem;
+			font-size: 1.75rem;
 		}
 
 		.curriculum-description {
-			font-size: 1rem;
+			font-size: 0.9375rem;
 		}
 
 		.cluster-card-content {
