@@ -5,9 +5,11 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
+    "prebuild": "node scripts/validate-content.js",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "validate": "node scripts/validate-content.js"
   },
   "devDependencies": {
     "@sveltejs/adapter-netlify": "^4.3.0",
