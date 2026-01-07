@@ -40,7 +40,7 @@ function isValidInteger(value) {
 }
 
 /**
- * Get all markdown files from a directory (excluding locale variants)
+ * Get all markdown files from a directory
  */
 function getMarkdownFiles(dir) {
 	if (!fs.existsSync(dir)) return [];
