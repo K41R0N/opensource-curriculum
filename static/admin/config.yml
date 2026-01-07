@@ -1,0 +1,155 @@
+# =============================================================================
+# DEVICES Curriculum CMS Configuration
+# =============================================================================
+# This config defines the content schema for the curriculum.
+# See /CONTENT_ARCHITECTURE.md for full documentation.
+#
+# Schema Version: 1.1
+# =============================================================================
+
+backend:
+  name: github
+  repo: K41R0N/devices-curriculum
+  branch: main
+  base_url: https://sveltia-cms-auth.alejandro-057.workers.dev
+
+# Internationalization (i18n) configuration
+# Supports English (default) and Colombian Spanish
+# Default locale files keep original names (e.g., about.md)
+# Other locale files use suffix (e.g., about.es-CO.md)
+i18n:
+  structure: multiple_files
+  locales: [en, es-CO]
+  default_locale: en
+  omit_default_locale_from_filename: true
+
+media_folder: static/images
+public_folder: /images
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: '-'
+
+collections:
+  # Clusters - the thematic groupings of lessons
+  - name: clusters
+    label: Clusters
+    label_singular: Cluster
+    folder: content/clusters
+    create: true
+    slug: '{{slug}}'
+    sortable_fields: ['order', 'title']
+    summary: '{{order}}. {{title}}'
+    preview_path: 'curriculum/{{slug}}'
+    i18n: true
+    fields:
+      - { label: Title, name: title, widget: string, i18n: true }
+      - { label: Slug, name: slug, widget: string, i18n: duplicate }
+      - { label: Order, name: order, widget: number, value_type: int, min: 1, i18n: duplicate }
+      - { label: Description, name: description, widget: text, i18n: true }
+      - { label: Overview, name: body, widget: markdown, required: false, i18n: true }
+
+  # Lessons - the main content of the curriculum
+  - name: lessons
+    label: Lessons
+    label_singular: Lesson
+    folder: content/lessons
+    create: true
+    slug: '{{cluster}}-{{slug}}'
+    sortable_fields: ['order', 'title', 'cluster']
+    summary: '{{cluster}} / {{order}}. {{title}}'
+    preview_path: 'curriculum/{{cluster}}/{{slug}}'
+    i18n: true
+    fields:
+      - { label: Title, name: title, widget: string, i18n: true }
+      - { label: Slug, name: slug, widget: string, i18n: duplicate }
+      - label: Cluster
+        name: cluster
+        widget: relation
+        collection: clusters
+        value_field: slug
+        search_fields: ['title', 'slug']
+        display_fields: ['title']
+        i18n: duplicate
+      - { label: Author, name: author, widget: string, required: false, i18n: true }
+      - { label: Order, name: order, widget: number, value_type: int, min: 1, i18n: duplicate }
+      - { label: Description, name: description, widget: text, i18n: true }
+      - { label: Featured Image, name: featured_image, widget: image, required: false, i18n: duplicate }
+      - label: Learning Objectives
+        name: objectives
+        widget: list
+        i18n: true
+        field: { label: Objective, name: objective, widget: string }
+      - label: Key Concepts
+        name: key_concepts
+        widget: list
+        i18n: true
+        fields:
+          - { label: Concept Name, name: name, widget: string }
+          - { label: Explanation, name: explanation, widget: markdown }
+      - label: Assignment
+        name: assignment
+        widget: object
+        i18n: true
+        fields:
+          - { label: Instructions, name: instructions, widget: markdown }
+          - { label: Reading URL, name: url, widget: string, required: false }
+          - { label: Reading Title, name: reading_title, widget: string, required: false }
+      - label: Knowledge Check
+        name: knowledge_check
+        widget: list
+        i18n: true
+        fields:
+          - { label: Question, name: question, widget: string }
+          - { label: Hint, name: hint, widget: text, required: false }
+      - label: Additional Resources
+        name: additional_resources
+        widget: list
+        required: false
+        i18n: true
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Author, name: author, widget: string, required: false }
+          - { label: URL, name: url, widget: string, required: false }
+          - { label: Description, name: description, widget: text }
+      - { label: Introduction, name: body, widget: markdown, i18n: true }
+
+  # Static pages
+  - name: pages
+    label: Pages
+    i18n: true
+    files:
+      - name: about
+        label: About Page
+        file: content/pages/about.md
+        i18n: true
+        fields:
+          - { label: Title, name: title, widget: string, i18n: true }
+          - { label: Subtitle, name: subtitle, widget: string, i18n: true }
+          - { label: Content, name: body, widget: markdown, i18n: true }
+      - name: home
+        label: Home Page
+        file: content/pages/home.md
+        i18n: true
+        fields:
+          - { label: Title, name: title, widget: string, hint: "Main curriculum title (displayed in book cover)", i18n: true }
+          - { label: Tagline, name: tagline, widget: text, hint: "One-sentence value proposition", i18n: true }
+          - { label: CTA Button Text, name: cta_text, widget: string, default: "Begin Reading", hint: "Call-to-action button text", i18n: true }
+          - { label: Approach Section, name: body, widget: markdown, required: false, hint: "Optional philosophy/methodology section below clusters", i18n: true }
+
+  # Site settings
+  - name: settings
+    label: Settings
+    i18n: true
+    files:
+      - name: site
+        label: Site Settings
+        file: content/settings/site.json
+        i18n: true
+        fields:
+          - { label: Site Title, name: title, widget: string, i18n: true }
+          - { label: Site Description, name: description, widget: text, i18n: true }
+          - { label: Author Name, name: author, widget: string, i18n: duplicate }
+          - { label: Substack URL, name: substack_url, widget: string, i18n: duplicate }
+          - { label: Footer Text, name: footer_text, widget: string, i18n: true }
