@@ -280,6 +280,82 @@
 		color: var(--color-text-muted);
 	}
 
+	/* Code Blocks */
+	.prose pre,
+	.lesson-content pre,
+	.concept-explanation pre,
+	.assignment-body pre {
+		background-color: #f5f5f5;
+		border: 1px solid var(--color-border-light);
+		border-radius: 0;
+		padding: 1rem;
+		margin: 1.5rem 0;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.prose code,
+	.lesson-content code,
+	.concept-explanation code,
+	.assignment-body code {
+		font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+		font-size: 0.875rem;
+		line-height: 1.6;
+	}
+
+	/* Inline code */
+	.prose p code,
+	.prose li code,
+	.lesson-content p code,
+	.lesson-content li code {
+		background-color: #f5f5f5;
+		border: 1px solid var(--color-border-light);
+		padding: 0.125rem 0.375rem;
+		font-size: 0.875em;
+	}
+
+	/* Code block wrapper for copy button */
+	.code-block-wrapper {
+		position: relative;
+	}
+
+	.code-block-wrapper pre {
+		margin: 0;
+	}
+
+	.copy-button {
+		position: absolute;
+		top: 0.5rem;
+		right: 0.5rem;
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+		padding: 0.375rem 0.625rem;
+		background-color: var(--color-background);
+		border: 1px solid var(--color-border-light);
+		color: var(--color-text-muted);
+		font-family: var(--font-body);
+		font-size: 0.75rem;
+		cursor: pointer;
+		opacity: 0;
+		transition: opacity 0.15s ease;
+	}
+
+	.code-block-wrapper:hover .copy-button {
+		opacity: 1;
+	}
+
+	.copy-button:hover {
+		background-color: var(--color-surface);
+		color: var(--color-text);
+		border-color: var(--color-border);
+	}
+
+	.copy-button.copied {
+		color: #16a34a;
+		border-color: #16a34a;
+	}
+
 	.prose strong {
 		font-weight: 600;
 		color: var(--color-text);
@@ -372,5 +448,19 @@
 
 	.hero h1 {
 		font-size: 2rem !important;
+	}
+
+	/* Code blocks on mobile */
+	.prose pre,
+	.lesson-content pre,
+	.concept-explanation pre,
+	.assignment-body pre {
+		padding: 0.75rem;
+		font-size: 0.8125rem;
+	}
+
+	/* Always show copy button on touch devices */
+	.copy-button {
+		opacity: 1;
 	}
 }

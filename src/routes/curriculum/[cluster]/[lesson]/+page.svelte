@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { onMount } from 'svelte';
+	import { onMount, afterUpdate } from 'svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -22,6 +22,65 @@
 		? Math.max(1, Math.ceil(lesson.content.split(/\s+/).length / 200))
 		: 5;
 
+	// Add copy buttons to code blocks
+	function addCopyButtons() {
+		const codeBlocks = document.querySelectorAll('.lesson-content pre, .concept-explanation pre, .assignment-body pre');
+
+		codeBlocks.forEach((pre) => {
+			// Skip if already wrapped
+			if (pre.parentElement?.classList.contains('code-block-wrapper')) return;
+
+			// Create wrapper
+			const wrapper = document.createElement('div');
+			wrapper.className = 'code-block-wrapper';
+
+			// Create copy button
+			const button = document.createElement('button');
+			button.className = 'copy-button';
+			button.innerHTML = `
+				<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+					<path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+				</svg>
+				Copy
+			`;
+
+			button.addEventListener('click', async () => {
+				const code = pre.querySelector('code');
+				const text = code ? code.textContent : pre.textContent;
+
+				try {
+					await navigator.clipboard.writeText(text || '');
+					button.innerHTML = `
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M20 6L9 17l-5-5"/>
+						</svg>
+						Copied!
+					`;
+					button.classList.add('copied');
+
+					setTimeout(() => {
+						button.innerHTML = `
+							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+								<path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+							</svg>
+							Copy
+						`;
+						button.classList.remove('copied');
+					}, 2000);
+				} catch (err) {
+					console.error('Failed to copy:', err);
+				}
+			});
+
+			// Wrap the pre element
+			pre.parentNode?.insertBefore(wrapper, pre);
+			wrapper.appendChild(pre);
+			wrapper.appendChild(button);
+		});
+	}
+
 	onMount(() => {
 		const updateProgress = () => {
 			const scrollTop = window.scrollY;
@@ -32,7 +91,15 @@
 		window.addEventListener('scroll', updateProgress, { passive: true });
 		updateProgress();
 
+		// Add copy buttons after initial render
+		addCopyButtons();
+
 		return () => window.removeEventListener('scroll', updateProgress);
+	});
+
+	// Re-add copy buttons when content changes (navigation between lessons)
+	afterUpdate(() => {
+		addCopyButtons();
 	});
 </script>
 
