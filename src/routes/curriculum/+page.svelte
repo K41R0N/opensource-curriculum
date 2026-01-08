@@ -273,14 +273,20 @@
 		gap: 0.5rem;
 		font-family: var(--font-body);
 		font-size: 0.875rem;
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
 		padding: 0.75rem 1.5rem;
-		background-color: var(--color-text);
-		color: var(--color-background);
+		background-color: var(--color-primary);
+		color: var(--color-text-inverse);
 		text-decoration: none;
-		border: 1px solid var(--color-border);
+		border: 1px solid var(--color-primary);
+		border-radius: var(--radius-base);
+		transition: background-color var(--transition-base);
+	}
+
+	.curriculum-cta:hover {
+		background-color: var(--color-primary-hover);
 	}
 
 	/* Section Styles */
@@ -333,7 +339,15 @@
 		text-decoration: none;
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border);
+		border-radius: var(--radius-base);
 		padding: 1rem;
+		box-shadow: var(--shadow-sm);
+		transition: border-color var(--transition-base), box-shadow var(--transition-base);
+	}
+
+	.cluster-card:hover {
+		border-color: var(--color-primary);
+		box-shadow: var(--shadow-md);
 	}
 
 	.cluster-card-content {
@@ -351,9 +365,10 @@
 		height: 2.5rem;
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border);
+		border-radius: var(--radius-sm);
 		color: var(--color-text);
 		font-family: var(--font-body);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		font-size: 0.875rem;
 	}
 

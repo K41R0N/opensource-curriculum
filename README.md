@@ -217,6 +217,7 @@ Edit CSS custom properties in `src/app.css`:
 | [AGENTS.md](./AGENTS.md) | Instructions for AI agents |
 | [docs/cms-setup.md](./docs/cms-setup.md) | CMS OAuth setup (Sveltia) |
 | [docs/obsidian-setup.md](./docs/obsidian-setup.md) | Local editing with Obsidian |
+| [docs/styling-guide.md](./docs/styling-guide.md) | Visual customization (colors, fonts, borders) |
 
 ## License
 

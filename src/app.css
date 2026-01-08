@@ -1,18 +1,156 @@
-/* Minimal, neutral styling - system fonts */
+/* ==========================================================================
+   THEME CONFIGURATION
+
+   This file controls the visual appearance of your curriculum site.
+   Edit the CSS variables below to customize colors, typography, and styling.
+
+   The theming system is designed to be modified without breaking the CMS
+   or content structure. Only change values, not variable names.
+   ========================================================================== */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
+	/* =======================================================================
+	   COLOR PALETTE
+
+	   Customize these colors to match your brand. The default is a minimal
+	   black and white scheme. Some alternatives:
+
+	   Academic Blue:    --color-primary: #1e40af; --color-accent: #3b82f6;
+	   Forest Green:     --color-primary: #166534; --color-accent: #22c55e;
+	   Warm Terracotta:  --color-primary: #9a3412; --color-accent: #f97316;
+	   Deep Purple:      --color-primary: #6b21a8; --color-accent: #a855f7;
+	   ======================================================================= */
+
+	/* Primary colors - main brand color used for buttons, links, accents */
 	--color-primary: #000000;
+	--color-primary-hover: #333333;
+
+	/* Background colors */
 	--color-background: #ffffff;
 	--color-surface: #ffffff;
+	--color-surface-elevated: #fafafa;
+
+	/* Text colors */
 	--color-text: #000000;
 	--color-text-muted: #555555;
+	--color-text-inverse: #ffffff;
+
+	/* Border colors */
 	--color-border: #000000;
 	--color-border-light: #cccccc;
+
+	/* Accent color - for highlights, success states, call-to-action */
+	--color-accent: #000000;
+
+	/* Semantic colors - for feedback and status */
+	--color-success: #16a34a;
+	--color-warning: #ca8a04;
+	--color-error: #dc2626;
+
+	/* Code block colors */
+	--color-code-bg: #f5f5f5;
+	--color-code-border: #e5e5e5;
+
+	/* =======================================================================
+	   TYPOGRAPHY
+
+	   Font options (uncomment one pair or add your own):
+
+	   System (default - fast loading):
+	     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif
+
+	   Classic serif:
+	     Georgia, 'Times New Roman', serif
+
+	   Modern sans:
+	     'Inter', 'Helvetica Neue', Arial, sans-serif
+
+	   Monospace (for technical content):
+	     'JetBrains Mono', 'Fira Code', 'SF Mono', monospace
+
+	   To use Google Fonts, add a <link> in src/app.html <head>:
+	   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+	   ======================================================================= */
+
 	--font-heading: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 	--font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	--font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+	/* Font weights */
+	--font-weight-normal: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 600;
+	--font-weight-bold: 700;
+
+	/* =======================================================================
+	   BORDER RADIUS
+
+	   Controls the roundness of corners. Options:
+
+	   Sharp (default):  0
+	   Subtle:           0.25rem (4px)
+	   Moderate:         0.5rem (8px)
+	   Rounded:          0.75rem (12px)
+	   Pill:             9999px (fully rounded)
+
+	   Set --radius-base and all other radius values scale from it.
+	   ======================================================================= */
+
+	--radius-none: 0;
+	--radius-sm: 0.125rem;   /* 2px - for small elements like badges */
+	--radius-base: 0;        /* DEFAULT: Change this to add roundness site-wide */
+	--radius-md: 0.375rem;   /* 6px - for medium elements */
+	--radius-lg: 0.5rem;     /* 8px - for cards, panels */
+	--radius-xl: 0.75rem;    /* 12px - for large cards, modals */
+	--radius-full: 9999px;   /* Fully rounded (pills, avatars) */
+
+	/* =======================================================================
+	   SPACING & SIZING
+
+	   Consistent spacing scale used throughout the site.
+	   ======================================================================= */
+
+	--spacing-xs: 0.25rem;   /* 4px */
+	--spacing-sm: 0.5rem;    /* 8px */
+	--spacing-md: 1rem;      /* 16px */
+	--spacing-lg: 1.5rem;    /* 24px */
+	--spacing-xl: 2rem;      /* 32px */
+	--spacing-2xl: 3rem;     /* 48px */
+
+	/* Container max-widths */
+	--container-sm: 36rem;   /* 576px - narrow content */
+	--container-md: 42rem;   /* 672px - lesson content */
+	--container-lg: 48rem;   /* 768px - wider layouts */
+
+	/* =======================================================================
+	   SHADOWS
+
+	   Box shadows for depth. Set to 'none' for flat design.
+	   ======================================================================= */
+
+	--shadow-sm: none;
+	--shadow-md: none;
+	--shadow-lg: none;
+
+	/* To enable shadows, uncomment these:
+	--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+	--shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+	--shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+	*/
+
+	/* =======================================================================
+	   TRANSITIONS
+
+	   Animation timing for hover effects and state changes.
+	   ======================================================================= */
+
+	--transition-fast: 0.1s ease;
+	--transition-base: 0.15s ease;
+	--transition-slow: 0.3s ease;
 }
 
 @layer base {
@@ -109,8 +247,10 @@
 	.card {
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border);
+		border-radius: var(--radius-base);
 		padding: 1.5rem;
 		margin-bottom: 1rem;
+		box-shadow: var(--shadow-sm);
 	}
 
 	.card h3 {
@@ -145,9 +285,11 @@
 	.lesson-panel {
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border);
-		border-left: 3px solid var(--color-text);
+		border-left: 3px solid var(--color-primary);
+		border-radius: var(--radius-base);
 		padding: 1.5rem;
 		margin: 2rem 0;
+		box-shadow: var(--shadow-sm);
 	}
 
 	.lesson-panel h2,
@@ -160,8 +302,10 @@
 	.knowledge-check {
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border);
+		border-radius: var(--radius-base);
 		padding: 1.5rem;
 		margin: 2rem 0;
+		box-shadow: var(--shadow-sm);
 	}
 
 	.knowledge-check h2,
@@ -178,6 +322,7 @@
 	.knowledge-check li {
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border-light);
+		border-radius: var(--radius-base);
 		padding: 1rem;
 		margin-bottom: 0.75rem;
 	}
@@ -187,18 +332,29 @@
 		display: inline-block;
 		font-family: var(--font-body);
 		font-size: 0.9375rem;
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		padding: 0.75rem 1.5rem;
 		border: 1px solid var(--color-border);
+		border-radius: var(--radius-base);
 		background-color: var(--color-background);
 		color: var(--color-text);
 		text-decoration: none;
 		cursor: pointer;
+		transition: background-color var(--transition-base), border-color var(--transition-base);
+	}
+
+	.btn:hover {
+		background-color: var(--color-surface-elevated);
 	}
 
 	.btn-primary {
-		background-color: var(--color-text);
-		color: var(--color-background);
+		background-color: var(--color-primary);
+		color: var(--color-text-inverse);
+		border-color: var(--color-primary);
+	}
+
+	.btn-primary:hover {
+		background-color: var(--color-primary-hover);
 	}
 
 	/* Section Header */
@@ -285,9 +441,9 @@
 	.lesson-content pre,
 	.concept-explanation pre,
 	.assignment-body pre {
-		background-color: #f5f5f5;
-		border: 1px solid var(--color-border-light);
-		border-radius: 0;
+		background-color: var(--color-code-bg);
+		border: 1px solid var(--color-code-border);
+		border-radius: var(--radius-base);
 		padding: 1rem;
 		margin: 1.5rem 0;
 		overflow-x: auto;
@@ -298,7 +454,7 @@
 	.lesson-content code,
 	.concept-explanation code,
 	.assignment-body code {
-		font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+		font-family: var(--font-mono);
 		font-size: 0.875rem;
 		line-height: 1.6;
 	}
@@ -308,8 +464,9 @@
 	.prose li code,
 	.lesson-content p code,
 	.lesson-content li code {
-		background-color: #f5f5f5;
-		border: 1px solid var(--color-border-light);
+		background-color: var(--color-code-bg);
+		border: 1px solid var(--color-code-border);
+		border-radius: var(--radius-sm);
 		padding: 0.125rem 0.375rem;
 		font-size: 0.875em;
 	}
@@ -333,12 +490,13 @@
 		padding: 0.375rem 0.625rem;
 		background-color: var(--color-background);
 		border: 1px solid var(--color-border-light);
+		border-radius: var(--radius-sm);
 		color: var(--color-text-muted);
 		font-family: var(--font-body);
 		font-size: 0.75rem;
 		cursor: pointer;
 		opacity: 0;
-		transition: opacity 0.15s ease;
+		transition: opacity var(--transition-base), background-color var(--transition-base);
 	}
 
 	.code-block-wrapper:hover .copy-button {
@@ -346,14 +504,14 @@
 	}
 
 	.copy-button:hover {
-		background-color: var(--color-surface);
+		background-color: var(--color-surface-elevated);
 		color: var(--color-text);
 		border-color: var(--color-border);
 	}
 
 	.copy-button.copied {
-		color: #16a34a;
-		border-color: #16a34a;
+		color: var(--color-success);
+		border-color: var(--color-success);
 	}
 
 	.prose strong {

@@ -519,9 +519,11 @@
 		gap: 1rem;
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border);
-		border-left: 3px solid var(--color-text);
+		border-left: 3px solid var(--color-primary);
+		border-radius: var(--radius-base);
 		padding: 1rem;
 		margin: 1.5rem 0;
+		box-shadow: var(--shadow-sm);
 	}
 
 	.callout-icon {
@@ -533,6 +535,7 @@
 		height: 2rem;
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border);
+		border-radius: var(--radius-sm);
 		color: var(--color-text);
 	}
 
@@ -575,9 +578,11 @@
 		gap: 1rem;
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border);
+		border-radius: var(--radius-base);
 		padding: 1rem;
 		margin-bottom: 0.75rem;
 		overflow: hidden;
+		box-shadow: var(--shadow-sm);
 	}
 
 	.concept-accent {
@@ -586,7 +591,7 @@
 		left: 0;
 		width: 3px;
 		height: 100%;
-		background-color: var(--color-text);
+		background-color: var(--color-primary);
 	}
 
 	.concept-icon {
@@ -598,6 +603,7 @@
 		height: 2rem;
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border);
+		border-radius: var(--radius-sm);
 		color: var(--color-text);
 	}
 
@@ -627,7 +633,9 @@
 	.assignment-card {
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border);
+		border-radius: var(--radius-base);
 		padding: 1.25rem;
+		box-shadow: var(--shadow-sm);
 	}
 
 	.assignment-header {
@@ -658,19 +666,27 @@
 		gap: 0.5rem;
 		font-family: var(--font-body);
 		font-size: 0.9375rem;
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		padding: 0.625rem 1rem;
-		background-color: var(--color-text);
-		color: var(--color-background);
+		background-color: var(--color-primary);
+		color: var(--color-text-inverse);
 		text-decoration: none;
-		border: 1px solid var(--color-border);
+		border: 1px solid var(--color-primary);
+		border-radius: var(--radius-base);
+		transition: background-color var(--transition-base);
+	}
+
+	.assignment-link:hover {
+		background-color: var(--color-primary-hover);
 	}
 
 	/* Knowledge Check */
 	.knowledge-check-section {
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border);
+		border-radius: var(--radius-base);
 		padding: 1.25rem;
+		box-shadow: var(--shadow-sm);
 	}
 
 	.knowledge-check-header {
@@ -703,6 +719,7 @@
 		gap: 0.75rem;
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border);
+		border-radius: var(--radius-base);
 		padding: 0.75rem;
 	}
 
@@ -711,6 +728,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		border-radius: var(--radius-sm);
 		width: 1.5rem;
 		height: 1.5rem;
 		background-color: var(--color-surface);
@@ -751,7 +769,14 @@
 	.resource-card {
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border);
+		border-radius: var(--radius-base);
 		padding: 0.75rem 1rem;
+		box-shadow: var(--shadow-sm);
+		transition: border-color var(--transition-base);
+	}
+
+	.resource-card:hover {
+		border-color: var(--color-primary);
 	}
 
 	.resource-card h4 {
