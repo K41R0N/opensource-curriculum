@@ -239,13 +239,39 @@ src/lib/cms/
 
 ## Migration Path
 
-### From Sveltia to Notion
+### From Sveltia to Notion (Automatic)
 
-1. Set up Notion databases matching schema
-2. Export content from `content/` folder
-3. Import into Notion (manual or scripted)
-4. Update environment variables
-5. Redeploy
+Use the sync script to automatically create and populate Notion databases:
+
+```bash
+# 1. Create a Notion integration at https://www.notion.so/my-integrations
+# 2. Create a parent page in Notion and share it with your integration
+# 3. Get the parent page ID from the URL
+
+# 4. Run the sync script
+NOTION_TOKEN=secret_xxx NOTION_PARENT_PAGE=xxx npm run sync:notion
+
+# 5. The script outputs database IDs - add them to your environment:
+#    NOTION_CLUSTERS_DB=xxx
+#    NOTION_LESSONS_DB=xxx
+#    NOTION_PAGES_DB=xxx
+
+# 6. Set CMS_PROVIDER=notion and redeploy
+```
+
+The sync script (`scripts/sync-to-notion.js`):
+- Creates Clusters, Lessons, and Pages databases
+- Populates all content from `content/` folder
+- Sets up relations between lessons and clusters
+- Converts markdown to Notion blocks
+- Outputs the database IDs you need for configuration
+
+### From Sveltia to Notion (Manual)
+
+1. Set up Notion databases matching schema (see `docs/notion-template.md`)
+2. Manually copy content from `content/` folder
+3. Update environment variables
+4. Redeploy
 
 ### From Sveltia to Obsidian
 
