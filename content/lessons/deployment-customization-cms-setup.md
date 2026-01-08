@@ -3,135 +3,146 @@ title: Setting Up the CMS
 slug: cms-setup
 cluster: deployment-customization
 order: 2
-description: "Configure GitHub OAuth and Cloudflare Workers to enable browser-based content editing."
+description: "Configure authentication so you can edit content through the browser-based CMS."
 objectives:
-  - Understand why OAuth is needed for CMS authentication
-  - Set up a GitHub OAuth application
-  - Deploy the authentication worker to Cloudflare
-  - Test the CMS login flow
+  - Understand why authentication is needed for the CMS
+  - Set up GitHub and Cloudflare to enable secure login
+  - Connect everything together
+  - Successfully log into the CMS for the first time
 key_concepts:
-  - name: "Why OAuth?"
+  - name: "What is the CMS?"
     explanation: |
-      The CMS needs to edit files in your GitHub repository. To do this securely, it uses OAuth—a standard protocol that lets you grant limited access without sharing your password.
+      The CMS (Content Management System) is a web interface for editing your curriculum. Instead of editing raw files, you get:
 
-      When you log into the CMS:
-      1. You're redirected to GitHub
-      2. GitHub asks if you want to grant access
-      3. GitHub sends back a secure token
-      4. The CMS uses that token to edit your files
+      - **Visual forms** for filling in titles, descriptions, and content
+      - **Rich text editing** like a word processor
+      - **Automatic file management** — no need to know where files go
 
-      This is the same flow used by thousands of apps that integrate with GitHub.
-  - name: "The Auth Worker"
+      Access it at `your-site.netlify.app/admin/`. But first, it needs to know you're allowed to edit.
+  - name: "Why Do I Need to Log In?"
     explanation: |
-      OAuth requires a server to handle the token exchange—but your curriculum is a static site with no server.
+      Your curriculum files live on GitHub. When you save changes in the CMS, it updates those files automatically. But GitHub needs to verify it's really you making changes.
 
-      The solution: a tiny Cloudflare Worker that handles just the OAuth flow. It:
-      - Receives the callback from GitHub
-      - Exchanges the code for an access token
-      - Passes the token back to the CMS
+      The login flow works like this:
+      1. You click "Login with GitHub" in the CMS
+      2. GitHub asks "Do you want to let this app edit your files?"
+      3. You click "Authorize"
+      4. The CMS can now save changes on your behalf
 
-      Cloudflare Workers are free for this use case and take about 5 minutes to set up.
-  - name: "Sveltia CMS"
+      This is the same process used by thousands of apps that connect to GitHub.
+  - name: "The Three Pieces"
     explanation: |
-      Sveltia CMS is a modern, open-source content management system designed for static sites. It:
+      This setup requires three things to work together:
 
-      - Runs entirely in your browser
-      - Edits files directly in your GitHub repository
-      - Provides a user-friendly interface for non-technical editors
-      - Supports all the content types in your curriculum
+      1. **GitHub OAuth App** — Tells GitHub which app is asking for permission
+      2. **Cloudflare Worker** — A tiny helper that handles the login handshake
+      3. **CMS Configuration** — Points the CMS to your helper
 
-      Access it at `your-site.netlify.app/admin/`.
+      It sounds complex, but you'll just be copying and pasting values between three websites. Follow the steps in order, and it will work.
 assignment:
   instructions: |
-    Follow these steps carefully. Each step builds on the previous one.
+    This is the most technical lesson in the curriculum. Set aside 20-30 minutes of focused time.
 
-    **Step 1: Create a GitHub OAuth App**
-    1. Go to GitHub → Settings → Developer settings → OAuth Apps
-    2. Click "New OAuth App"
-    3. Fill in:
-       - Application name: `My Curriculum CMS` (or your preferred name)
-       - Homepage URL: Your Netlify site URL
-       - Authorization callback URL: `https://your-worker-name.your-subdomain.workers.dev/callback`
-         (You'll create this worker in Step 2)
-    4. Click "Register application"
-    5. Copy the **Client ID**
-    6. Click "Generate a new client secret" and copy it immediately
+    **You'll be working across three websites:**
+    - GitHub (where your files live)
+    - Cloudflare (free helper service)
+    - Your curriculum repository
 
-    **Step 2: Deploy the Cloudflare Worker**
-    1. Go to [workers.cloudflare.com](https://workers.cloudflare.com) and sign up/log in
-    2. Click "Create a Worker"
-    3. Replace the default code with the OAuth worker code (see lesson content below)
-    4. Click "Save and Deploy"
-    5. Note your worker URL: `https://your-worker-name.your-subdomain.workers.dev`
+    **Before starting, have ready:**
+    - Your Netlify site URL (e.g., `https://my-curriculum.netlify.app`)
+    - A text file or notes app to temporarily store values you'll copy
 
-    **Step 3: Configure Worker Environment Variables**
-    1. In your Cloudflare Worker settings, go to "Variables"
-    2. Add these environment variables:
-       - `CLIENT_ID`: Your GitHub OAuth Client ID
-       - `CLIENT_SECRET`: Your GitHub OAuth Client Secret (mark as encrypted)
-       - `REDIRECT_URI`: Your worker's callback URL
-
-    **Step 4: Update CMS Config**
-    1. In your repository, edit `static/admin/config.yml`
-    2. Update the `base_url` under `backend` to your worker URL
-
-    **Step 5: Test the Login**
-    1. Go to `your-site.netlify.app/admin/`
-    2. Click "Login with GitHub"
-    3. Authorize the application
-    4. You should see the CMS dashboard
+    Follow each step in order. Don't skip ahead!
 knowledge_check:
-  - question: "Why can't the CMS authenticate directly with GitHub without a worker?"
-    hint: "Think about what OAuth requires and what a static site can provide."
-  - question: "What happens if someone gets your Client Secret?"
-    hint: "Consider what access it grants and how to revoke it."
+  - question: "Why does the CMS need you to log in with GitHub?"
+    hint: "Think about who should be allowed to change your curriculum content."
+  - question: "If something goes wrong, where would you check the callback URL?"
+    hint: "The callback URL appears in both GitHub and your CMS config."
+additional_resources:
+  - title: "Cloudflare Workers Documentation"
+    author: "Cloudflare"
+    url: "https://developers.cloudflare.com/workers/"
+    description: "Learn more about the free service that powers authentication."
+  - title: "GitHub OAuth Apps"
+    author: "GitHub"
+    url: "https://docs.github.com/en/apps/oauth-apps"
+    description: "GitHub's documentation on OAuth applications."
 ---
 
-## Understanding CMS Authentication
+## Before You Begin
 
-The CMS is how you'll edit your curriculum without touching code. But before it can work, we need to set up secure authentication with GitHub.
+**This is the most technical lesson in the curriculum.** Don't worry—you won't need to write any code. You'll just be copying and pasting values between websites. But it does require careful attention to detail.
 
-## Why This Setup?
+**Time required**: 20-30 minutes
 
-Your curriculum lives as files in a GitHub repository. The CMS needs permission to edit those files on your behalf. OAuth provides this permission securely—you never share your password, and you can revoke access anytime.
+**What you'll set up**:
+- A way for the CMS to securely verify you're the owner
+- The ability to edit content through a friendly web interface
 
-The setup has three parts:
-1. **GitHub OAuth App**: Tells GitHub which application is requesting access
-2. **Cloudflare Worker**: Handles the OAuth token exchange (required because static sites can't keep secrets)
-3. **CMS Configuration**: Points the CMS to your worker
+**Tip**: Open a text file or notes app to temporarily store values as you go. You'll copy several codes and URLs that need to be pasted elsewhere.
 
-## Step-by-Step Setup
+---
 
-### 1. Create the GitHub OAuth App
+## Overview: What We're Building
 
-Navigate to GitHub:
-1. Click your profile picture → Settings
-2. Scroll down to "Developer settings" (left sidebar)
-3. Click "OAuth Apps" → "New OAuth App"
+```
+You                         CMS                         GitHub
+ │                           │                            │
+ ├── Click "Login" ─────────→│                            │
+ │                           ├── Redirect to GitHub ─────→│
+ │                           │                            │
+ │←──────────────────────────┼── "Allow access?" ←────────┤
+ │                           │                            │
+ ├── Click "Authorize" ─────→│                            │
+ │                           │                            │
+ │                    Cloudflare Worker                   │
+ │                           │                            │
+ │                           ├── Verify & get token ─────→│
+ │                           │                            │
+ │←── Now logged in ─────────┤                            │
+```
 
-Fill in the form:
-- **Application name**: Something descriptive (e.g., "Philosophy Curriculum CMS")
-- **Homepage URL**: Your Netlify site URL (e.g., `https://my-curriculum.netlify.app`)
-- **Authorization callback URL**: Leave blank for now—we'll fill this after creating the worker
+The Cloudflare Worker is a tiny helper (free) that handles the security handshake between the CMS and GitHub. Let's set it all up.
 
-After registering:
-1. Copy the **Client ID** somewhere safe
-2. Click "Generate a new client secret"
-3. Copy the **Client Secret** immediately (you won't see it again)
+---
 
-### 2. Deploy the OAuth Worker
+## Step 1: Create a Cloudflare Account
 
-Go to [workers.cloudflare.com](https://workers.cloudflare.com):
-1. Sign up or log in (free account works)
-2. Click "Create a Worker"
-3. Give it a name (e.g., `curriculum-oauth`)
-4. Replace the code with:
+Cloudflare provides the helper service that handles login. It's free.
+
+1. Go to [dash.cloudflare.com/sign-up](https://dash.cloudflare.com/sign-up)
+2. Enter your email and create a password
+3. Verify your email if prompted
+4. You'll land on the Cloudflare dashboard
+
+> **Note**: If you already have a Cloudflare account, just log in.
+
+---
+
+## Step 2: Create the Worker
+
+A "Worker" is a small program that runs on Cloudflare's servers. We need one to handle the login process.
+
+### Create a New Worker
+
+1. In the Cloudflare dashboard sidebar, click **Workers & Pages**
+2. Click **Create**
+3. Select **Create Worker**
+4. Give it a name: `curriculum-auth` (or any name you'll remember)
+5. Click **Deploy** (we'll edit the code next)
+
+### Edit the Worker Code
+
+1. After deploying, click **Edit code** (or go to your worker and click "Quick edit")
+2. **Delete all the existing code** in the editor
+3. **Copy the entire code block below** and paste it:
 
 ```javascript
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    // Step 1: Start the login - redirect to GitHub
     if (url.pathname === '/auth') {
       const authUrl = new URL('https://github.com/login/oauth/authorize');
       authUrl.searchParams.set('client_id', env.CLIENT_ID);
@@ -141,9 +152,11 @@ export default {
       return Response.redirect(authUrl.toString(), 302);
     }
 
+    // Step 2: Handle GitHub's response
     if (url.pathname === '/callback') {
       const code = url.searchParams.get('code');
 
+      // Exchange the code for an access token
       const tokenResponse = await fetch('https://github.com/login/oauth/access_token', {
         method: 'POST',
         headers: {
@@ -159,11 +172,11 @@ export default {
 
       const tokenData = await tokenResponse.json();
 
+      // Send the token back to the CMS
       const script = `
         <script>
           (function() {
             function receiveMessage(e) {
-              console.log("receiveMessage %o", e);
               window.opener.postMessage(
                 'authorization:github:success:${JSON.stringify(tokenData)}',
                 e.origin
@@ -181,79 +194,186 @@ export default {
       });
     }
 
-    return new Response('Not found', { status: 404 });
+    return new Response('OAuth Worker - visit /auth to begin', { status: 200 });
   }
 };
 ```
 
-5. Click "Save and Deploy"
-6. Copy your worker URL (e.g., `https://curriculum-oauth.yourname.workers.dev`)
+4. Click **Save and Deploy**
 
-### 3. Configure Worker Variables
+### Get Your Worker URL
 
-Still in Cloudflare:
-1. Go to your worker's Settings → Variables
-2. Add three environment variables:
+After deploying, you'll see your worker URL. It looks like:
 
-| Variable | Value |
-|----------|-------|
-| `CLIENT_ID` | Your GitHub OAuth Client ID |
-| `CLIENT_SECRET` | Your GitHub OAuth Client Secret (encrypt this) |
-| `REDIRECT_URI` | `https://your-worker.workers.dev/callback` |
+```
+https://curriculum-auth.YOUR-USERNAME.workers.dev
+```
 
-3. Click "Save and Deploy"
+**Write this URL down!** You'll need it in the next steps.
 
-### 4. Update GitHub OAuth App
+---
 
-Go back to your GitHub OAuth App settings and update:
-- **Authorization callback URL**: `https://your-worker.workers.dev/callback`
+## Step 3: Create a GitHub OAuth App
 
-### 5. Update CMS Config
+Now we need to tell GitHub about your CMS.
 
-In your repository, edit `static/admin/config.yml`:
+### Navigate to OAuth Apps
+
+1. Go to [github.com](https://github.com) and log in
+2. Click your **profile picture** (top right) → **Settings**
+3. Scroll down the left sidebar and click **Developer settings**
+4. Click **OAuth Apps** → **New OAuth App**
+
+### Fill In the Form
+
+| Field | What to Enter |
+|-------|---------------|
+| **Application name** | `My Curriculum CMS` (or any name) |
+| **Homepage URL** | Your Netlify site URL (e.g., `https://my-curriculum.netlify.app`) |
+| **Application description** | Optional — you can leave this blank |
+| **Authorization callback URL** | Your worker URL + `/callback` (e.g., `https://curriculum-auth.yourname.workers.dev/callback`) |
+
+5. Click **Register application**
+
+### Copy Your Credentials
+
+After registering, you'll see your app's settings page.
+
+1. **Copy the Client ID** — Save it to your notes
+2. Click **Generate a new client secret**
+3. **Copy the Client Secret immediately** — You won't be able to see it again!
+
+> **Important**: Keep these safe! The Client Secret is like a password. Don't share it publicly.
+
+---
+
+## Step 4: Configure the Worker Variables
+
+Go back to Cloudflare and add your GitHub credentials to the worker.
+
+1. Go to **Workers & Pages** → click on your worker
+2. Click the **Settings** tab
+3. Click **Variables and Secrets** (under "Bindings" section)
+4. Click **Add** for each variable:
+
+| Variable Name | Value | Type |
+|---------------|-------|------|
+| `CLIENT_ID` | Your GitHub Client ID | Text |
+| `CLIENT_SECRET` | Your GitHub Client Secret | Secret (click "Encrypt") |
+| `REDIRECT_URI` | `https://your-worker.workers.dev/callback` | Text |
+
+**Make sure REDIRECT_URI matches exactly** what you put in GitHub (including `/callback`).
+
+5. Click **Deploy** to save the changes
+
+---
+
+## Step 5: Update Your CMS Config
+
+Now we need to tell your CMS where to find the worker.
+
+### Edit the Config File
+
+1. Go to your repository on GitHub
+2. Navigate to `static/admin/config.yml`
+3. Click the **pencil icon** to edit
+
+### Update the Backend Section
+
+Find the `backend` section at the top and update it:
 
 ```yaml
 backend:
   name: github
-  repo: YOUR_USERNAME/YOUR_REPO
+  repo: YOUR-USERNAME/YOUR-REPO-NAME
   branch: main
-  base_url: https://your-worker.workers.dev
+  base_url: https://curriculum-auth.yourname.workers.dev
   auth_endpoint: /auth
 ```
 
-Commit and push this change. Wait for Netlify to redeploy.
+**Replace**:
+- `YOUR-USERNAME/YOUR-REPO-NAME` with your actual GitHub username and repository name
+- `curriculum-auth.yourname.workers.dev` with your actual worker URL (without `/callback`)
 
-### 6. Test Everything
+### Commit the Change
 
-1. Go to `https://your-site.netlify.app/admin/`
-2. Click "Login with GitHub"
-3. Authorize the application when GitHub prompts you
-4. You should land in the CMS dashboard
+1. Scroll down to "Commit changes"
+2. Write a commit message like "Configure CMS authentication"
+3. Click **Commit changes**
 
-If it works, you're done! If not, check the troubleshooting section below.
+Wait 1-2 minutes for Netlify to rebuild your site.
+
+---
+
+## Step 6: Test the Login
+
+The moment of truth!
+
+1. Go to your site's admin page: `https://your-site.netlify.app/admin/`
+2. Click **Login with GitHub**
+3. GitHub will ask if you want to authorize your app — click **Authorize**
+4. You should be redirected back to the CMS dashboard
+
+**If you see the CMS dashboard with your content listed: Success!**
+
+---
 
 ## Troubleshooting
 
-**"Failed to fetch" error**
-- Check that your worker URL is correct in `config.yml`
-- Verify the worker is deployed (visit the URL directly)
+### "Failed to fetch" or blank screen after clicking login
 
-**"Bad credentials" error**
-- Verify CLIENT_ID and CLIENT_SECRET are correct
-- Make sure CLIENT_SECRET is the actual secret, not encrypted
+**Likely cause**: Worker URL is wrong in your `config.yml`.
 
-**Stuck on authorization page**
-- Check the callback URL matches exactly between GitHub and your worker
-- Look at the browser console for error messages
+**Fix**:
+1. Visit your worker URL directly (e.g., `https://curriculum-auth.yourname.workers.dev`)
+2. You should see "OAuth Worker - visit /auth to begin"
+3. If not, check the worker was deployed correctly
+4. Make sure `config.yml` has the correct URL (no `/callback` at the end)
 
-**Can see CMS but can't save**
-- Verify your GitHub account has write access to the repository
-- Check the `repo` setting in `config.yml` matches your repository
+### "Bad credentials" error
 
-## Security Notes
+**Likely cause**: Client ID or Secret is wrong.
 
-- Your Client Secret should never appear in client-side code
-- If you suspect the secret is compromised, regenerate it in GitHub
-- The worker only has access to repositories you explicitly authorize
-- You can revoke access anytime in GitHub Settings → Applications
+**Fix**:
+1. Double-check the values in Cloudflare match exactly what's in GitHub
+2. Make sure you didn't accidentally add spaces when copying
+3. Try regenerating a new client secret in GitHub and updating Cloudflare
 
+### Login popup closes but nothing happens
+
+**Likely cause**: Callback URL mismatch.
+
+**Fix**:
+1. In GitHub OAuth App settings, check the "Authorization callback URL"
+2. In Cloudflare worker variables, check `REDIRECT_URI`
+3. These must match **exactly** (including `https://` and `/callback`)
+
+### "Not found" or 404 errors
+
+**Likely cause**: Worker code isn't right.
+
+**Fix**:
+1. Go to your worker in Cloudflare and click "Quick edit"
+2. Make sure the code is exactly as shown above
+3. Click "Save and Deploy" again
+
+### Can see CMS but changes won't save
+
+**Likely cause**: Repository name is wrong in config, or you don't have write access.
+
+**Fix**:
+1. Check `repo` in `config.yml` matches your exact username and repo name
+2. Make sure you're logged into the GitHub account that owns the repository
+
+---
+
+## Success!
+
+Once you can log in and see the CMS dashboard, you're ready to start editing content through the browser. The next lesson covers basic customization options.
+
+**What you can now do**:
+- Edit lessons, clusters, and pages through a visual interface
+- Save changes that automatically publish to your live site
+- Add images and manage content without touching code
+
+The CMS is accessed at `your-site.netlify.app/admin/` whenever you need to edit.

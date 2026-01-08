@@ -103,7 +103,7 @@ The CMS is powered by [Sveltia CMS](https://github.com/sveltia/sveltia-cms), an 
 For the technically curious:
 
 - **Framework**: SvelteKit (fast, modern, great developer experience)
-- **Styling**: Tailwind CSS (utility-first, customizable)
+- **Styling**: CSS Custom Properties for easy theming
 - **CMS**: Sveltia CMS (Git-based, no backend needed)
 - **Hosting**: Netlify (free tier handles most curricula)
 - **Auth**: GitHub OAuth via Cloudflare Workers
@@ -117,6 +117,17 @@ The entire stack is free or very low cost for typical usage.
 | `static/admin/config.yml` | CMS schema definition |
 | `content/settings/site.json` | Site title, description, author |
 | `content/pages/home.md` | Homepage content |
-| `tailwind.config.js` | Color and font customization |
+| `src/app.css` | Color, font, and theme customization |
 
 You'll interact with these files when customizing your curriculum. The following lessons will walk you through each one.
+
+## What You Don't Need to Worry About
+
+This platform handles the technical complexity so you can focus on content:
+
+- **No server management**: Everything runs on Netlify's free tier
+- **No database**: Content is stored as files in your repository
+- **No deployment scripts**: Push to GitHub, site updates automatically
+- **No coding required**: The CMS handles content editing visually
+
+You *can* customize the code if you want to, but it's entirely optional.
