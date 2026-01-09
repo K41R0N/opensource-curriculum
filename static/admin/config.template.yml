@@ -185,6 +185,37 @@ collections:
         hint: "Optional further reading"
 
       # ═══════════════════════════════════════════════════════════════════════
+      # INLINE CALLOUTS (Contextual blocks within lesson content)
+      # ═══════════════════════════════════════════════════════════════════════
+      - label: Callouts
+        name: callouts
+        widget: list
+        required: false
+        collapsed: true
+        minimize_collapsed: true
+        max: 5
+        fields:
+          - label: Type
+            name: type
+            widget: select
+            options:
+              - { label: "πŸ€" Ask Yourself", value: "ask" }
+              - { label: "πŸ" Example", value: "example" }
+              - { label: "πŸ'' Hint", value: "hint" }
+              - { label: "⚠️ Important", value: "important" }
+              - { label: "❓ Question", value: "question" }
+              - { label: "πŸ•' Context/When", value: "when" }
+          - label: Title (optional)
+            name: title
+            widget: string
+            required: false
+            hint: "Override the default title if needed"
+          - label: Content
+            name: content
+            widget: markdown
+        hint: "Add up to 5 contextual callout blocks (tips, examples, questions, etc.)"
+
+      # ═══════════════════════════════════════════════════════════════════════
       # EXTRAS (Optional enhancements)
       # ═══════════════════════════════════════════════════════════════════════
       - label: Reading Author
@@ -210,6 +241,7 @@ collections:
           - { label: "Assignment", value: "assignment" }
           - { label: "Knowledge Check", value: "knowledge_check" }
           - { label: "Additional Resources", value: "additional_resources" }
+          - { label: "Callouts", value: "callouts" }
           - { label: "Introduction", value: "body" }
         hint: "Temporarily hide sections without deleting content"
 

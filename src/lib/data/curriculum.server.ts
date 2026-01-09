@@ -382,6 +382,28 @@ export async function loadFullLesson(clusterSlug: string, lessonSlug: string): P
 					};
 				}
 
+				// Parse markdown in callouts content (with safe checks)
+				const validCalloutTypes = ['ask', 'example', 'hint', 'important', 'question', 'when'] as const;
+				type CalloutType = typeof validCalloutTypes[number];
+
+				let parsedCallouts: Array<{ type: CalloutType; title?: string; content: string }> | undefined;
+				if (Array.isArray(data.callouts)) {
+					parsedCallouts = data.callouts
+						.filter((callout): callout is { type: string; title?: string; content: string } =>
+							callout &&
+							typeof callout === 'object' &&
+							isNonEmptyString(callout.type) &&
+							validCalloutTypes.includes(callout.type as CalloutType) &&
+							typeof callout.content === 'string'
+						)
+						.slice(0, 5) // Enforce max 5 callouts
+						.map((callout) => ({
+							type: callout.type as CalloutType,
+							title: isNonEmptyString(callout.title) ? callout.title : undefined,
+							content: parseMarkdown(callout.content)
+						}));
+				}
+
 				const lesson: Lesson = {
 					id: `${data.cluster}-${order}`,
 					title: data.title,
@@ -396,6 +418,7 @@ export async function loadFullLesson(clusterSlug: string, lessonSlug: string): P
 					assignment: parsedAssignment,
 					knowledge_check: Array.isArray(data.knowledge_check) ? data.knowledge_check : undefined,
 					additional_resources: Array.isArray(data.additional_resources) ? data.additional_resources : undefined,
+					callouts: parsedCallouts,
 					content: bodyHtml,
 					hidden_sections: Array.isArray(data.hidden_sections) ? data.hidden_sections : undefined
 				};

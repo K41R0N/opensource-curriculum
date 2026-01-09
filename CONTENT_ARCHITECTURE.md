@@ -60,13 +60,8 @@ An individual learning unit within a cluster. Lessons are the core content of th
 | `assignment` | Assignment | no | Primary reading/task |
 | `knowledge_check` | list[Question] | no | Reflection questions |
 | `additional_resources` | list[Resource] | no | Supplementary materials |
+| `callouts` | list[Callout] | no | Inline callout blocks (max 5) |
 | `body` | markdown | no | Introduction/overview content |
-| `ask` | string | no | Question prompting critical evaluation |
-| `example` | string | no | Practical example illustrating concepts |
-| `hint` | string | no | Reflection or problem-solving hint |
-| `important` | string | no | Critical note or disclaimer |
-| `question` | string | no | Reflection or quiz question |
-| `when` | string | no | Context or timing guidance |
 | `hidden_sections` | list[string] | no | Sections to hide without deleting content |
 
 **Flexible Rendering**: Optional fields that are empty simply won't render on the page. This allows minimal lessons (just metadata + intro + assignment) or full lessons with all sections.
@@ -95,6 +90,11 @@ assignment:
   author: string (optional)
   url: string (optional)
   description: text (optional)
+
+# Callout
+- type: enum (required) - ask, example, hint, important, question, when
+  title: string (optional) - custom title override
+  content: markdown (required)
 ```
 
 ---
@@ -349,6 +349,7 @@ export interface Lesson {
   assignment?: Assignment;
   knowledge_check?: Question[];
   additional_resources?: Resource[];
+  callouts?: Callout[];    // inline callout blocks (max 5)
   content?: string;        // markdown body
   hidden_sections?: string[];  // sections to hide without deleting
 }
@@ -374,6 +375,12 @@ export interface Resource {
   author?: string;
   url?: string;
   description?: string;
+}
+
+export interface Callout {
+  type: 'ask' | 'example' | 'hint' | 'important' | 'question' | 'when';
+  title?: string;           // custom title override
+  content: string;          // markdown
 }
 
 export interface SiteSettings {

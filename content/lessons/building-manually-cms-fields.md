@@ -272,6 +272,33 @@ additional_resources:
 - These are optional—not required for completing the lesson
 - Describe what each resource adds
 
+### Callouts
+**What it is**: Contextual blocks for tips, examples, warnings, and questions (max 5 per lesson)
+
+**Structure**:
+```yaml
+callouts:
+  - type: "important"
+    title: "Custom Title"  # optional - overrides default
+    content: |
+      Your markdown content here.
+      Can include **formatting** and multiple paragraphs.
+```
+
+**Available types**:
+- `ask` - "Ask Yourself" - prompts for critical evaluation
+- `example` - "Example" - practical illustrations
+- `hint` - "Hint" - helpful tips and guidance
+- `important` - "Important" - critical notes or warnings
+- `question` - "Question" - reflection questions
+- `when` - "Context" - timing or situational guidance
+
+**Best practices**:
+- Use sparingly—max 5 per lesson
+- Choose the type that best matches your intent
+- Custom titles are optional; defaults work well
+- Keep content focused and concise
+
 ### Reading Author
 **What it is**: The author of the primary reading (optional)
 
@@ -297,6 +324,7 @@ additional_resources:
 - Assignment
 - Knowledge Check
 - Additional Resources
+- Callouts
 - Introduction
 
 **Use cases**:
@@ -330,6 +358,7 @@ When creating a lesson, work through this checklist:
 - [ ] Learning objectives (3-5 bullet points)
 - [ ] Knowledge check (2-4 reflection questions)
 - [ ] Additional resources (2-4 links)
+- [ ] Callouts (up to 5 contextual blocks)
 - [ ] Reading author (if relevant)
 - [ ] Featured image (if available)
 

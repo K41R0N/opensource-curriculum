@@ -19,6 +19,44 @@
 		return lesson?.hidden_sections?.includes(section) ?? false;
 	}
 
+	// Callout type configuration
+	const calloutConfig: Record<string, { icon: string; defaultTitle: string; colorClass: string }> = {
+		ask: {
+			icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>`,
+			defaultTitle: 'Ask Yourself',
+			colorClass: 'callout-ask'
+		},
+		example: {
+			icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>`,
+			defaultTitle: 'Example',
+			colorClass: 'callout-example'
+		},
+		hint: {
+			icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>`,
+			defaultTitle: 'Hint',
+			colorClass: 'callout-hint'
+		},
+		important: {
+			icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>`,
+			defaultTitle: 'Important',
+			colorClass: 'callout-important'
+		},
+		question: {
+			icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
+			defaultTitle: 'Question',
+			colorClass: 'callout-question'
+		},
+		when: {
+			icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>`,
+			defaultTitle: 'Context',
+			colorClass: 'callout-when'
+		}
+	};
+
+	function getCalloutConfig(type: string) {
+		return calloutConfig[type] || calloutConfig.hint;
+	}
+
 	// Reading progress
 	let scrollProgress = 0;
 
@@ -201,6 +239,23 @@
 							</ul>
 						</div>
 					</div>
+				{/if}
+
+				{#if lesson.callouts && lesson.callouts.length > 0 && !isHidden('callouts')}
+					{#each lesson.callouts as callout}
+						{@const config = getCalloutConfig(callout.type)}
+						<div class="lesson-callout {config.colorClass}">
+							<div class="callout-icon">
+								{@html config.icon}
+							</div>
+							<div class="callout-content">
+								<h3>{callout.title || config.defaultTitle}</h3>
+								<div class="callout-body">
+									{@html callout.content}
+								</div>
+							</div>
+						</div>
+					{/each}
 				{/if}
 
 				{#if lesson.key_concepts && lesson.key_concepts.length > 0 && !isHidden('key_concepts')}
@@ -569,6 +624,39 @@
 
 	.callout-content p {
 		margin: 0;
+	}
+
+	.callout-body :global(p) {
+		margin: 0;
+	}
+
+	.callout-body :global(p + p) {
+		margin-top: 0.5rem;
+	}
+
+	/* Callout type variations */
+	.callout-ask {
+		border-left-color: #6366f1; /* indigo */
+	}
+
+	.callout-example {
+		border-left-color: #10b981; /* emerald */
+	}
+
+	.callout-hint {
+		border-left-color: #f59e0b; /* amber */
+	}
+
+	.callout-important {
+		border-left-color: #ef4444; /* red */
+	}
+
+	.callout-question {
+		border-left-color: #8b5cf6; /* violet */
+	}
+
+	.callout-when {
+		border-left-color: #06b6d4; /* cyan */
 	}
 
 	/* Sections */

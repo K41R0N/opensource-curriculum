@@ -54,6 +54,8 @@ export interface Lesson {
 	knowledge_check?: Question[];
 	/** Supplementary materials */
 	additional_resources?: Resource[];
+	/** Inline callout blocks (max 5) */
+	callouts?: Callout[];
 	/** Introduction/overview (markdown body) */
 	content?: string;
 	/** Sections to hide without deleting content */
@@ -96,6 +98,15 @@ export interface Resource {
 	url?: string;
 	/** Brief description */
 	description?: string;
+}
+
+export interface Callout {
+	/** Callout type (determines icon and default title) */
+	type: 'ask' | 'example' | 'hint' | 'important' | 'question' | 'when';
+	/** Optional custom title (overrides default) */
+	title?: string;
+	/** Main content (markdown) */
+	content: string;
 }
 
 // ============================================
