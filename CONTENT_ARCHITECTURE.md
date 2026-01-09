@@ -24,17 +24,21 @@ A thematic grouping of related lessons. Clusters organize the curriculum into co
 | `slug` | string | yes | URL-safe identifier (unique) |
 | `order` | integer | yes | Sort position in curriculum (1-based) |
 | `description` | text | yes | Brief summary (1-2 sentences) |
+| `is_foundation` | boolean | no | Whether this cluster appears in "Start Here" section (default: false) |
 | `body` | markdown | no | Extended overview content |
 
 **File Location**: `content/clusters/{slug}.md`
 
+**Foundation vs Specialization**: Clusters with `is_foundation: true` appear in the "Start Here" section on the home and curriculum pages. Clusters without this field (or with `is_foundation: false`) appear under "Specializations".
+
 **Example**:
 ```yaml
 ---
-title: "Mediation Architecture & Reality Framing"
-slug: mediation-architecture
+title: "Getting Started"
+slug: getting-started
 order: 1
-description: "How devices function as mediating instruments that frame reality."
+description: "Why build a self-directed curriculum and how this platform works."
+is_foundation: true
 ---
 
 Extended overview content goes here as markdown body...
@@ -55,38 +59,64 @@ An individual learning unit within a cluster. Lessons are the core content of th
 | `description` | text | yes | Brief summary (1-2 sentences) |
 | `author` | string | no | Original author of the source material |
 | `featured_image` | image | no | Hero/thumbnail image |
-| `objectives` | list[string] | no | Learning objectives |
-| `key_concepts` | list[KeyConcept] | no | Core concepts explained |
 | `assignment` | Assignment | no | Primary reading/task |
-| `knowledge_check` | list[Question] | no | Reflection questions |
-| `additional_resources` | list[Resource] | no | Supplementary materials |
+| `blocks` | list[ContentBlock] | no | Unified content blocks (max 15) |
 | `body` | markdown | no | Introduction/overview content |
+| `hidden_sections` | list[string] | no | Sections to hide without deleting content |
+
+**Flexible Rendering**: Optional fields that are empty simply won't render on the page. This allows minimal lessons (just metadata + intro + assignment) or full lessons with all sections.
 
 **File Location**: `content/lessons/{cluster}-{slug}.md`
 
 **Nested Types**:
 
 ```yaml
-# KeyConcept
-- name: string (required)
-  explanation: markdown (required)
-
 # Assignment
 assignment:
   instructions: markdown (required)
   url: string (optional)
   reading_title: string (optional)
 
-# Question
-- question: string (required)
-  hint: text (optional)
+# ContentBlock (unified block system - use ONE type per block)
+blocks:
+  # Learning Objectives
+  - type: objectives
+    items: list[string]
 
-# Resource
-- title: string (required)
-  author: string (optional)
-  url: string (optional)
-  description: text (optional)
+  # Key Concept
+  - type: concept
+    name: string (required)
+    explanation: markdown (required)
+
+  # Knowledge Check Question
+  - type: check
+    question: string (required)
+    hint: text (optional)
+
+  # Resource/Link
+  - type: resource
+    title: string (required)
+    author: string (optional)
+    url: string (optional)
+    description: text (optional)
+
+  # Callout blocks (ask, example, tip, important, reflection, context)
+  - type: ask | example | tip | important | reflection | context
+    title: string (optional) - custom title override
+    content: markdown (required)
 ```
+
+**Block Types**:
+- `objectives` - Learning objectives list
+- `concept` - Key concept with name and explanation
+- `check` - Knowledge check question with optional hint
+- `resource` - External resource with link
+- `ask` - "Ask Yourself" prompt
+- `example` - Example/illustration
+- `tip` - Helpful tip
+- `important` - Important note/warning
+- `reflection` - Reflection question
+- `context` - Contextual information
 
 ---
 
@@ -282,13 +312,18 @@ When redesigning the front-end:
 ```
 content/
 ├── clusters/
-│   ├── mediation-architecture.md
-│   ├── embodiment-repetition.md
-│   └── ... (9 total)
+│   ├── getting-started.md
+│   ├── building-curriculum.md      # AI-assisted path
+│   ├── building-manually.md        # Manual path
+│   ├── deployment-customization.md
+│   ├── working-with-content.md
+│   ├── making-it-yours.md
+│   └── api-data-access.md          # 7 total
 ├── lessons/
-│   ├── mediation-architecture-framing.md
-│   ├── mediation-architecture-culture-in-action.md
-│   └── ... (25 total)
+│   ├── getting-started-why-curriculum.md
+│   ├── building-curriculum-defining-domain.md
+│   ├── building-manually-choosing-topic.md
+│   └── ...                         # 23 total
 ├── pages/
 │   ├── home.md
 │   └── about.md
@@ -330,17 +365,10 @@ export interface Lesson {
   description: string;
   author?: string;
   featured_image?: string;
-  objectives?: string[];
-  key_concepts?: KeyConcept[];
   assignment?: Assignment;
-  knowledge_check?: Question[];
-  additional_resources?: Resource[];
+  blocks?: ContentBlock[];  // unified content blocks (max 15)
   content?: string;        // markdown body
-}
-
-export interface KeyConcept {
-  name: string;
-  explanation: string;     // markdown
+  hidden_sections?: string[];  // sections to hide without deleting
 }
 
 export interface Assignment {
@@ -349,17 +377,42 @@ export interface Assignment {
   reading_title?: string;
 }
 
-export interface Question {
+// Unified Block Types
+export type BlockType = 'objectives' | 'concept' | 'check' | 'resource'
+  | 'ask' | 'example' | 'tip' | 'important' | 'reflection' | 'context';
+
+export interface ObjectivesBlock {
+  type: 'objectives';
+  items: string[];
+}
+
+export interface ConceptBlock {
+  type: 'concept';
+  name: string;
+  explanation: string;
+}
+
+export interface CheckBlock {
+  type: 'check';
   question: string;
   hint?: string;
 }
 
-export interface Resource {
+export interface ResourceBlock {
+  type: 'resource';
   title: string;
   author?: string;
   url?: string;
   description?: string;
 }
+
+export interface CalloutBlock {
+  type: 'ask' | 'example' | 'tip' | 'important' | 'reflection' | 'context';
+  title?: string;
+  content: string;
+}
+
+export type ContentBlock = ObjectivesBlock | ConceptBlock | CheckBlock | ResourceBlock | CalloutBlock;
 
 export interface SiteSettings {
   title: string;
@@ -427,8 +480,8 @@ GET /api/curriculum.json?urls=false
     "description": "..."
   },
   "stats": {
-    "totalClusters": 6,
-    "totalLessons": 16
+    "totalClusters": 7,
+    "totalLessons": 23
   },
   "clusters": [...]
 }

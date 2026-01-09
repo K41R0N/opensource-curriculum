@@ -8,7 +8,7 @@
 #   CMS_REPO     - Your GitHub username/repo (e.g., "username/repo-name")
 #   CMS_AUTH_URL - Your Cloudflare Worker URL (e.g., "https://my-auth.workers.dev")
 #
-# Schema Version: 2.0 (Single Language)
+# Schema Version: 2.1 (Improved field ordering and UX)
 # =============================================================================
 
 backend:
@@ -44,20 +44,27 @@ collections:
         name: title
         widget: string
         hint: "The name of this cluster (e.g., 'Getting Started', 'Core Concepts')"
-      - label: Slug
-        name: slug
-        widget: string
-        hint: "URL-friendly version (e.g., 'getting-started'). Use lowercase, hyphens only."
       - label: Order
         name: order
         widget: number
         value_type: int
         min: 1
         hint: "Display order (1 = first cluster shown)"
+      - label: Slug
+        name: slug
+        widget: string
+        pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', "Use lowercase letters, numbers, and hyphens only"]
+        hint: "URL identifier (e.g., 'getting-started')"
       - label: Description
         name: description
         widget: text
         hint: "Brief description shown on curriculum overview (1-2 sentences)"
+      - label: Foundation Cluster
+        name: is_foundation
+        widget: boolean
+        default: false
+        required: false
+        hint: "Foundation clusters appear in 'Start Here' section; others in 'Specializations'"
       - label: Overview
         name: body
         widget: markdown
@@ -78,14 +85,14 @@ collections:
     summary: '{{cluster}} / {{order}}. {{title}}'
     preview_path: 'curriculum/{{cluster}}/{{slug}}'
     fields:
+      # ═══════════════════════════════════════════════════════════════════════
+      # ESSENTIAL METADATA (What is this lesson?)
+      # ═══════════════════════════════════════════════════════════════════════
       - label: Title
         name: title
         widget: string
-        hint: "The title of the reading or lesson"
-      - label: Slug
-        name: slug
-        widget: string
-        hint: "URL-friendly version. Use lowercase, hyphens only."
+        hint: "The title of this lesson"
+
       - label: Cluster
         name: cluster
         widget: relation
@@ -94,87 +101,170 @@ collections:
         search_fields: ['title', 'slug']
         display_fields: ['title']
         hint: "Which cluster this lesson belongs to"
-      - label: Author
-        name: author
-        widget: string
-        required: false
-        hint: "Author of the primary reading (if applicable)"
+
       - label: Order
         name: order
         widget: number
         value_type: int
         min: 1
-        hint: "Order within the cluster (1 = first lesson)"
+        hint: "Position within the cluster (1 = first lesson)"
+
+      - label: Slug
+        name: slug
+        widget: string
+        pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', "Use lowercase letters, numbers, and hyphens only"]
+        hint: "URL identifier (e.g., 'social-construction')"
+
       - label: Description
         name: description
         widget: text
-        hint: "Brief description shown in lesson lists (1-2 sentences)"
-      - label: Featured Image
-        name: featured_image
-        widget: image
-        required: false
-        hint: "Optional image shown at top of lesson"
-      - label: Learning Objectives
-        name: objectives
-        widget: list
-        required: false
-        field: { label: Objective, name: objective, widget: string }
-        hint: "What will the reader learn? (bullet points)"
-      - label: Key Concepts
-        name: key_concepts
-        widget: list
-        required: false
-        fields:
-          - { label: Concept Name, name: name, widget: string }
-          - { label: Explanation, name: explanation, widget: markdown }
-        hint: "Core ideas explained in detail"
-      - label: Assignment
-        name: assignment
-        widget: object
-        required: false
-        fields:
-          - { label: Instructions, name: instructions, widget: markdown }
-          - { label: Reading URL, name: url, widget: string, required: false }
-          - { label: Reading Title, name: reading_title, widget: string, required: false }
-        hint: "The primary reading assignment with link"
-      - label: Knowledge Check
-        name: knowledge_check
-        widget: list
-        required: false
-        fields:
-          - { label: Question, name: question, widget: string }
-          - { label: Hint, name: hint, widget: text, required: false }
-        hint: "Reflection questions for the reader"
-      - label: Additional Resources
-        name: additional_resources
-        widget: list
-        required: false
-        fields:
-          - { label: Title, name: title, widget: string }
-          - { label: Author, name: author, widget: string, required: false }
-          - { label: URL, name: url, widget: string, required: false }
-          - { label: Description, name: description, widget: text }
-        hint: "Related readings for deeper exploration"
+        hint: "1-2 sentences shown in lesson listings"
+
+      # ═══════════════════════════════════════════════════════════════════════
+      # CORE CONTENT (What do learners engage with?)
+      # ═══════════════════════════════════════════════════════════════════════
       - label: Introduction
         name: body
         widget: markdown
         required: false
-        hint: "Main content introducing the reading and its significance"
+        hint: "Context and significance of the reading (2-4 paragraphs)"
+
+      - label: Assignment
+        name: assignment
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: Instructions, name: instructions, widget: markdown }
+          - { label: Reading URL, name: url, widget: string, required: false, hint: "Link to access the reading" }
+          - { label: Reading Title, name: reading_title, widget: string, required: false, hint: "Full citation" }
+        hint: "The primary reading with access link"
+
+      # ═══════════════════════════════════════════════════════════════════════
+      # CONTENT BLOCKS (Unified component system)
+      # All card-like components in a single, flexible list
+      # ═══════════════════════════════════════════════════════════════════════
+      - label: Content Blocks
+        name: blocks
+        widget: list
+        required: false
+        collapsed: true
+        minimize_collapsed: true
+        max: 15
+        hint: "Add objectives, concepts, questions, resources, and callouts (max 15)"
+        types:
+          # Learning Objectives Block
+          - label: "Learning Objectives"
+            name: objectives
+            widget: object
+            fields:
+              - label: Objectives
+                name: items
+                widget: list
+                field: { label: Objective, name: item, widget: string }
+
+          # Key Concept Block
+          - label: "Key Concept"
+            name: concept
+            widget: object
+            fields:
+              - { label: Concept Name, name: name, widget: string }
+              - { label: Explanation, name: explanation, widget: markdown }
+
+          # Knowledge Check Block
+          - label: "Knowledge Check"
+            name: check
+            widget: object
+            fields:
+              - { label: Question, name: question, widget: string }
+              - { label: Hint, name: hint, widget: text, required: false }
+
+          # Resource Block
+          - label: "Resource"
+            name: resource
+            widget: object
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Author, name: author, widget: string, required: false }
+              - { label: URL, name: url, widget: string, required: false }
+              - { label: Description, name: description, widget: text }
+
+          # Callout Blocks (various types)
+          - label: "Ask Yourself"
+            name: ask
+            widget: object
+            fields:
+              - { label: Title (optional), name: title, widget: string, required: false }
+              - { label: Content, name: content, widget: markdown }
+
+          - label: "Example"
+            name: example
+            widget: object
+            fields:
+              - { label: Title (optional), name: title, widget: string, required: false }
+              - { label: Content, name: content, widget: markdown }
+
+          - label: "Tip"
+            name: tip
+            widget: object
+            fields:
+              - { label: Title (optional), name: title, widget: string, required: false }
+              - { label: Content, name: content, widget: markdown }
+
+          - label: "Important"
+            name: important
+            widget: object
+            fields:
+              - { label: Title (optional), name: title, widget: string, required: false }
+              - { label: Content, name: content, widget: markdown }
+
+          - label: "Reflection"
+            name: reflection
+            widget: object
+            fields:
+              - { label: Title (optional), name: title, widget: string, required: false }
+              - { label: Content, name: content, widget: markdown }
+
+          - label: "Context"
+            name: context
+            widget: object
+            fields:
+              - { label: Title (optional), name: title, widget: string, required: false }
+              - { label: Content, name: content, widget: markdown }
+
+      # ═══════════════════════════════════════════════════════════════════════
+      # EXTRAS (Optional enhancements)
+      # ═══════════════════════════════════════════════════════════════════════
+      - label: Reading Author
+        name: author
+        widget: string
+        required: false
+        hint: "Author of the primary reading (optional)"
+
+      - label: Featured Image
+        name: featured_image
+        widget: image
+        required: false
+        hint: "Optional header image"
+
+      - label: Hidden Sections
+        name: hidden_sections
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - { label: "Introduction", value: "body" }
+          - { label: "Assignment", value: "assignment" }
+          - { label: "Content Blocks", value: "blocks" }
+        hint: "Temporarily hide sections without deleting content"
 
   # ==========================================================================
   # PAGES
-  # Static pages like About
+  # Static pages like About and Home
   # ==========================================================================
   - name: pages
     label: Pages
     files:
-      - name: about
-        label: About Page
-        file: content/pages/about.md
-        fields:
-          - { label: Title, name: title, widget: string }
-          - { label: Subtitle, name: subtitle, widget: string }
-          - { label: Content, name: body, widget: markdown }
       - name: home
         label: Home Page
         file: content/pages/home.md
@@ -182,7 +272,7 @@ collections:
           - label: Title
             name: title
             widget: string
-            hint: "Main curriculum title (displayed in book cover)"
+            hint: "Main curriculum title (displayed prominently)"
           - label: Tagline
             name: tagline
             widget: text
@@ -197,6 +287,14 @@ collections:
             widget: markdown
             required: false
             hint: "Optional philosophy/methodology section below clusters"
+
+      - name: about
+        label: About Page
+        file: content/pages/about.md
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Subtitle, name: subtitle, widget: string, required: false }
+          - { label: Content, name: body, widget: markdown }
 
   # ==========================================================================
   # SETTINGS

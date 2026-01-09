@@ -5,10 +5,6 @@ cluster: getting-started
 author: ''
 order: 1
 description: The philosophy behind depth-first learning and why curated curricula matter more than ever.
-objectives:
-  - Understand why depth beats breadth in the age of AI-generated content
-  - Learn the difference between passive consumption and active scholarship
-  - See how self-directed curricula create genuine expertise
 key_concepts:
   - name: Depth Over Breadth
     explanation: |-

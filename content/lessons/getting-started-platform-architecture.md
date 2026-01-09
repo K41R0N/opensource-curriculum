@@ -4,10 +4,6 @@ slug: platform-architecture
 cluster: getting-started
 order: 2
 description: "Technical overview of the curriculum platform: content structure, CMS, and deployment."
-objectives:
-  - Understand the cluster → lesson content hierarchy
-  - Learn how content is stored as Markdown files
-  - See how the CMS provides a visual editing interface
 key_concepts:
   - name: "Content Hierarchy"
     explanation: |

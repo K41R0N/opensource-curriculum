@@ -4,10 +4,6 @@ slug: advanced-customization
 cluster: making-it-yours
 order: 3
 description: "Border radius, shadows, and custom CSS for when theme variables aren't enough."
-objectives:
-  - Apply border radius to create different visual moods
-  - Use shadows for depth and hierarchy
-  - Write safe custom CSS that won't break during updates
 key_concepts:
   - name: "Border Radius Psychology"
     explanation: |
@@ -46,10 +42,6 @@ knowledge_check:
   - question: "Why should custom CSS be added at the end of app.css rather than inline?"
     hint: "Consider maintainability and what happens during theme updates."
 additional_resources:
-  - title: "CSS Border Radius Generator"
-    author: "Various"
-    url: "https://cssgenerator.org/border-radius-css-generator.html"
-    description: "Visual tool for generating border radius values."
   - title: "Box Shadow CSS Generator"
     author: "CSSmatic"
     url: "https://www.cssmatic.com/box-shadow"

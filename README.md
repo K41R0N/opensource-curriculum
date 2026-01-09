@@ -123,8 +123,13 @@ Each lesson includes:
 The included starter content teaches the full methodology:
 
 1. **Getting Started** — Understanding the platform and philosophy
-2. **Building Your Curriculum** — Defining domains, finding readings, structuring content
+2. **Building Your Curriculum** — Choose your path:
+   - **Building with AI** — Use AI prompts to rapidly generate curriculum structure
+   - **Building Manually** — Step-by-step guide without AI assistance
 3. **Deployment & Customization** — Deploying, CMS setup, branding
+4. **Working With Content** — Ongoing editing and iteration
+5. **Making It Yours** — Visual customization and theming
+6. **API & Data Access** — Programmatic access via JSON/RSS
 
 ### AI-Assisted Workflow
 

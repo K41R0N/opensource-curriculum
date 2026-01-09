@@ -4,10 +4,6 @@ slug: colors-fonts
 cluster: making-it-yours
 order: 2
 description: "Practical guide to changing your site's color palette and typography."
-objectives:
-  - Apply a cohesive color palette to your site
-  - Choose and implement font families
-  - Understand the visual impact of different choices
 key_concepts:
   - name: "Color Semantics"
     explanation: |
@@ -66,14 +62,6 @@ additional_resources:
     author: "Juxtopposed"
     url: "https://www.realtimecolors.com/"
     description: "Generate and preview color palettes in real-time."
-  - title: "Google Fonts"
-    author: "Google"
-    url: "https://fonts.google.com/"
-    description: "Free, open-source fonts for web use."
-  - title: "WebAIM Contrast Checker"
-    author: "WebAIM"
-    url: "https://webaim.org/resources/contrastchecker/"
-    description: "Verify your text meets accessibility standards."
 ---
 
 ## Choosing a Color Palette

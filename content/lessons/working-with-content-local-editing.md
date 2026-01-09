@@ -4,11 +4,6 @@ slug: local-editing
 cluster: working-with-content
 order: 2
 description: "Set up a powerful local editing environment for longer writing sessions and offline work."
-objectives:
-  - Understand when local editing is preferable to the CMS
-  - Install Git and clone your repository to your computer
-  - Set up Obsidian with Git sync for your curriculum
-  - Make your first local edit and push it live
 key_concepts:
   - name: "Why Edit Locally?"
     explanation: |
@@ -64,14 +59,6 @@ additional_resources:
     author: "Obsidian"
     url: "https://help.obsidian.md"
     description: "Official documentation for all Obsidian features."
-  - title: "Obsidian Git Plugin"
-    author: "Vinzent"
-    url: "https://github.com/denolehov/obsidian-git"
-    description: "The plugin that enables Git sync from within Obsidian."
-  - title: "Git for Beginners"
-    author: "GitHub"
-    url: "https://docs.github.com/en/get-started/using-git/about-git"
-    description: "GitHub's beginner-friendly introduction to Git concepts."
 ---
 
 ## When to Use Local Editing

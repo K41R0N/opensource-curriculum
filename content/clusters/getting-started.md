@@ -3,6 +3,7 @@ title: Getting Started
 slug: getting-started
 order: 1
 description: "Why build a self-directed curriculum and how this platform works."
+is_foundation: true
 ---
 
 Before you dive into building your curriculum, it's worth understanding *why* this approach matters and how the platform is structured.

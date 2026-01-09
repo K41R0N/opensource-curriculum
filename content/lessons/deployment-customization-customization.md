@@ -4,10 +4,6 @@ slug: customization
 cluster: deployment-customization
 order: 3
 description: "Brand your curriculum with custom colors, logos, and site settings—no code required."
-objectives:
-  - Update site metadata and branding through the CMS
-  - Understand the CSS custom properties system
-  - Customize colors and typography to match your brand
 key_concepts:
   - name: "Site Settings"
     explanation: |

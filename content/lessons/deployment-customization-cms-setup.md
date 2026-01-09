@@ -4,11 +4,6 @@ slug: cms-setup
 cluster: deployment-customization
 order: 2
 description: "Configure authentication so you can edit content through the browser-based CMS."
-objectives:
-  - Understand why authentication is needed for the CMS
-  - Set up GitHub and Cloudflare to enable secure login
-  - Connect everything together
-  - Successfully log into the CMS for the first time
 key_concepts:
   - name: "What is the CMS?"
     explanation: |
@@ -63,10 +58,6 @@ additional_resources:
     author: "Cloudflare"
     url: "https://developers.cloudflare.com/workers/"
     description: "Learn more about the free service that powers authentication."
-  - title: "GitHub OAuth Apps"
-    author: "GitHub"
-    url: "https://docs.github.com/en/apps/oauth-apps"
-    description: "GitHub's documentation on OAuth applications."
 ---
 
 ## Before You Begin

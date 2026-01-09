@@ -23,6 +23,8 @@ export interface Cluster {
 	description: string;
 	/** Extended overview (markdown body) */
 	overview?: string;
+	/** Whether this cluster is part of the foundation section (default: false) */
+	is_foundation?: boolean;
 	/** Lessons in this cluster (populated by loader) */
 	lessons: Lesson[];
 }
@@ -44,30 +46,19 @@ export interface Lesson {
 	author?: string;
 	/** Hero/thumbnail image path */
 	featured_image?: string;
-	/** Learning objectives list */
-	objectives?: string[];
-	/** Core concepts with explanations */
-	key_concepts?: KeyConcept[];
 	/** Primary reading/task assignment */
 	assignment?: Assignment;
-	/** Reflection questions */
-	knowledge_check?: Question[];
-	/** Supplementary materials */
-	additional_resources?: Resource[];
+	/** Unified content blocks (max 15) */
+	blocks?: ContentBlock[];
 	/** Introduction/overview (markdown body) */
 	content?: string;
+	/** Sections to hide without deleting content */
+	hidden_sections?: string[];
 }
 
 // ============================================
 // Nested Types
 // ============================================
-
-export interface KeyConcept {
-	/** Concept name/title */
-	name: string;
-	/** Detailed explanation (markdown) */
-	explanation: string;
-}
 
 export interface Assignment {
 	/** Task instructions (markdown) */
@@ -78,23 +69,70 @@ export interface Assignment {
 	reading_title?: string;
 }
 
-export interface Question {
-	/** The question text */
+// ============================================
+// Unified Block Types (Discriminated Union)
+// ============================================
+
+/** Valid block type identifiers (runtime array for validation) */
+export const VALID_BLOCK_TYPES = [
+	'objectives',
+	'concept',
+	'check',
+	'resource',
+	'ask',
+	'example',
+	'tip',
+	'important',
+	'reflection',
+	'context'
+] as const;
+
+/** Block type identifiers (derived from runtime array) */
+export type BlockType = (typeof VALID_BLOCK_TYPES)[number];
+
+/** Learning objectives block */
+export interface ObjectivesBlock {
+	type: 'objectives';
+	items: string[];
+}
+
+/** Key concept block */
+export interface ConceptBlock {
+	type: 'concept';
+	name: string;
+	explanation: string;
+}
+
+/** Knowledge check question block */
+export interface CheckBlock {
+	type: 'check';
 	question: string;
-	/** Optional hint for reflection */
 	hint?: string;
 }
 
-export interface Resource {
-	/** Resource title */
+/** Resource/link block */
+export interface ResourceBlock {
+	type: 'resource';
 	title: string;
-	/** Resource author */
 	author?: string;
-	/** Link to resource */
 	url?: string;
-	/** Brief description */
 	description?: string;
 }
+
+/** Callout block (various types with same structure) */
+export interface CalloutBlock {
+	type: 'ask' | 'example' | 'tip' | 'important' | 'reflection' | 'context';
+	title?: string;
+	content: string;
+}
+
+/** Union of all block types */
+export type ContentBlock =
+	| ObjectivesBlock
+	| ConceptBlock
+	| CheckBlock
+	| ResourceBlock
+	| CalloutBlock;
 
 // ============================================
 // Page Types

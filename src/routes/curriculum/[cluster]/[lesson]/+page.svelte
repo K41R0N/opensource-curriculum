@@ -14,6 +14,71 @@
 
 	$: lesson = data.hasContent ? data.lesson : lessonMeta;
 
+	// Helper to check if a section is hidden
+	function isHidden(section: string): boolean {
+		return lesson?.hidden_sections?.includes(section) ?? false;
+	}
+
+	// Block type configuration for rendering
+	const blockConfig: Record<string, { icon: string; defaultTitle: string; colorClass: string }> = {
+		// Structured blocks
+		objectives: {
+			icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>`,
+			defaultTitle: 'Learning Objectives',
+			colorClass: 'block-objectives'
+		},
+		concept: {
+			icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>`,
+			defaultTitle: 'Key Concept',
+			colorClass: 'block-concept'
+		},
+		check: {
+			icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
+			defaultTitle: 'Knowledge Check',
+			colorClass: 'block-check'
+		},
+		resource: {
+			icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>`,
+			defaultTitle: 'Resource',
+			colorClass: 'block-resource'
+		},
+		// Callout blocks
+		ask: {
+			icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>`,
+			defaultTitle: 'Ask Yourself',
+			colorClass: 'block-ask'
+		},
+		example: {
+			icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>`,
+			defaultTitle: 'Example',
+			colorClass: 'block-example'
+		},
+		tip: {
+			icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>`,
+			defaultTitle: 'Tip',
+			colorClass: 'block-tip'
+		},
+		important: {
+			icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>`,
+			defaultTitle: 'Important',
+			colorClass: 'block-important'
+		},
+		reflection: {
+			icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
+			defaultTitle: 'Reflection',
+			colorClass: 'block-reflection'
+		},
+		context: {
+			icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>`,
+			defaultTitle: 'Context',
+			colorClass: 'block-context'
+		}
+	};
+
+	function getBlockConfig(type: string) {
+		return blockConfig[type] || blockConfig.tip;
+	}
+
 	// Reading progress
 	let scrollProgress = 0;
 
@@ -173,54 +238,13 @@
 		<!-- Article Body -->
 		<article class="lesson-article">
 			{#if data.hasContent}
-				{#if lesson.content}
+				{#if lesson.content && !isHidden('body')}
 					<div class="lesson-content">
 						{@html lesson.content}
 					</div>
 				{/if}
 
-				{#if lesson.objectives && lesson.objectives.length > 0}
-					<div class="lesson-callout lesson-callout-objectives">
-						<div class="callout-icon">
-							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-								<circle cx="12" cy="12" r="10"/>
-								<path d="M12 16v-4M12 8h.01"/>
-							</svg>
-						</div>
-						<div class="callout-content">
-							<h3>Learning Objectives</h3>
-							<ul>
-								{#each lesson.objectives as objective}
-									<li>{objective}</li>
-								{/each}
-							</ul>
-						</div>
-					</div>
-				{/if}
-
-				{#if lesson.key_concepts && lesson.key_concepts.length > 0}
-					<section class="lesson-section">
-						<h2>Key Concepts</h2>
-						{#each lesson.key_concepts as concept}
-							<div class="concept-card">
-								<div class="concept-accent"></div>
-								<div class="concept-icon">
-									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-										<path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-									</svg>
-								</div>
-								<div class="concept-content">
-									<h4>{concept.name}</h4>
-									<div class="concept-explanation">
-										{@html concept.explanation}
-									</div>
-								</div>
-							</div>
-						{/each}
-					</section>
-				{/if}
-
-				{#if lesson.assignment}
+				{#if lesson.assignment && !isHidden('assignment')}
 					<section class="lesson-section">
 						<div class="assignment-card">
 							<div class="assignment-header">
@@ -249,66 +273,95 @@
 					</section>
 				{/if}
 
-				{#if lesson.knowledge_check && lesson.knowledge_check.length > 0}
-					<section class="lesson-section">
-						<div class="knowledge-check-section">
-							<div class="knowledge-check-header">
-								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-									<path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-								</svg>
-								<h3>Knowledge Check</h3>
-							</div>
-							<p class="knowledge-check-intro">
-								Reflect on the key topics in this lesson.
-							</p>
-							<div class="knowledge-check-questions">
-								{#each lesson.knowledge_check as question, i}
-									<div class="question-card">
-										<span class="question-number">{i + 1}</span>
-										<div class="question-content">
-											<p class="question-text">{question.question}</p>
-											{#if question.hint}
-												<p class="question-hint">
-													<strong>Hint:</strong> {question.hint}
-												</p>
-											{/if}
-										</div>
-									</div>
-								{/each}
-							</div>
-						</div>
-					</section>
-				{/if}
+				{#if lesson.blocks && lesson.blocks.length > 0 && !isHidden('blocks')}
+					{#each lesson.blocks as block}
+						{@const config = getBlockConfig(block.type)}
 
-				{#if lesson.additional_resources && lesson.additional_resources.length > 0}
-					<section class="lesson-section">
-						<h2>Additional Resources</h2>
-						<p class="section-subtitle">Supplementary materials for deeper exploration.</p>
-						<div class="resources-grid">
-							{#each lesson.additional_resources as resource}
-								<div class="resource-card">
-									<h4>
-										{#if resource.url}
-											<a href={resource.url} target="_blank" rel="noopener noreferrer">
-												{resource.title}
-												<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-													<path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
-												</svg>
-											</a>
-										{:else}
-											{resource.title}
-										{/if}
-									</h4>
-									{#if resource.author}
-										<p class="resource-author">{resource.author}</p>
-									{/if}
-									{#if resource.description}
-										<p class="resource-description">{resource.description}</p>
+						{#if block.type === 'objectives'}
+							<!-- Learning Objectives Block -->
+							<div class="lesson-block {config.colorClass}">
+								<div class="block-icon">
+									{@html config.icon}
+								</div>
+								<div class="block-content">
+									<h3>{config.defaultTitle}</h3>
+									<ul>
+										{#each block.items as item}
+											<li>{item}</li>
+										{/each}
+									</ul>
+								</div>
+							</div>
+
+						{:else if block.type === 'concept'}
+							<!-- Key Concept Block -->
+							<div class="concept-card">
+								<div class="concept-accent"></div>
+								<div class="concept-icon">
+									{@html config.icon}
+								</div>
+								<div class="concept-content">
+									<h4>{block.name}</h4>
+									<div class="concept-explanation">
+										{@html block.explanation}
+									</div>
+								</div>
+							</div>
+
+						{:else if block.type === 'check'}
+							<!-- Knowledge Check Block -->
+							<div class="question-block">
+								<div class="block-icon">
+									{@html config.icon}
+								</div>
+								<div class="question-content">
+									<p class="question-text">{block.question}</p>
+									{#if block.hint}
+										<p class="question-hint">
+											<strong>Hint:</strong> {block.hint}
+										</p>
 									{/if}
 								</div>
-							{/each}
-						</div>
-					</section>
+							</div>
+
+						{:else if block.type === 'resource'}
+							<!-- Resource Block -->
+							<div class="resource-card">
+								<h4>
+									{#if block.url}
+										<a href={block.url} target="_blank" rel="noopener noreferrer">
+											{block.title}
+											<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+												<path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+											</svg>
+										</a>
+									{:else}
+										{block.title}
+									{/if}
+								</h4>
+								{#if block.author}
+									<p class="resource-author">{block.author}</p>
+								{/if}
+								{#if block.description}
+									<p class="resource-description">{block.description}</p>
+								{/if}
+							</div>
+
+						{:else}
+							<!-- Callout Blocks (ask, example, tip, important, reflection, context) -->
+							<div class="lesson-block {config.colorClass}">
+								<div class="block-icon">
+									{@html config.icon}
+								</div>
+								<div class="block-content">
+									<h3>{block.title || config.defaultTitle}</h3>
+									<div class="block-body">
+										{@html block.content}
+									</div>
+								</div>
+							</div>
+						{/if}
+					{/each}
 				{/if}
 			{:else}
 				<p class="lesson-description">{lesson.description}</p>
@@ -522,7 +575,112 @@
 		margin-bottom: 0.5rem;
 	}
 
-	/* Callouts */
+	/* Unified Blocks */
+	.lesson-block {
+		display: flex;
+		gap: 1rem;
+		background-color: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-left: 3px solid var(--color-primary);
+		border-radius: var(--radius-base);
+		padding: 1rem;
+		margin: 1.5rem 0;
+		box-shadow: var(--shadow-sm);
+	}
+
+	.block-icon {
+		flex-shrink: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 2rem;
+		height: 2rem;
+		background-color: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-sm);
+		color: var(--color-text);
+	}
+
+	.block-content h3 {
+		margin: 0 0 0.5rem;
+		font-size: 1rem;
+	}
+
+	.block-content ul {
+		margin: 0;
+		padding-left: 1.25rem;
+	}
+
+	.block-content li {
+		margin-bottom: 0.25rem;
+	}
+
+	.block-content p {
+		margin: 0;
+	}
+
+	.block-body :global(p) {
+		margin: 0;
+	}
+
+	.block-body :global(p + p) {
+		margin-top: 0.5rem;
+	}
+
+	/* Question block (knowledge check) */
+	.question-block {
+		display: flex;
+		gap: 0.75rem;
+		background-color: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-left: 3px solid #8b5cf6;
+		border-radius: var(--radius-base);
+		padding: 0.75rem;
+		margin: 1rem 0;
+	}
+
+	/* Block type color variations */
+	.block-objectives {
+		border-left-color: var(--color-primary);
+	}
+
+	.block-concept {
+		border-left-color: #f59e0b; /* amber */
+	}
+
+	.block-check {
+		border-left-color: #8b5cf6; /* violet */
+	}
+
+	.block-resource {
+		border-left-color: #10b981; /* emerald */
+	}
+
+	.block-ask {
+		border-left-color: #6366f1; /* indigo */
+	}
+
+	.block-example {
+		border-left-color: #10b981; /* emerald */
+	}
+
+	.block-tip {
+		border-left-color: #f59e0b; /* amber */
+	}
+
+	.block-important {
+		border-left-color: #ef4444; /* red */
+	}
+
+	.block-reflection {
+		border-left-color: #8b5cf6; /* violet */
+	}
+
+	.block-context {
+		border-left-color: #06b6d4; /* cyan */
+	}
+
+	/* Legacy callout support */
 	.lesson-callout {
 		display: flex;
 		gap: 1rem;
@@ -551,15 +709,6 @@
 	.callout-content h3 {
 		margin: 0 0 0.5rem;
 		font-size: 1rem;
-	}
-
-	.callout-content ul {
-		margin: 0;
-		padding-left: 1.25rem;
-	}
-
-	.callout-content li {
-		margin-bottom: 0.25rem;
 	}
 
 	.callout-content p {

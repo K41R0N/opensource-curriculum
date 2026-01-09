@@ -4,72 +4,33 @@ slug: endpoints
 cluster: api-data-access
 order: 1
 description: "Explore the built-in APIs that expose your curriculum as structured data."
-objectives:
-  - Know what data endpoints are available
-  - Understand the difference between JSON API, RSS, and sitemap
-  - Access and interpret the curriculum data programmatically
 key_concepts:
-  - name: "Machine-Readable Data"
+  - name: "Four Built-In Endpoints"
     explanation: |
-      Every curriculum built with this template automatically exposes its content through several machine-readable formats:
+      Every curriculum automatically exposes its content through machine-readable formats:
 
-      - **JSON API** — Full curriculum data for apps and scripts
-      - **RSS Feed** — Subscribe to updates in any feed reader
-      - **Sitemap** — Help search engines index your content
-      - **Schema.org Manifest** — Structured data for rich search results
+      | Endpoint | Format | Purpose |
+      |----------|--------|---------|
+      | `/api/curriculum.json` | JSON | Full data for apps and AI |
+      | `/feed.xml` | RSS 2.0 | Feed reader subscriptions |
+      | `/sitemap.xml` | XML | Search engine indexing |
+      | `/api/manifest.json` | JSON-LD | Rich snippets in search |
 
-      These endpoints update automatically whenever you change content through the CMS.
-  - name: "The JSON Curriculum API"
+      These update automatically when you edit content through the CMS.
+  - name: "The JSON API"
     explanation: |
-      The most powerful endpoint is `/api/curriculum.json`. It returns your complete curriculum structure:
+      The primary endpoint is `/api/curriculum.json`. It returns your complete curriculum structure with query parameters for filtering:
 
-      ```json
-      {
-        "version": "1.0",
-        "site": { "name": "...", "url": "..." },
-        "stats": { "totalClusters": 5, "totalLessons": 20 },
-        "clusters": [
-          {
-            "title": "Getting Started",
-            "slug": "getting-started",
-            "url": "https://yoursite.com/curriculum/getting-started",
-            "lessons": [...]
-          }
-        ]
-      }
-      ```
-
-      It supports query parameters:
       - `?cluster=getting-started` — Filter to a single cluster
       - `?urls=false` — Omit URL fields for smaller response
-      - `?content=true` — Include full lesson content (body, objectives, key concepts, etc.)
-  - name: "RSS Feed"
+      - `?content=true` — Include full lesson content for AI agents
+  - name: "Discovery & Syndication"
     explanation: |
-      The RSS feed at `/feed.xml` follows the RSS 2.0 standard. It lists all clusters and lessons as feed items.
+      The other endpoints enable discovery and distribution:
 
-      Users can subscribe in any RSS reader (Feedly, NetNewsWire, Inoreader, etc.) to get notified when you add new content.
-
-      The feed includes:
-      - Cluster entries with descriptions
-      - Lesson entries with author attribution
-      - Proper categories for filtering
-  - name: "Sitemap"
-    explanation: |
-      The sitemap at `/sitemap.xml` helps search engines discover and index your content efficiently.
-
-      It's automatically generated and includes:
-      - All static pages (home, about, curriculum index)
-      - All cluster pages
-      - All lesson pages
-
-      Priority and change frequency hints help crawlers understand your content structure.
-  - name: "Schema.org Manifest"
-    explanation: |
-      The manifest at `/api/manifest.json` uses JSON-LD format with Schema.org vocabulary. This enables rich snippets in search results.
-
-      It describes your curriculum as a `Course` with `CourseInstance` (clusters) containing `LearningResource` (lessons).
-
-      Search engines and AI systems can understand your content structure semantically, not just as text.
+      - **RSS Feed** (`/feed.xml`) — Subscribers get notified of new content. Works with Feedly, automation tools like Zapier, and AI agents.
+      - **Sitemap** (`/sitemap.xml`) — Helps Google and other search engines index your content efficiently.
+      - **Schema.org Manifest** (`/api/manifest.json`) — Enables rich snippets in search results using structured vocabulary.
 assignment:
   instructions: |
     Explore each endpoint on your deployed site:
@@ -95,18 +56,10 @@ knowledge_check:
   - question: "What's the difference between the RSS feed and the JSON API?"
     hint: "Think about who or what is consuming each format."
 additional_resources:
-  - title: "RSS 2.0 Specification"
-    author: "RSS Advisory Board"
-    url: "https://www.rssboard.org/rss-specification"
-    description: "The official RSS format specification."
   - title: "Schema.org Course Type"
     author: "Schema.org"
     url: "https://schema.org/Course"
     description: "Documentation for the Course schema used in the manifest."
-  - title: "JSON:API Specification"
-    author: "JSON:API"
-    url: "https://jsonapi.org/"
-    description: "A specification for building APIs in JSON (our API is simpler but inspired by these patterns)."
 ---
 
 ## Available Endpoints

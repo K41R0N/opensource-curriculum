@@ -4,57 +4,30 @@ slug: use-cases
 cluster: api-data-access
 order: 2
 description: "Practical applications for the curriculum APIs—from AI agents to custom dashboards."
-objectives:
-  - Understand how AI agents can consume your curriculum
-  - Build awareness of automation possibilities
-  - Explore ideas for custom integrations
 key_concepts:
-  - name: "AI Agent Integration"
+  - name: "AI Integration"
     explanation: |
-      AI assistants and agents can consume your curriculum directly via the JSON API. This enables scenarios like:
+      AI assistants can consume your curriculum via the JSON API:
 
-      - **Tutoring bots** that know your curriculum structure and can guide learners
-      - **Research assistants** that reference your content when answering questions
-      - **Content tools** that help you write new lessons consistent with existing material
+      - **Claude Projects**: Add your curriculum JSON as project knowledge for a curriculum-aware assistant
+      - **Custom GPTs**: Upload curriculum data to build a "curriculum guide"
+      - **Tutoring bots**: Point any AI at `/api/curriculum.json` and it instantly understands your content
 
-      By pointing an AI at `/api/curriculum.json`, it instantly understands what you teach and how it's organized.
-  - name: "Claude Projects & Custom GPTs"
+      The structured format makes it easy for AI to understand relationships between clusters, lessons, and concepts.
+  - name: "Automation & Syndication"
     explanation: |
-      Modern AI platforms let you create specialized assistants with custom knowledge:
+      The RSS feed integrates with automation platforms like Zapier, Make, and IFTTT. When you publish a new lesson, automatically tweet about it, notify a Discord channel, or send a newsletter.
 
-      **Claude Projects**: Add your curriculum JSON as project knowledge. Claude can then answer questions about your curriculum, suggest which lesson covers a topic, or help learners navigate.
-
-      **Custom GPTs**: Upload your curriculum data or configure the GPT to fetch from your API. Build a "curriculum guide" that knows your content deeply.
-
-      The structured JSON format makes it easy for AI to understand relationships between clusters, lessons, and concepts.
-  - name: "RSS Automation"
+      The API also enables syndication—pull your curriculum into documentation sites, learning management systems, or partner sites. Your API is the single source of truth.
+  - name: "Custom Applications"
     explanation: |
-      RSS feeds integrate with automation platforms:
+      Build custom tools on top of the JSON API:
 
-      - **Zapier/Make**: Trigger workflows when new items appear in the feed
-      - **IFTTT**: Post to social media, send emails, or update spreadsheets
-      - **Discord/Slack**: Notify a channel when new lessons are published
-
-      Example: When you publish a new lesson, automatically tweet about it or send a newsletter notification.
-  - name: "Custom Dashboards"
-    explanation: |
-      The JSON API enables custom UIs:
-
-      - **Progress trackers**: Build an app that tracks which lessons a user has completed
-      - **Analytics dashboards**: Visualize your curriculum structure and growth
-      - **Mobile apps**: Create a native app that fetches and displays your curriculum
+      - **Progress trackers**: Track which lessons a user has completed
       - **Embeddable widgets**: Show a lesson list on another website
+      - **Mobile apps**: Create a native app that fetches your curriculum
 
-      Since the API supports CORS, client-side JavaScript can fetch data directly.
-  - name: "Content Syndication"
-    explanation: |
-      Publish your curriculum across multiple platforms:
-
-      - **Documentation sites**: Pull lesson content into docs
-      - **Learning management systems**: Import structure and metadata
-      - **Partner sites**: Let others embed your curriculum
-
-      The API acts as a single source of truth that other systems can read from.
+      Since the API supports CORS, client-side JavaScript can fetch data directly from any domain.
 assignment:
   instructions: |
     Choose one integration to explore:
@@ -107,14 +80,6 @@ additional_resources:
     author: "Anthropic"
     url: "https://support.anthropic.com/en/articles/9517075-what-are-projects"
     description: "How to create Claude Projects with custom knowledge."
-  - title: "Zapier RSS Integration"
-    author: "Zapier"
-    url: "https://zapier.com/apps/rss/integrations"
-    description: "Connect RSS feeds to thousands of apps."
-  - title: "Building with the Fetch API"
-    author: "MDN"
-    url: "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch"
-    description: "JavaScript documentation for fetching data from APIs."
 ---
 
 ## Why Expose Your Curriculum as Data?

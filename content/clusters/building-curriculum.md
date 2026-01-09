@@ -1,11 +1,13 @@
 ---
-title: Building Your Curriculum
+title: Building with AI
 slug: building-curriculum
 order: 2
-description: The methodology for defining your domain, finding readings, and structuring content.
+description: "Use AI prompts to define your domain, discover readings, and auto-populate your curriculum."
+is_foundation: true
 ---
-This is the heart of the process: taking a domain you care about and transforming it into a structured learning path.
 
-The lessons in this cluster walk you through using AI prompts to define your field, discover foundational readings, and organize everything into clusters and lessons. Each lesson includes the actual prompts you'll use, along with explanations of why they work.
+This is the AI-assisted path for building your curriculum. If you're comfortable using Claude, GPT-4, or similar tools, this approach lets you generate a complete first draft quickly—then refine it over time.
 
-**_Disclaimer: _**_This cluster outlines methods for using LLMs and agents to create your own personalized curriculum. This platform is built to be AI-optional. If you'd prefer to skip the AI parts, you can just proceed with the next cluster on deployment and just manually fill in your material using the built-in CMS._
+The lessons walk you through using specific prompts to define your field, discover foundational readings, structure everything into clusters, and auto-populate your CMS. Each lesson includes the actual prompts you'll use, along with explanations of why they work.
+
+**Not comfortable with AI tools?** See the [Building Manually](/curriculum/building-manually) cluster for a traditional approach.

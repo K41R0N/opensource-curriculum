@@ -4,10 +4,6 @@ slug: iterating
 cluster: working-with-content
 order: 3
 description: "Develop a practice of continuous improvement based on feedback and deeper understanding."
-objectives:
-  - Establish a regular review cadence for your curriculum
-  - Learn how to gather and incorporate feedback
-  - Understand when to add, revise, or retire content
 key_concepts:
   - name: "The Living Curriculum"
     explanation: |

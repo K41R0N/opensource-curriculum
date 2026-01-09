@@ -1,8 +1,9 @@
 ---
 title: Deployment & Customization
 slug: deployment-customization
-order: 3
+order: 4
 description: "Setting up your site, connecting the CMS, and making it your own."
+is_foundation: true
 ---
 
 Once you've designed your curriculum, it's time to deploy it and make it accessible to your audience.

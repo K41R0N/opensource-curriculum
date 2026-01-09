@@ -5,37 +5,21 @@ cluster: building-curriculum
 author: ''
 order: 1
 description: Use AI prompts to articulate your curriculum's scope, central questions, and boundaries.
-objectives:
-  - Learn to articulate your domain clearly and precisely
-  - Understand how to identify the boundaries of your curriculum
-  - Use the Domain Definition Prompt to generate your curriculum framework
 key_concepts:
   - name: The Central Question
     explanation: |-
       Every good curriculum answers a central question. Not "What topics does this cover?" but "What will someone who completes this be able to understand or do?"
 
       Examples:
-
       - "How do social movements create lasting change?"
       - "What makes distributed systems reliable?"
-      - "How has colonialism shaped modern economics?"
 
       Your central question defines what's in scope and what's not.
-  - name: Domain vs. Survey
+  - name: AI as Brainstorming Partner
     explanation: |-
-      A domain curriculum goes deep on a specific area. A survey curriculum covers many areas shallowly. This platform is designed for domain curricula.
+      LLMs are excellent for domain definition. They can suggest canonical texts, identify adjacent fields, point out gaps in your framing, and generate alternative structures.
 
-      Signs you're building a domain curriculum:
-
-      - You can name the foundational texts
-      - There's a clear intellectual tradition
-      - Mastery requires reading primary sources
-      - The field has depth, not just breadth
-  - name: Intellectual Traditions
-    explanation: |-
-      Most domains exist within intellectual traditions—networks of thinkers who built on each other's work. Your curriculum should identify which tradition(s) you're drawing from.
-
-      For example, a curriculum on "design thinking" might draw from cognitive psychology, industrial design, and business strategy. Naming these traditions helps learners understand where the ideas come from.
+      But remember: the AI is helping you think, not thinking for you. You need to critically evaluate every suggestion and bring your own judgment about what matters.
 assignment:
   instructions: |-
     Use the Domain Definition Prompt (below) with your preferred AI assistant (Claude, GPT-4, etc.) to generate an initial framework for your curriculum.
@@ -61,32 +45,9 @@ additional_resources:
 ---
 ## The Art of Domain Definition
 
-**_Disclaimer: This cluster outlines methods for using LLMs and agents to create your own personalized curriculum. This platform is built to be AI-optional. If you'd prefer to skip the AI parts, you can just proceed with [the next cluster on deployment](https://byocurriculum.dev/curriculum/deployment-customization) and just manually fill in your material using the built-in CMS._**
+**_Prefer working without AI?_** See the [Building Manually](/curriculum/building-manually) cluster for a hands-on approach.
 
 The most common mistake in curriculum design is being too broad. "A curriculum on philosophy" is too broad. "A curriculum on how 20th-century analytic philosophy addressed the mind-body problem" is focused enough to be useful.
-
-Your domain definition should answer:
-
-1. **What is the central question?** What will learners be able to understand or do?
-2. **What's the scope?** What's included? What's explicitly excluded?
-3. **What traditions does it draw from?** What schools of thought and key thinkers?
-4. **Who is the audience?** What do they already know? What do they want?
-
-## Using AI to Help Define Your Domain
-
-Large language models are excellent brainstorming partners for domain definition. They can:
-
-- Suggest canonical texts you might have missed
-- Identify adjacent fields worth considering
-- Point out potential gaps in your framing
-- Generate alternative ways to structure the domain
-
-But remember: the AI is helping you think, not thinking for you. You need to:
-
-- **Critically evaluate** every suggestion
-- **Bring your own judgment** about what matters
-- **Iterate** until the framing feels right
-- **Make choices** the AI can't make for you
 
 ## The Domain Definition Prompt
 
