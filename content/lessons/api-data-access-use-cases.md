@@ -31,6 +31,17 @@ blocks:
       - **Mobile apps**: Create a native app that fetches your curriculum
 
       Since the API supports CORS, client-side JavaScript can fetch data directly from any domain.
+  - type: check
+    question: "Why is structured JSON better than scraping HTML for AI integrations?"
+    hint: "Think about reliability, clarity of relationships, and maintenance."
+  - type: check
+    question: "What's a practical automation you could build with the RSS feed for your curriculum?"
+    hint: "Consider how you'd want to notify your audience about new content."
+  - type: resource
+    title: "Claude Projects Documentation"
+    author: "Anthropic"
+    url: "https://support.anthropic.com/en/articles/9517075-what-are-projects"
+    description: "How to create Claude Projects with custom knowledge."
 assignment:
   instructions: |
     Choose one integration to explore:
@@ -49,41 +60,9 @@ assignment:
     5. Test by adding a new lesson and watching the automation trigger
 
     **Option C: Simple Dashboard**
-    1. Create an HTML file with this starter code:
-    ```html
-    <!DOCTYPE html>
-    <html>
-    <head><title>My Curriculum</title></head>
-    <body>
-      <h1>Curriculum Overview</h1>
-      <div id="stats"></div>
-      <div id="clusters"></div>
-      <script>
-        fetch('https://YOURSITE.netlify.app/api/curriculum.json')
-          .then(r => r.json())
-          .then(data => {
-            document.getElementById('stats').innerHTML =
-              `<p>${data.stats.totalClusters} clusters, ${data.stats.totalLessons} lessons</p>`;
-            document.getElementById('clusters').innerHTML =
-              data.clusters.map(c => `<h2>${c.title}</h2><ul>${c.lessons.map(l => `<li>${l.title}</li>`).join('')}</ul>`).join('');
-          });
-      </script>
-    </body>
-    </html>
-    ```
+    1. Create an HTML file with the starter code shown below
     2. Replace `YOURSITE` with your actual domain
     3. Open the HTML file in a browser
-  - type: check
-    question: "Why is structured JSON better than scraping HTML for AI integrations?"
-    hint: "Think about reliability, clarity of relationships, and maintenance."
-  - type: check
-    question: "What's a practical automation you could build with the RSS feed for your curriculum?"
-    hint: "Consider how you'd want to notify your audience about new content."
-  - type: resource
-    title: "Claude Projects Documentation"
-    author: "Anthropic"
-    url: "https://support.anthropic.com/en/articles/9517075-what-are-projects"
-    description: "How to create Claude Projects with custom knowledge."
 ---
 
 ## Why Expose Your Curriculum as Data?

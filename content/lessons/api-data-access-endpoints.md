@@ -34,6 +34,17 @@ blocks:
       - **RSS Feed** (`/feed.xml`) — Subscribers get notified of new content. Works with Feedly, automation tools like Zapier, and AI agents.
       - **Sitemap** (`/sitemap.xml`) — Helps Google and other search engines index your content efficiently.
       - **Schema.org Manifest** (`/api/manifest.json`) — Enables rich snippets in search results using structured vocabulary.
+  - type: check
+    question: "Which endpoint would you use to build a mobile app that displays your curriculum?"
+    hint: "You need structured data that's easy to parse in code."
+  - type: check
+    question: "What's the difference between the RSS feed and the JSON API?"
+    hint: "Think about who or what is consuming each format."
+  - type: resource
+    title: "Schema.org Course Type"
+    author: "Schema.org"
+    url: "https://schema.org/Course"
+    description: "Documentation for the Course schema used in the manifest."
 assignment:
   instructions: |
     Explore each endpoint on your deployed site:
@@ -53,17 +64,6 @@ assignment:
     4. **Manifest**: Visit `https://yoursite.netlify.app/api/manifest.json`
        - Notice the Schema.org vocabulary (`@type`, `@context`)
        - Find the `_links` section that references all other endpoints
-  - type: check
-    question: "Which endpoint would you use to build a mobile app that displays your curriculum?"
-    hint: "You need structured data that's easy to parse in code."
-  - type: check
-    question: "What's the difference between the RSS feed and the JSON API?"
-    hint: "Think about who or what is consuming each format."
-  - type: resource
-    title: "Schema.org Course Type"
-    author: "Schema.org"
-    url: "https://schema.org/Course"
-    description: "Documentation for the Course schema used in the manifest."
 ---
 
 ## Available Endpoints

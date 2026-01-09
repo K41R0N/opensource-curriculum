@@ -37,6 +37,17 @@ blocks:
       3. **Environment Variables** — Tell your site where to find everything
 
       It sounds complex, but you'll just be copying and pasting values between websites. Follow the steps in order, and it will work.
+  - type: check
+    question: "Why does the CMS need you to log in with GitHub?"
+    hint: "Think about who should be allowed to change your curriculum content."
+  - type: check
+    question: "If something goes wrong, where would you check the callback URL?"
+    hint: "The callback URL appears in both GitHub and Cloudflare."
+  - type: resource
+    title: "Cloudflare Workers Documentation"
+    author: "Cloudflare"
+    url: "https://developers.cloudflare.com/workers/"
+    description: "Learn more about the free service that powers authentication."
 assignment:
   instructions: |
     This is the most technical lesson in the curriculum. Set aside 20-30 minutes of focused time.
@@ -51,17 +62,6 @@ assignment:
     - A text file or notes app to temporarily store values you'll copy
 
     Follow each step in order. Don't skip ahead!
-  - type: check
-    question: "Why does the CMS need you to log in with GitHub?"
-    hint: "Think about who should be allowed to change your curriculum content."
-  - type: check
-    question: "If something goes wrong, where would you check the callback URL?"
-    hint: "The callback URL appears in both GitHub and Cloudflare."
-  - type: resource
-    title: "Cloudflare Workers Documentation"
-    author: "Cloudflare"
-    url: "https://developers.cloudflare.com/workers/"
-    description: "Learn more about the free service that powers authentication."
 ---
 
 ## Before You Begin

@@ -36,16 +36,6 @@ blocks:
       4. Your live site updates in 1-2 minutes
 
       You never have to manually "upload" or "publish" your site. It just happens.
-assignment:
-  instructions: |
-    Follow the step-by-step guide below to deploy your curriculum. The whole process takes about 15 minutes.
-
-    **Before you start, you'll need:**
-    - A computer with internet access
-    - An email address for creating accounts
-    - About 15 minutes of uninterrupted time
-
-    No coding or technical knowledge required!
   - type: check
     question: "Why does the curriculum use static site hosting instead of a traditional server?"
     hint: "Think about speed, security, cost, and maintenance."
@@ -57,6 +47,16 @@ assignment:
     author: "Netlify"
     url: "https://docs.netlify.com/"
     description: "Official documentation for all Netlify features."
+assignment:
+  instructions: |
+    Follow the step-by-step guide below to deploy your curriculum. The whole process takes about 15 minutes.
+
+    **Before you start, you'll need:**
+    - A computer with internet access
+    - An email address for creating accounts
+    - About 15 minutes of uninterrupted time
+
+    No coding or technical knowledge required!
 ---
 
 ## Before You Begin

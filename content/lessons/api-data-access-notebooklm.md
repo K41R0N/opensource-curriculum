@@ -37,6 +37,17 @@ blocks:
       - Reflection questions grounded in source material
 
       Export the insights and feed them into your lesson-writing process. NotebookLM does the close reading; you do the curation and editorial judgment.
+  - type: check
+    question: "Why is the JSON API with ?content=true more useful for NotebookLM than just the basic API?"
+    hint: "Think about what NotebookLM needs to generate meaningful insights."
+  - type: check
+    question: "In the generator workflow, what role does editorial judgment play?"
+    hint: "NotebookLM analyzes, but who decides what belongs in the curriculum?"
+  - type: resource
+    title: "NotebookLM"
+    author: "Google"
+    url: "https://notebooklm.google.com"
+    description: "Google's AI-powered research assistant."
 assignment:
   instructions: |
     Try both integration directions:
@@ -64,17 +75,6 @@ assignment:
        - "What would make good reflection questions?"
     4. Use the responses to draft a new lesson
     5. Add it to your curriculum via the CMS
-  - type: check
-    question: "Why is the JSON API with ?content=true more useful for NotebookLM than just the basic API?"
-    hint: "Think about what NotebookLM needs to generate meaningful insights."
-  - type: check
-    question: "In the generator workflow, what role does editorial judgment play?"
-    hint: "NotebookLM analyzes, but who decides what belongs in the curriculum?"
-  - type: resource
-    title: "NotebookLM"
-    author: "Google"
-    url: "https://notebooklm.google.com"
-    description: "Google's AI-powered research assistant."
 ---
 
 ## Two Ways to Integrate

@@ -43,6 +43,12 @@ blocks:
       3. Define your domain and audience clearly
 
       Good content with default styling beats poor content with custom branding.
+  - type: check
+    question: "What should you customize before changing colors?"
+    hint: "Think about what visitors actually read vs. what they see."
+  - type: check
+    question: "How do CSS custom properties make theming easier?"
+    hint: "Consider what happens when you change a variable in one place."
 assignment:
   instructions: |
     Customize your curriculum in this order:
@@ -76,12 +82,6 @@ assignment:
     1. Add your logo image to `static/images/`
     2. Update the logo path in Site Settings
     3. Or edit the header component directly
-  - type: check
-    question: "What should you customize before changing colors?"
-    hint: "Think about what visitors actually read vs. what they see."
-  - type: check
-    question: "How do CSS custom properties make theming easier?"
-    hint: "Consider what happens when you change a variable in one place."
 ---
 
 ## Making It Yours

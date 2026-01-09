@@ -40,6 +40,17 @@ blocks:
       - **Templates**: Create lesson templates for consistency
 
       It's like having a specialized editor built for your curriculum.
+  - type: check
+    question: "When would you choose local editing over the CMS?"
+    hint: "Think about session length, internet access, and feature needs."
+  - type: check
+    question: "What does 'pull before you push' mean and why does it matter?"
+    hint: "Consider what happens if someone else edited while you were working."
+  - type: resource
+    title: "Obsidian Help Documentation"
+    author: "Obsidian"
+    url: "https://help.obsidian.md"
+    description: "Official documentation for all Obsidian features."
 assignment:
   instructions: |
     Complete the step-by-step setup below. Each step builds on the previous one. Allow about 30 minutes for the full setup.
@@ -52,17 +63,6 @@ assignment:
     The detailed reference guide is available if you get stuck or want more context.
   url: "/docs/obsidian-setup.md"
   reading_title: "Detailed Obsidian Setup Reference"
-  - type: check
-    question: "When would you choose local editing over the CMS?"
-    hint: "Think about session length, internet access, and feature needs."
-  - type: check
-    question: "What does 'pull before you push' mean and why does it matter?"
-    hint: "Consider what happens if someone else edited while you were working."
-  - type: resource
-    title: "Obsidian Help Documentation"
-    author: "Obsidian"
-    url: "https://help.obsidian.md"
-    description: "Official documentation for all Obsidian features."
 ---
 
 ## When to Use Local Editing
