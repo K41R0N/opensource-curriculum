@@ -4,10 +4,6 @@ slug: finding-readings
 cluster: building-curriculum
 order: 2
 description: "Use AI prompts to discover the canonical texts and influential works in your domain."
-objectives:
-  - Learn to identify truly foundational vs. merely popular texts
-  - Use the Reading Discovery Prompt to generate reading lists
-  - Evaluate and prioritize AI-suggested readings
 key_concepts:
   - name: "Foundational vs. Popular"
     explanation: |
@@ -47,9 +43,6 @@ additional_resources:
   - title: "Google Scholar"
     url: "https://scholar.google.com"
     description: "Use citation counts and 'Cited by' links to identify influential works."
-  - title: "Internet Archive"
-    url: "https://archive.org"
-    description: "Many foundational texts are available for free borrowing."
 ---
 
 ## Finding the Right Readings

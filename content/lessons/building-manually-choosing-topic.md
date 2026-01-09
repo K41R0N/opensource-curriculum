@@ -4,47 +4,19 @@ slug: choosing-topic
 cluster: building-manually
 order: 1
 description: "What kinds of topics work best for this platform, and how to scope yours appropriately."
-objectives:
-  - Understand what makes a topic suitable for a depth-first curriculum
-  - Evaluate whether your topic has the right characteristics
-  - Scope your curriculum to be achievable and valuable
 key_concepts:
-  - name: "Depth vs. Breadth"
-    explanation: |
-      This platform is designed for **depth-first** learning—going deep on a focused topic rather than surveying many topics shallowly.
-
-      **Good fit**: "How phenomenology explains the experience of using technology"
-      **Poor fit**: "An introduction to all Western philosophy"
-
-      If your topic could fill a semester-long seminar, it's probably right. If it could fill an entire degree program, narrow it down.
   - name: "The Foundational Text Test"
     explanation: |
       A topic works well if you can answer: "What are the 10-20 texts someone *must* read to understand this deeply?"
 
       If you can name specific, canonical texts that shaped the field, your topic has the intellectual infrastructure this platform needs.
 
-      If your topic is too new, too broad, or too applied to have foundational texts, consider:
-      - Narrowing to a specific school of thought
-      - Focusing on theoretical foundations rather than applications
-      - Choosing an adjacent topic with clearer intellectual lineage
-  - name: "Topics That Work Well"
+      If your topic is too new, too broad, or too applied, consider narrowing to a specific school of thought or focusing on theoretical foundations.
+  - name: "What Works (and What Doesn't)"
     explanation: |
-      Great topics for this platform share common traits:
+      **Good topics** have: established intellectual traditions, accessible primary sources, ideas that reward close reading, and a domain you've personally engaged with.
 
-      - **Established intellectual traditions**: Named thinkers, cited works, ongoing debates
-      - **Primary sources available**: Original texts you can actually access
-      - **Rewards close reading**: Ideas that reveal more on deeper engagement
-      - **Personal expertise**: You've gone deep yourself and have perspective to share
-
-      Examples: social theory, design philosophy, media ecology, organizational behavior, philosophy of mind, economic history
-  - name: "Topics That Struggle"
-    explanation: |
-      Some topics don't fit the depth-first model:
-
-      - **Too practical**: "How to use Excel" → skills, not research
-      - **Too current**: "AI ethics in 2024" → no foundational canon yet
-      - **Too broad**: "Psychology" → needs focus on specific area
-      - **Too personal**: "My leadership philosophy" → curriculum needs external foundations
+      **Topics that struggle**: Too practical ("How to use Excel"), too current (no canon yet), too broad ("Psychology"), or too personal ("My leadership philosophy").
 
       These aren't bad topics—they just need different formats than a research curriculum.
 assignment:
@@ -77,6 +49,8 @@ knowledge_check:
 ---
 
 ## Finding the Right Topic
+
+**_Prefer AI assistance?_** See the [Building with AI](/curriculum/building-curriculum) cluster for a prompt-based approach.
 
 The most common mistake is choosing a topic that's too broad. "Philosophy" isn't a topic—it's an entire discipline. "How 20th-century phenomenology shaped human-computer interaction" is a topic.
 

@@ -4,10 +4,6 @@ slug: refining-content
 cluster: building-curriculum
 order: 5
 description: "Improve your auto-generated curriculum over time with targeted edits and your unique perspective."
-objectives:
-  - Develop a systematic approach to improving generated content
-  - Add your unique perspective and voice to lessons
-  - Prioritize which lessons to refine first
 key_concepts:
   - name: "The 80/20 of Refinement"
     explanation: |

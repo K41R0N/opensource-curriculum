@@ -4,63 +4,36 @@ slug: notebooklm
 cluster: api-data-access
 order: 3
 description: "Use Google's NotebookLM to consume your curriculum or generate new content from source readings."
-objectives:
-  - Understand bidirectional integration possibilities with NotebookLM
-  - Feed curriculum data into NotebookLM for querying and audio generation
-  - Use NotebookLM to analyze sources and draft curriculum content
 key_concepts:
   - name: "Two Integration Directions"
     explanation: |
-      NotebookLM can work with your curriculum in two powerful ways:
+      NotebookLM can work with your curriculum in two ways:
 
-      1. **As a curriculum consumer** — Import your curriculum data for querying, summarization, and podcast generation
-      2. **As a curriculum generator** — Analyze your source readings and help draft lesson content
+      | Direction | Input | Output |
+      |-----------|-------|--------|
+      | **Consumer** | Your curriculum data | Queries, summaries, audio overviews |
+      | **Generator** | Your source readings | Insights for writing lessons |
 
-      Both directions leverage the structured data your curriculum already provides.
-  - name: "NotebookLM as Consumer"
+      Both leverage the same insight: structured, well-organized content is easier for AI to work with.
+  - name: "Consuming Your Curriculum"
     explanation: |
-      Your curriculum exposes machine-readable endpoints that NotebookLM can ingest:
+      Add your curriculum to NotebookLM using the JSON API (`/api/curriculum.json?content=true`) or individual lesson URLs. Once imported, you can:
 
-      - **JSON API** (`/api/curriculum.json?content=true`) — Full curriculum with lesson content
-      - **RSS Feed** (`/feed.xml`) — All lessons with `content:encoded`
-      - **Individual lesson URLs** — Each lesson page can be added as a source
+      - Query across your entire curriculum for connections
+      - Generate Audio Overviews (podcast-style discussions) of clusters
+      - Create study guides and summaries
 
-      Once imported, you can query across your entire curriculum, find connections between lessons, and generate summaries.
-  - name: "Audio Deep Dives"
+      The structured nature of your lessons gives NotebookLM better material to synthesize.
+  - name: "Generating Curriculum Content"
     explanation: |
-      NotebookLM's podcast generation feature creates conversational audio overviews of your sources.
+      Upload your foundational readings (PDFs, articles) to NotebookLM, then query it for:
 
-      Feed it a cluster's worth of lessons and it produces an audio companion—useful for:
-
-      - Learners who want to preview material before reading
-      - Accessibility for auditory learners
-      - Review sessions while commuting or exercising
-
-      The structured nature of your curriculum (clear objectives, key concepts) gives NotebookLM better material to work with.
-  - name: "NotebookLM as Generator"
-    explanation: |
-      The more powerful direction: use NotebookLM to analyze your foundational readings *before* you write lessons.
-
-      Upload your primary sources (PDFs, articles, book chapters) to a NotebookLM notebook. Then query it to:
-
-      - Identify key concepts across multiple texts
-      - Surface unexpected connections between readings
+      - Key concepts across multiple texts
+      - Connections between readings
       - Draft explanations of difficult ideas
-      - Generate reflection questions grounded in the source material
+      - Reflection questions grounded in source material
 
-      Take those insights and feed them into your lesson-writing process.
-  - name: "The Generation Workflow"
-    explanation: |
-      A practical workflow combining NotebookLM with your curriculum:
-
-      1. **Upload sources** — Add your foundational readings to NotebookLM
-      2. **Query for insights** — Ask about key concepts, themes, connections
-      3. **Export findings** — Copy the most useful responses
-      4. **Feed into prompts** — Use NotebookLM's output as input for curriculum structure prompts
-      5. **Generate lessons** — Create content with richer source grounding
-      6. **Publish via CMS** — Add polished lessons to your curriculum
-
-      NotebookLM does the close reading. You do the curation and editorial judgment.
+      Export the insights and feed them into your lesson-writing process. NotebookLM does the close reading; you do the curation and editorial judgment.
 assignment:
   instructions: |
     Try both integration directions:
@@ -98,10 +71,6 @@ additional_resources:
     author: "Google"
     url: "https://notebooklm.google.com"
     description: "Google's AI-powered research assistant."
-  - title: "NotebookLM Help"
-    author: "Google"
-    url: "https://support.google.com/notebooklm"
-    description: "Official documentation for NotebookLM features."
 ---
 
 ## Two Ways to Integrate

@@ -4,10 +4,6 @@ slug: structuring-content
 cluster: building-curriculum
 order: 3
 description: "Transform your reading list into a coherent curriculum structure with logical progression."
-objectives:
-  - Learn to group readings into thematic clusters
-  - Understand how to sequence lessons for optimal learning
-  - Create complete lesson structures with all components
 key_concepts:
   - name: "Cluster Design"
     explanation: |

@@ -4,10 +4,6 @@ slug: first-lesson
 cluster: building-manually
 order: 4
 description: "Walk through creating a complete lesson from scratch—from reading to published content."
-objectives:
-  - Create a complete lesson with all recommended fields
-  - Develop a repeatable process for future lessons
-  - Publish and verify your first curriculum content
 key_concepts:
   - name: "The Reading-First Approach"
     explanation: |

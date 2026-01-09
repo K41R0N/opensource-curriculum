@@ -4,10 +4,6 @@ slug: auto-populate
 cluster: building-curriculum
 order: 4
 description: "Use AI to generate complete lesson content and batch-populate your curriculum for first deployment."
-objectives:
-  - Generate complete lesson content from your reading list
-  - Format AI output for direct CMS entry
-  - Populate your entire curriculum structure in one session
 key_concepts:
   - name: "The Batch Generation Approach"
     explanation: |

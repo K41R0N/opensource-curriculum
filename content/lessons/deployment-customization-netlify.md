@@ -4,11 +4,6 @@ slug: deploying-netlify
 cluster: deployment-customization
 order: 1
 description: "Fork the repository, connect to Netlify, and get your curriculum online in minutes."
-objectives:
-  - Create a GitHub account and fork the curriculum template
-  - Connect your repository to Netlify for automatic deployment
-  - Configure your site URL and environment variables
-  - Understand how updates flow from editing to live site
 key_concepts:
   - name: "What is Forking?"
     explanation: |
@@ -58,10 +53,6 @@ additional_resources:
     author: "Netlify"
     url: "https://docs.netlify.com/"
     description: "Official documentation for all Netlify features."
-  - title: "GitHub Docs: Forking a Repository"
-    author: "GitHub"
-    url: "https://docs.github.com/en/get-started/quickstart/fork-a-repo"
-    description: "GitHub's guide to understanding forks."
 ---
 
 ## Before You Begin

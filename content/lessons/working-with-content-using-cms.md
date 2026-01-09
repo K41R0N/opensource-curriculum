@@ -4,10 +4,6 @@ slug: using-cms
 cluster: working-with-content
 order: 1
 description: "Add and edit content through the browser-based CMS without touching code."
-objectives:
-  - Navigate the CMS interface to find and edit content
-  - Create new lessons and clusters using the visual editor
-  - Understand how changes flow from the CMS to your live site
 key_concepts:
   - name: "Git-Based CMS"
     explanation: |

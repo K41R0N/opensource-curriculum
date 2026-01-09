@@ -4,10 +4,6 @@ slug: theme-system
 cluster: making-it-yours
 order: 1
 description: "How the site's styling is organized and why it's safe to customize."
-objectives:
-  - Understand the separation between content, structure, and styling
-  - Learn where theme variables are defined
-  - Know what you can and cannot safely change
 key_concepts:
   - name: "CSS Custom Properties"
     explanation: |

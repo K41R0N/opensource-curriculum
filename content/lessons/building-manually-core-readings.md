@@ -4,10 +4,6 @@ slug: core-readings
 cluster: building-manually
 order: 2
 description: "How to select foundational texts without AI assistance—using your judgment and research skills."
-objectives:
-  - Develop criteria for evaluating foundational texts
-  - Use academic resources to identify canonical works
-  - Build a reading list through deliberate curation
 key_concepts:
   - name: "Primary vs. Secondary Sources"
     explanation: |
@@ -85,12 +81,6 @@ additional_resources:
   - title: "Google Scholar"
     url: "https://scholar.google.com"
     description: "Search academic literature and see citation counts."
-  - title: "Internet Archive"
-    url: "https://archive.org"
-    description: "Free borrowing of many older academic texts."
-  - title: "Connected Papers"
-    url: "https://www.connectedpapers.com"
-    description: "Visualize the citation network around a paper to find related foundational works."
 ---
 
 ## Building Your Reading List
