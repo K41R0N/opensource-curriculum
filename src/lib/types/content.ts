@@ -73,18 +73,22 @@ export interface Assignment {
 // Unified Block Types (Discriminated Union)
 // ============================================
 
-/** Block type identifiers */
-export type BlockType =
-	| 'objectives'
-	| 'concept'
-	| 'check'
-	| 'resource'
-	| 'ask'
-	| 'example'
-	| 'tip'
-	| 'important'
-	| 'reflection'
-	| 'context';
+/** Valid block type identifiers (runtime array for validation) */
+export const VALID_BLOCK_TYPES = [
+	'objectives',
+	'concept',
+	'check',
+	'resource',
+	'ask',
+	'example',
+	'tip',
+	'important',
+	'reflection',
+	'context'
+] as const;
+
+/** Block type identifiers (derived from runtime array) */
+export type BlockType = (typeof VALID_BLOCK_TYPES)[number];
 
 /** Learning objectives block */
 export interface ObjectivesBlock {

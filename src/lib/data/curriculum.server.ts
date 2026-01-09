@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { marked } from 'marked';
 import type { Cluster, Lesson, HomePage, AboutPage } from './curriculum';
+import { VALID_BLOCK_TYPES, type BlockType } from '$lib/types/content';
 
 /**
  * Validates that a value is a non-empty string
@@ -373,9 +374,6 @@ export async function loadFullLesson(clusterSlug: string, lessonSlug: string): P
 				// Parse unified blocks (with safe checks and markdown parsing)
 				// Also supports legacy fields (objectives, key_concepts, knowledge_check, additional_resources)
 				// by converting them to the unified blocks format
-				const validBlockTypes = ['objectives', 'concept', 'check', 'resource', 'ask', 'example', 'tip', 'important', 'reflection', 'context'] as const;
-				type BlockType = typeof validBlockTypes[number];
-
 				let parsedBlocks: Array<Record<string, unknown>> = [];
 
 				// First, handle the new unified blocks field
@@ -385,7 +383,7 @@ export async function loadFullLesson(clusterSlug: string, lessonSlug: string): P
 							block &&
 							typeof block === 'object' &&
 							isNonEmptyString(block.type) &&
-							validBlockTypes.includes(block.type as BlockType)
+							(VALID_BLOCK_TYPES as readonly string[]).includes(block.type as string)
 						)
 						.slice(0, 15) // Enforce max 15 blocks
 						.map((block) => {

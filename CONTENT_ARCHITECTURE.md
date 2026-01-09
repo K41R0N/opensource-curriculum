@@ -24,17 +24,21 @@ A thematic grouping of related lessons. Clusters organize the curriculum into co
 | `slug` | string | yes | URL-safe identifier (unique) |
 | `order` | integer | yes | Sort position in curriculum (1-based) |
 | `description` | text | yes | Brief summary (1-2 sentences) |
+| `is_foundation` | boolean | no | Whether this cluster appears in "Start Here" section (default: false) |
 | `body` | markdown | no | Extended overview content |
 
 **File Location**: `content/clusters/{slug}.md`
 
+**Foundation vs Specialization**: Clusters with `is_foundation: true` appear in the "Start Here" section on the home and curriculum pages. Clusters without this field (or with `is_foundation: false`) appear under "Specializations".
+
 **Example**:
 ```yaml
 ---
-title: "Mediation Architecture & Reality Framing"
-slug: mediation-architecture
+title: "Getting Started"
+slug: getting-started
 order: 1
-description: "How devices function as mediating instruments that frame reality."
+description: "Why build a self-directed curriculum and how this platform works."
+is_foundation: true
 ---
 
 Extended overview content goes here as markdown body...

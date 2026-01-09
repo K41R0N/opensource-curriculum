@@ -154,7 +154,7 @@ collections:
         hint: "Add objectives, concepts, questions, resources, and callouts (max 15)"
         types:
           # Learning Objectives Block
-          - label: "πŸ"‹ Learning Objectives"
+          - label: "Learning Objectives"
             name: objectives
             widget: object
             fields:
@@ -164,7 +164,7 @@ collections:
                 field: { label: Objective, name: item, widget: string }
 
           # Key Concept Block
-          - label: "πŸ'' Key Concept"
+          - label: "Key Concept"
             name: concept
             widget: object
             fields:
@@ -172,7 +172,7 @@ collections:
               - { label: Explanation, name: explanation, widget: markdown }
 
           # Knowledge Check Block
-          - label: "❓ Knowledge Check"
+          - label: "Knowledge Check"
             name: check
             widget: object
             fields:
@@ -180,7 +180,7 @@ collections:
               - { label: Hint, name: hint, widget: text, required: false }
 
           # Resource Block
-          - label: "πŸ"— Resource"
+          - label: "Resource"
             name: resource
             widget: object
             fields:
@@ -190,42 +190,42 @@ collections:
               - { label: Description, name: description, widget: text }
 
           # Callout Blocks (various types)
-          - label: "πŸ€" Ask Yourself"
+          - label: "Ask Yourself"
             name: ask
             widget: object
             fields:
               - { label: Title (optional), name: title, widget: string, required: false }
               - { label: Content, name: content, widget: markdown }
 
-          - label: "πŸ" Example"
+          - label: "Example"
             name: example
             widget: object
             fields:
               - { label: Title (optional), name: title, widget: string, required: false }
               - { label: Content, name: content, widget: markdown }
 
-          - label: "πŸ'' Tip"
+          - label: "Tip"
             name: tip
             widget: object
             fields:
               - { label: Title (optional), name: title, widget: string, required: false }
               - { label: Content, name: content, widget: markdown }
 
-          - label: "⚠️ Important"
+          - label: "Important"
             name: important
             widget: object
             fields:
               - { label: Title (optional), name: title, widget: string, required: false }
               - { label: Content, name: content, widget: markdown }
 
-          - label: "❔ Reflection"
+          - label: "Reflection"
             name: reflection
             widget: object
             fields:
               - { label: Title (optional), name: title, widget: string, required: false }
               - { label: Content, name: content, widget: markdown }
 
-          - label: "πŸ•' Context"
+          - label: "Context"
             name: context
             widget: object
             fields:
