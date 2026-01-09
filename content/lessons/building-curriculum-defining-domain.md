@@ -2,61 +2,66 @@
 title: Defining Your Domain
 slug: defining-domain
 cluster: building-curriculum
+author: ''
 order: 1
-description: "Use AI prompts to articulate your curriculum's scope, central questions, and boundaries."
+description: Use AI prompts to articulate your curriculum's scope, central questions, and boundaries.
 objectives:
   - Learn to articulate your domain clearly and precisely
   - Understand how to identify the boundaries of your curriculum
   - Use the Domain Definition Prompt to generate your curriculum framework
 key_concepts:
-  - name: "The Central Question"
-    explanation: |
+  - name: The Central Question
+    explanation: |-
       Every good curriculum answers a central question. Not "What topics does this cover?" but "What will someone who completes this be able to understand or do?"
 
       Examples:
+
       - "How do social movements create lasting change?"
       - "What makes distributed systems reliable?"
       - "How has colonialism shaped modern economics?"
 
       Your central question defines what's in scope and what's not.
-  - name: "Domain vs. Survey"
-    explanation: |
+  - name: Domain vs. Survey
+    explanation: |-
       A domain curriculum goes deep on a specific area. A survey curriculum covers many areas shallowly. This platform is designed for domain curricula.
 
       Signs you're building a domain curriculum:
+
       - You can name the foundational texts
       - There's a clear intellectual tradition
       - Mastery requires reading primary sources
       - The field has depth, not just breadth
-  - name: "Intellectual Traditions"
-    explanation: |
+  - name: Intellectual Traditions
+    explanation: |-
       Most domains exist within intellectual traditions—networks of thinkers who built on each other's work. Your curriculum should identify which tradition(s) you're drawing from.
 
       For example, a curriculum on "design thinking" might draw from cognitive psychology, industrial design, and business strategy. Naming these traditions helps learners understand where the ideas come from.
 assignment:
-  instructions: |
+  instructions: |-
     Use the Domain Definition Prompt (below) with your preferred AI assistant (Claude, GPT-4, etc.) to generate an initial framework for your curriculum.
 
     **Prompt Instructions:**
+
     1. Copy the prompt from the `prompts/01-domain-definition.md` file
     2. Fill in the bracketed sections with your domain
     3. Review the AI's output critically—it's a starting point, not final
     4. Iterate by asking follow-up questions
   url: /prompts/01-domain-definition.md
-  reading_title: "Domain Definition Prompt"
+  reading_title: Domain Definition Prompt
 knowledge_check:
-  - question: "What's your curriculum's central question?"
-    hint: "Frame it as what someone will understand or be able to do after completing it."
-  - question: "What intellectual traditions does your domain draw from?"
-    hint: "Think about the schools of thought and key thinkers who shaped the field."
+  - question: What's your curriculum's central question?
+    hint: Frame it as what someone will understand or be able to do after completing it.
+  - question: What intellectual traditions does your domain draw from?
+    hint: Think about the schools of thought and key thinkers who shaped the field.
 additional_resources:
-  - title: "How to Define Research Questions"
-    author: "Various"
-    url: "https://writingcenter.gmu.edu/writing-resources/research-based-writing/how-to-write-a-research-question"
-    description: "While focused on academic research, the principles apply to curriculum design."
+  - title: How to Define Research Questions
+    author: Various
+    url: https://writingcenter.gmu.edu/writing-resources/research-based-writing/how-to-write-a-research-question
+    description: While focused on academic research, the principles apply to curriculum design.
 ---
-
 ## The Art of Domain Definition
+
+**_Disclaimer: This cluster outlines methods for using LLMs and agents to create your own personalized curriculum. This platform is built to be AI-optional. If you'd prefer to skip the AI parts, you can just proceed with [the next cluster on deployment](https://byocurriculum.dev/curriculum/deployment-customization) and just manually fill in your material using the built-in CMS._**
 
 The most common mistake in curriculum design is being too broad. "A curriculum on philosophy" is too broad. "A curriculum on how 20th-century analytic philosophy addressed the mind-body problem" is focused enough to be useful.
 
@@ -122,6 +127,7 @@ Here's how domain definition worked for a curriculum on how material, conceptual
 **Central Question**: How do devices—material, conceptual, and ritual—mediate human experience and become naturalized as "just how things are"?
 
 **Scope**:
+
 - Included: Social construction theory, media ecology, ritual studies, technology philosophy
 - Excluded: Technical implementation, specific technologies, historical surveys
 
