@@ -135,85 +135,96 @@ collections:
         hint: "The primary reading with access link"
 
       # ═══════════════════════════════════════════════════════════════════════
-      # LEARNING STRUCTURE (How do we guide learning?)
+      # CONTENT BLOCKS (Unified component system)
+      # All card-like components in a single, flexible list
       # ═══════════════════════════════════════════════════════════════════════
-      - label: Learning Objectives
-        name: objectives
+      - label: Content Blocks
+        name: blocks
         widget: list
         required: false
         collapsed: true
         minimize_collapsed: true
-        field: { label: Objective, name: objective, widget: string }
-        hint: "What will the reader learn? (3-5 bullet points)"
+        max: 15
+        hint: "Add objectives, concepts, questions, resources, and callouts (max 15)"
+        types:
+          # Learning Objectives Block
+          - label: "πŸ"‹ Learning Objectives"
+            name: objectives
+            widget: object
+            fields:
+              - label: Objectives
+                name: items
+                widget: list
+                field: { label: Objective, name: item, widget: string }
 
-      - label: Key Concepts
-        name: key_concepts
-        widget: list
-        required: false
-        collapsed: true
-        minimize_collapsed: true
-        fields:
-          - { label: Concept Name, name: name, widget: string }
-          - { label: Explanation, name: explanation, widget: markdown }
-        hint: "3-5 core ideas explained in detail"
+          # Key Concept Block
+          - label: "πŸ'' Key Concept"
+            name: concept
+            widget: object
+            fields:
+              - { label: Concept Name, name: name, widget: string }
+              - { label: Explanation, name: explanation, widget: markdown }
 
-      # ═══════════════════════════════════════════════════════════════════════
-      # ASSESSMENT & EXTENSION (After the reading)
-      # ═══════════════════════════════════════════════════════════════════════
-      - label: Knowledge Check
-        name: knowledge_check
-        widget: list
-        required: false
-        collapsed: true
-        minimize_collapsed: true
-        fields:
-          - { label: Question, name: question, widget: string }
-          - { label: Hint, name: hint, widget: text, required: false }
-        hint: "2-4 reflection questions"
+          # Knowledge Check Block
+          - label: "❓ Knowledge Check"
+            name: check
+            widget: object
+            fields:
+              - { label: Question, name: question, widget: string }
+              - { label: Hint, name: hint, widget: text, required: false }
 
-      - label: Additional Resources
-        name: additional_resources
-        widget: list
-        required: false
-        collapsed: true
-        minimize_collapsed: true
-        fields:
-          - { label: Title, name: title, widget: string }
-          - { label: Author, name: author, widget: string, required: false }
-          - { label: URL, name: url, widget: string, required: false }
-          - { label: Description, name: description, widget: text }
-        hint: "Optional further reading"
+          # Resource Block
+          - label: "πŸ"— Resource"
+            name: resource
+            widget: object
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Author, name: author, widget: string, required: false }
+              - { label: URL, name: url, widget: string, required: false }
+              - { label: Description, name: description, widget: text }
 
-      # ═══════════════════════════════════════════════════════════════════════
-      # INLINE CALLOUTS (Contextual blocks within lesson content)
-      # ═══════════════════════════════════════════════════════════════════════
-      - label: Callouts
-        name: callouts
-        widget: list
-        required: false
-        collapsed: true
-        minimize_collapsed: true
-        max: 5
-        fields:
-          - label: Type
-            name: type
-            widget: select
-            options:
-              - { label: "πŸ€" Ask Yourself", value: "ask" }
-              - { label: "πŸ" Example", value: "example" }
-              - { label: "πŸ'' Hint", value: "hint" }
-              - { label: "⚠️ Important", value: "important" }
-              - { label: "❓ Question", value: "question" }
-              - { label: "πŸ•' Context/When", value: "when" }
-          - label: Title (optional)
-            name: title
-            widget: string
-            required: false
-            hint: "Override the default title if needed"
-          - label: Content
-            name: content
-            widget: markdown
-        hint: "Add up to 5 contextual callout blocks (tips, examples, questions, etc.)"
+          # Callout Blocks (various types)
+          - label: "πŸ€" Ask Yourself"
+            name: ask
+            widget: object
+            fields:
+              - { label: Title (optional), name: title, widget: string, required: false }
+              - { label: Content, name: content, widget: markdown }
+
+          - label: "πŸ" Example"
+            name: example
+            widget: object
+            fields:
+              - { label: Title (optional), name: title, widget: string, required: false }
+              - { label: Content, name: content, widget: markdown }
+
+          - label: "πŸ'' Tip"
+            name: tip
+            widget: object
+            fields:
+              - { label: Title (optional), name: title, widget: string, required: false }
+              - { label: Content, name: content, widget: markdown }
+
+          - label: "⚠️ Important"
+            name: important
+            widget: object
+            fields:
+              - { label: Title (optional), name: title, widget: string, required: false }
+              - { label: Content, name: content, widget: markdown }
+
+          - label: "❔ Reflection"
+            name: reflection
+            widget: object
+            fields:
+              - { label: Title (optional), name: title, widget: string, required: false }
+              - { label: Content, name: content, widget: markdown }
+
+          - label: "πŸ•' Context"
+            name: context
+            widget: object
+            fields:
+              - { label: Title (optional), name: title, widget: string, required: false }
+              - { label: Content, name: content, widget: markdown }
 
       # ═══════════════════════════════════════════════════════════════════════
       # EXTRAS (Optional enhancements)
@@ -236,13 +247,9 @@ collections:
         multiple: true
         required: false
         options:
-          - { label: "Learning Objectives", value: "objectives" }
-          - { label: "Key Concepts", value: "key_concepts" }
-          - { label: "Assignment", value: "assignment" }
-          - { label: "Knowledge Check", value: "knowledge_check" }
-          - { label: "Additional Resources", value: "additional_resources" }
-          - { label: "Callouts", value: "callouts" }
           - { label: "Introduction", value: "body" }
+          - { label: "Assignment", value: "assignment" }
+          - { label: "Content Blocks", value: "blocks" }
         hint: "Temporarily hide sections without deleting content"
 
   # ==========================================================================

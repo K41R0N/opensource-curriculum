@@ -55,12 +55,8 @@ An individual learning unit within a cluster. Lessons are the core content of th
 | `description` | text | yes | Brief summary (1-2 sentences) |
 | `author` | string | no | Original author of the source material |
 | `featured_image` | image | no | Hero/thumbnail image |
-| `objectives` | list[string] | no | Learning objectives |
-| `key_concepts` | list[KeyConcept] | no | Core concepts explained |
 | `assignment` | Assignment | no | Primary reading/task |
-| `knowledge_check` | list[Question] | no | Reflection questions |
-| `additional_resources` | list[Resource] | no | Supplementary materials |
-| `callouts` | list[Callout] | no | Inline callout blocks (max 5) |
+| `blocks` | list[ContentBlock] | no | Unified content blocks (max 15) |
 | `body` | markdown | no | Introduction/overview content |
 | `hidden_sections` | list[string] | no | Sections to hide without deleting content |
 
@@ -71,31 +67,52 @@ An individual learning unit within a cluster. Lessons are the core content of th
 **Nested Types**:
 
 ```yaml
-# KeyConcept
-- name: string (required)
-  explanation: markdown (required)
-
 # Assignment
 assignment:
   instructions: markdown (required)
   url: string (optional)
   reading_title: string (optional)
 
-# Question
-- question: string (required)
-  hint: text (optional)
+# ContentBlock (unified block system - use ONE type per block)
+blocks:
+  # Learning Objectives
+  - type: objectives
+    items: list[string]
 
-# Resource
-- title: string (required)
-  author: string (optional)
-  url: string (optional)
-  description: text (optional)
+  # Key Concept
+  - type: concept
+    name: string (required)
+    explanation: markdown (required)
 
-# Callout
-- type: enum (required) - ask, example, hint, important, question, when
-  title: string (optional) - custom title override
-  content: markdown (required)
+  # Knowledge Check Question
+  - type: check
+    question: string (required)
+    hint: text (optional)
+
+  # Resource/Link
+  - type: resource
+    title: string (required)
+    author: string (optional)
+    url: string (optional)
+    description: text (optional)
+
+  # Callout blocks (ask, example, tip, important, reflection, context)
+  - type: ask | example | tip | important | reflection | context
+    title: string (optional) - custom title override
+    content: markdown (required)
 ```
+
+**Block Types**:
+- `objectives` - Learning objectives list
+- `concept` - Key concept with name and explanation
+- `check` - Knowledge check question with optional hint
+- `resource` - External resource with link
+- `ask` - "Ask Yourself" prompt
+- `example` - Example/illustration
+- `tip` - Helpful tip
+- `important` - Important note/warning
+- `reflection` - Reflection question
+- `context` - Contextual information
 
 ---
 
@@ -344,19 +361,10 @@ export interface Lesson {
   description: string;
   author?: string;
   featured_image?: string;
-  objectives?: string[];
-  key_concepts?: KeyConcept[];
   assignment?: Assignment;
-  knowledge_check?: Question[];
-  additional_resources?: Resource[];
-  callouts?: Callout[];    // inline callout blocks (max 5)
+  blocks?: ContentBlock[];  // unified content blocks (max 15)
   content?: string;        // markdown body
   hidden_sections?: string[];  // sections to hide without deleting
-}
-
-export interface KeyConcept {
-  name: string;
-  explanation: string;     // markdown
 }
 
 export interface Assignment {
@@ -365,23 +373,42 @@ export interface Assignment {
   reading_title?: string;
 }
 
-export interface Question {
+// Unified Block Types
+export type BlockType = 'objectives' | 'concept' | 'check' | 'resource'
+  | 'ask' | 'example' | 'tip' | 'important' | 'reflection' | 'context';
+
+export interface ObjectivesBlock {
+  type: 'objectives';
+  items: string[];
+}
+
+export interface ConceptBlock {
+  type: 'concept';
+  name: string;
+  explanation: string;
+}
+
+export interface CheckBlock {
+  type: 'check';
   question: string;
   hint?: string;
 }
 
-export interface Resource {
+export interface ResourceBlock {
+  type: 'resource';
   title: string;
   author?: string;
   url?: string;
   description?: string;
 }
 
-export interface Callout {
-  type: 'ask' | 'example' | 'hint' | 'important' | 'question' | 'when';
-  title?: string;           // custom title override
-  content: string;          // markdown
+export interface CalloutBlock {
+  type: 'ask' | 'example' | 'tip' | 'important' | 'reflection' | 'context';
+  title?: string;
+  content: string;
 }
+
+export type ContentBlock = ObjectivesBlock | ConceptBlock | CheckBlock | ResourceBlock | CalloutBlock;
 
 export interface SiteSettings {
   title: string;

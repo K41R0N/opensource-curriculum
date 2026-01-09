@@ -357,22 +357,6 @@ export async function loadFullLesson(clusterSlug: string, lessonSlug: string): P
 				// Parse markdown body to HTML
 				const bodyHtml = content.trim() ? await marked(content.trim()) : '';
 
-				// Parse markdown in key_concepts explanations (with safe checks)
-				let parsedConcepts: Array<{ name: string; explanation: string }> | undefined;
-				if (Array.isArray(data.key_concepts)) {
-					parsedConcepts = data.key_concepts
-						.filter((concept): concept is { name: string; explanation: string } =>
-							concept &&
-							typeof concept === 'object' &&
-							isNonEmptyString(concept.name) &&
-							typeof concept.explanation === 'string'
-						)
-						.map((concept) => ({
-							...concept,
-							explanation: parseMarkdown(concept.explanation)
-						}));
-				}
-
 				// Parse markdown in assignment instructions (with safe checks)
 				let parsedAssignment: { instructions: string; url?: string; reading_title?: string } | undefined;
 				if (data.assignment && typeof data.assignment === 'object' && typeof data.assignment.instructions === 'string') {
@@ -382,26 +366,93 @@ export async function loadFullLesson(clusterSlug: string, lessonSlug: string): P
 					};
 				}
 
-				// Parse markdown in callouts content (with safe checks)
-				const validCalloutTypes = ['ask', 'example', 'hint', 'important', 'question', 'when'] as const;
-				type CalloutType = typeof validCalloutTypes[number];
+				// Parse unified blocks (with safe checks and markdown parsing)
+				// Also supports legacy fields (objectives, key_concepts, knowledge_check, additional_resources)
+				// by converting them to the unified blocks format
+				const validBlockTypes = ['objectives', 'concept', 'check', 'resource', 'ask', 'example', 'tip', 'important', 'reflection', 'context'] as const;
+				type BlockType = typeof validBlockTypes[number];
 
-				let parsedCallouts: Array<{ type: CalloutType; title?: string; content: string }> | undefined;
-				if (Array.isArray(data.callouts)) {
-					parsedCallouts = data.callouts
-						.filter((callout): callout is { type: string; title?: string; content: string } =>
-							callout &&
-							typeof callout === 'object' &&
-							isNonEmptyString(callout.type) &&
-							validCalloutTypes.includes(callout.type as CalloutType) &&
-							typeof callout.content === 'string'
+				let parsedBlocks: Array<Record<string, unknown>> = [];
+
+				// First, handle the new unified blocks field
+				if (Array.isArray(data.blocks)) {
+					const newBlocks = data.blocks
+						.filter((block): block is Record<string, unknown> =>
+							block &&
+							typeof block === 'object' &&
+							isNonEmptyString(block.type) &&
+							validBlockTypes.includes(block.type as BlockType)
 						)
-						.slice(0, 5) // Enforce max 5 callouts
-						.map((callout) => ({
-							type: callout.type as CalloutType,
-							title: isNonEmptyString(callout.title) ? callout.title : undefined,
-							content: parseMarkdown(callout.content)
-						}));
+						.slice(0, 15) // Enforce max 15 blocks
+						.map((block) => {
+							const blockType = block.type as BlockType;
+
+							// Parse markdown for concept explanations
+							if (blockType === 'concept' && typeof block.explanation === 'string') {
+								return { ...block, explanation: parseMarkdown(block.explanation) };
+							}
+
+							// Parse markdown for callout content
+							if (['ask', 'example', 'tip', 'important', 'reflection', 'context'].includes(blockType) && typeof block.content === 'string') {
+								return { ...block, content: parseMarkdown(block.content) };
+							}
+
+							return block;
+						});
+					parsedBlocks.push(...newBlocks);
+				}
+
+				// Backward compatibility: Convert legacy fields to blocks
+				// Only if blocks array is empty or missing
+				if (parsedBlocks.length === 0) {
+					// Convert objectives to objectives block
+					if (Array.isArray(data.objectives) && data.objectives.length > 0) {
+						parsedBlocks.push({
+							type: 'objectives',
+							items: data.objectives.filter((item): item is string => typeof item === 'string')
+						});
+					}
+
+					// Convert key_concepts to concept blocks
+					if (Array.isArray(data.key_concepts)) {
+						for (const concept of data.key_concepts) {
+							if (concept && typeof concept === 'object' && isNonEmptyString(concept.name) && typeof concept.explanation === 'string') {
+								parsedBlocks.push({
+									type: 'concept',
+									name: concept.name,
+									explanation: parseMarkdown(concept.explanation)
+								});
+							}
+						}
+					}
+
+					// Convert knowledge_check to check blocks
+					if (Array.isArray(data.knowledge_check)) {
+						for (const check of data.knowledge_check) {
+							if (check && typeof check === 'object' && isNonEmptyString(check.question)) {
+								parsedBlocks.push({
+									type: 'check',
+									question: check.question,
+									hint: isNonEmptyString(check.hint) ? check.hint : undefined
+								});
+							}
+						}
+					}
+
+					// Convert additional_resources to resource blocks
+					if (Array.isArray(data.additional_resources)) {
+						for (const resource of data.additional_resources) {
+							if (resource && typeof resource === 'object' && isNonEmptyString(resource.title)) {
+								parsedBlocks.push({
+									type: 'resource',
+									title: resource.title,
+									author: isNonEmptyString(resource.author) ? resource.author : undefined,
+									url: isNonEmptyString(resource.url) ? resource.url : undefined,
+									description: isNonEmptyString(resource.description) ? resource.description : undefined
+								});
+							}
+						}
+					}
 				}
 
 				const lesson: Lesson = {
@@ -413,12 +464,8 @@ export async function loadFullLesson(clusterSlug: string, lessonSlug: string): P
 					description: data.description,
 					author: isNonEmptyString(data.author) ? data.author : undefined,
 					featured_image: isNonEmptyString(data.featured_image) ? data.featured_image : undefined,
-					objectives: Array.isArray(data.objectives) ? data.objectives : undefined,
-					key_concepts: parsedConcepts,
 					assignment: parsedAssignment,
-					knowledge_check: Array.isArray(data.knowledge_check) ? data.knowledge_check : undefined,
-					additional_resources: Array.isArray(data.additional_resources) ? data.additional_resources : undefined,
-					callouts: parsedCallouts,
+					blocks: parsedBlocks.length > 0 ? parsedBlocks as Lesson['blocks'] : undefined,
 					content: bodyHtml,
 					hidden_sections: Array.isArray(data.hidden_sections) ? data.hidden_sections : undefined
 				};

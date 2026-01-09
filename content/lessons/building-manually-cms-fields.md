@@ -4,12 +4,15 @@ slug: cms-fields
 cluster: building-manually
 order: 3
 description: "What each field in the CMS does, which are required, and what to keep in mind when filling them."
-objectives:
-  - Understand the purpose of each CMS field
-  - Know which fields are required vs. optional
-  - Learn best practices for writing effective content in each field
-key_concepts:
-  - name: "Required vs. Optional Fields"
+blocks:
+  - type: objectives
+    items:
+      - Understand the purpose of each CMS field
+      - Know which fields are required vs. optional
+      - Learn how the unified Content Blocks system works
+      - Learn best practices for writing effective content in each field
+  - type: concept
+    name: "Required vs. Optional Fields"
     explanation: |
       **Required** fields (5 total) must be filled for the lesson to work:
       - Title, Slug, Cluster, Order, Description
@@ -18,11 +21,12 @@ key_concepts:
 
       **Common combinations**:
       - *Minimal*: Required fields + Introduction + Assignment (reading link)
-      - *Standard*: Above + Key Concepts + Knowledge Check
-      - *Full*: All sections populated
+      - *Standard*: Above + a few Content Blocks
+      - *Full*: All sections populated with multiple block types
 
       You have complete flexibility—use only what each lesson needs.
-  - name: "The Slug Field"
+  - type: concept
+    name: "The Slug Field"
     explanation: |
       The slug becomes part of the URL: `yoursite.com/curriculum/cluster-slug/lesson-slug`
 
@@ -33,7 +37,8 @@ key_concepts:
       - **Short but clear**: `media-ecology` not `the-study-of-media-ecology`
 
       Don't change slugs after publishing—it breaks existing links.
-  - name: "Description vs. Introduction"
+  - type: concept
+    name: "Description vs. Introduction"
     explanation: |
       These serve different purposes:
 
@@ -46,21 +51,29 @@ key_concepts:
       - Appears at the top of the lesson page
       - Provides context and motivation
       - Sets up why the reading matters
-  - name: "Key Concepts Structure"
+  - type: concept
+    name: "Content Blocks System"
     explanation: |
-      Each key concept has two parts:
+      Content Blocks are a unified system for all card-like content. Instead of separate fields for objectives, concepts, questions, and resources, you use a single **Content Blocks** list.
 
-      **Name**: A short phrase (2-5 words) identifying the concept
-      - "Social Construction"
-      - "The Attention Economy"
-      - "Institutionalization Process"
+      Each block has a **type** that determines how it renders:
+      - **Learning Objectives**: Bullet list of what learners will achieve
+      - **Key Concept**: Named concept with explanation
+      - **Knowledge Check**: Reflection question with optional hint
+      - **Resource**: External link with description
+      - **Callouts**: Ask, Example, Tip, Important, Reflection, Context
 
-      **Explanation**: 2-4 paragraphs explaining the concept
-      - What it means
-      - Why it matters for this reading
-      - How to recognize it in the text
-
-      Aim for 3-5 concepts per lesson. More than 5 dilutes focus.
+      Add blocks in any order. Mix and match types. Maximum 15 blocks per lesson.
+  - type: check
+    question: "Why shouldn't you change a slug after publishing?"
+    hint: "Think about how URLs work and what happens to existing links."
+  - type: check
+    question: "What's the difference between a lesson description and its body content?"
+    hint: "Consider where each appears and what purpose it serves."
+  - type: resource
+    title: "Sveltia CMS Documentation"
+    url: "https://github.com/sveltia/sveltia-cms"
+    description: "Full reference for the CMS interface."
 assignment:
   instructions: |
     Familiarize yourself with the CMS by creating a test lesson:
@@ -72,15 +85,6 @@ assignment:
     5. Delete the test lesson or keep it as a template
 
     **Use this as a reference while building your actual lessons.**
-knowledge_check:
-  - question: "Why shouldn't you change a slug after publishing?"
-    hint: "Think about how URLs work and what happens to existing links."
-  - question: "What's the difference between a lesson description and its body content?"
-    hint: "Consider where each appears and what purpose it serves."
-additional_resources:
-  - title: "Sveltia CMS Documentation"
-    url: "https://github.com/sveltia/sveltia-cms"
-    description: "Full reference for the CMS interface."
 ---
 
 ## CMS Field Reference
@@ -95,10 +99,10 @@ This is your complete guide to every field in the lesson editor. Keep this open 
 
 This means you can create:
 - **Minimal lessons**: Just a title, description, intro, and reading link
-- **Full lessons**: All sections filled with rich content
+- **Full lessons**: All sections filled with rich content blocks
 - **Anything in between**: Mix and match based on what each reading needs
 
-If you leave Knowledge Check empty, that section simply won't appear. Same for Key Concepts, Additional Resources, Learning Objectives, etc. The page adapts to whatever content you provide.
+Content Blocks are flexible—add objectives, concepts, questions, resources, and callouts in any order. If you don't add any blocks, that section simply won't appear. The page adapts to whatever content you provide.
 
 ---
 
@@ -166,33 +170,9 @@ These fields must be filled for the lesson to function.
 
 ---
 
-## Recommended Fields
+## Core Content Fields
 
-These fields significantly improve lesson quality.
-
-### Key Concepts
-**What it is**: Expandable sections highlighting main ideas
-
-**Structure**:
-```yaml
-key_concepts:
-  - name: "Concept Name"
-    explanation: |
-      Explanation paragraphs here.
-      Can include **markdown** formatting.
-
-      Multiple paragraphs are fine.
-```
-
-**Best practices**:
-- 3-5 concepts per lesson
-- Names should be 2-5 words
-- Explanations should be 2-4 paragraphs
-- Focus on ideas *in the reading*, not general background
-
-**Examples**:
-- βœ" Name: "Externalization" / Explanation: What it means, how to spot it in the text
-- ✗ Name: "A concept from sociology" (too vague for a name)
+These fields provide the main lesson content.
 
 ### Assignment
 **What it is**: Instructions for the primary reading
@@ -230,74 +210,112 @@ assignment:
 
 ---
 
-## Optional Fields
+## Content Blocks
 
-These enhance lessons but can be added later.
+Content Blocks are a unified system for all card-like content. Instead of separate fields, you use a single **Content Blocks** list with different block types. Maximum 15 blocks per lesson.
 
-### Knowledge Check
-**What it is**: Reflection questions for self-assessment
+### Learning Objectives Block
+**What it is**: Bullet list of what learners will achieve
 
 **Structure**:
 ```yaml
-knowledge_check:
-  - question: "The question text"
+blocks:
+  - type: objectives
+    items:
+      - "First learning objective"
+      - "Second learning objective"
+```
+
+**Best practices**:
+- 3-5 objectives per lesson
+- Start with action verbs (Understand, Identify, Apply)
+- Be specific about what learners will be able to do
+
+### Key Concept Block
+**What it is**: Named concept with detailed explanation
+
+**Structure**:
+```yaml
+blocks:
+  - type: concept
+    name: "Concept Name"
+    explanation: |
+      Explanation paragraphs here.
+      Can include **markdown** formatting.
+```
+
+**Best practices**:
+- Names should be 2-5 words
+- Explanations should be 2-4 paragraphs
+- Focus on ideas *in the reading*, not general background
+- 3-5 concepts per lesson keeps focus
+
+### Knowledge Check Block
+**What it is**: Reflection question for self-assessment
+
+**Structure**:
+```yaml
+blocks:
+  - type: check
+    question: "The question text"
     hint: "A hint to guide thinking"
 ```
 
 **Best practices**:
-- 2-4 questions per lesson
 - Questions should require having done the reading
 - Focus on understanding, not recall
 - Hints should guide without giving answers
 
-**Examples**:
-- βœ" Question: "How does objectivation make human creations feel external?" / Hint: "Consider what happens when a pattern becomes 'the way we do things.'"
-- ✗ Question: "What year was the book published?" (tests recall, not understanding)
-
-### Additional Resources
-**What it is**: Further reading for those who want more
+### Resource Block
+**What it is**: External resource with link and description
 
 **Structure**:
 ```yaml
-additional_resources:
-  - title: "Resource Title"
+blocks:
+  - type: resource
+    title: "Resource Title"
     author: "Author Name"
     url: "https://..."
     description: "Brief description of what this adds"
 ```
 
 **Best practices**:
-- 2-4 resources per lesson
 - Include a mix of types (articles, videos, related books)
 - These are optional—not required for completing the lesson
 - Describe what each resource adds
 
-### Callouts
-**What it is**: Contextual blocks for tips, examples, warnings, and questions (max 5 per lesson)
+### Callout Blocks
+**What it is**: Contextual blocks for tips, examples, warnings, and questions
+
+**Available types**:
+- `ask` - "Ask Yourself" - prompts for critical evaluation
+- `example` - "Example" - practical illustrations
+- `tip` - "Tip" - helpful tips and guidance
+- `important` - "Important" - critical notes or warnings
+- `reflection` - "Reflection" - reflection questions
+- `context` - "Context" - timing or situational guidance
 
 **Structure**:
 ```yaml
-callouts:
-  - type: "important"
+blocks:
+  - type: important
     title: "Custom Title"  # optional - overrides default
     content: |
       Your markdown content here.
       Can include **formatting** and multiple paragraphs.
 ```
 
-**Available types**:
-- `ask` - "Ask Yourself" - prompts for critical evaluation
-- `example` - "Example" - practical illustrations
-- `hint` - "Hint" - helpful tips and guidance
-- `important` - "Important" - critical notes or warnings
-- `question` - "Question" - reflection questions
-- `when` - "Context" - timing or situational guidance
-
 **Best practices**:
-- Use sparingly—max 5 per lesson
+- Use sparingly throughout the lesson
 - Choose the type that best matches your intent
 - Custom titles are optional; defaults work well
 - Keep content focused and concise
+
+---
+
+## Optional Fields
+
+These enhance lessons but can be added later.
 
 ### Reading Author
 **What it is**: The author of the primary reading (optional)
@@ -319,13 +337,9 @@ callouts:
 **What it is**: Toggle visibility of sections without deleting content
 
 **Available options**:
-- Learning Objectives
-- Key Concepts
-- Assignment
-- Knowledge Check
-- Additional Resources
-- Callouts
 - Introduction
+- Assignment
+- Content Blocks
 
 **Use cases**:
 - Test how lessons look with/without certain sections
@@ -353,12 +367,12 @@ When creating a lesson, work through this checklist:
 - [ ] Introduction (why this reading matters)
 - [ ] Assignment (instructions + reading URL)
 
-**For richer lessons** (add as needed):
-- [ ] Key concepts (3-5 with explanations)
-- [ ] Learning objectives (3-5 bullet points)
-- [ ] Knowledge check (2-4 reflection questions)
-- [ ] Additional resources (2-4 links)
-- [ ] Callouts (up to 5 contextual blocks)
+**For richer lessons** (add Content Blocks as needed):
+- [ ] Learning objectives block (3-5 bullet points)
+- [ ] Key concept blocks (3-5 with explanations)
+- [ ] Knowledge check blocks (2-4 reflection questions)
+- [ ] Resource blocks (2-4 links)
+- [ ] Callout blocks (tips, examples, important notes)
 - [ ] Reading author (if relevant)
 - [ ] Featured image (if available)
 
@@ -370,7 +384,8 @@ When creating a lesson, work through this checklist:
 |---------|---------|-----|
 | Changing slugs | Breaks existing links | Never change after publishing |
 | Vague descriptions | Learners don't know what they'll get | Be specific about what's learned |
-| Too many key concepts | Dilutes focus | Stick to 3-5 most important |
+| Too many concept blocks | Dilutes focus | Stick to 3-5 most important |
 | Empty body | Lesson feels incomplete | Write at least 2 paragraphs of context |
 | Unverified URLs | Learners can't access reading | Always test links before publishing |
 | Recall-based questions | Doesn't test understanding | Ask about implications and connections |
+| Too many blocks | Overwhelming for learners | Maximum 15 blocks, focus on essentials |
