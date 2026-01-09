@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy, afterUpdate } from 'svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -22,6 +22,68 @@
 		? Math.max(1, Math.ceil(lesson.content.split(/\s+/).length / 200))
 		: 5;
 
+	// SVG icons for copy button states
+	const copyIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+		<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+		<path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+	</svg>Copy`;
+
+	const copiedIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+		<path d="M20 6L9 17l-5-5"/>
+	</svg>Copied!`;
+
+	// Delegated click handler for copy buttons
+	async function handleCopyClick(event: MouseEvent) {
+		const button = (event.target as Element).closest('.copy-button');
+		if (!button) return;
+
+		const wrapper = button.closest('.code-block-wrapper');
+		if (!wrapper) return;
+
+		const pre = wrapper.querySelector('pre');
+		if (!pre) return;
+
+		const code = pre.querySelector('code');
+		const text = code ? code.textContent : pre.textContent;
+
+		try {
+			await navigator.clipboard.writeText(text || '');
+			button.innerHTML = copiedIcon;
+			button.classList.add('copied');
+
+			setTimeout(() => {
+				button.innerHTML = copyIcon;
+				button.classList.remove('copied');
+			}, 2000);
+		} catch (err) {
+			console.error('Failed to copy:', err);
+		}
+	}
+
+	// Add copy button wrappers to code blocks (DOM creation only, no listeners)
+	function addCopyButtons() {
+		const codeBlocks = document.querySelectorAll('.lesson-content pre, .concept-explanation pre, .assignment-body pre');
+
+		codeBlocks.forEach((pre) => {
+			// Skip if already wrapped
+			if (pre.parentElement?.classList.contains('code-block-wrapper')) return;
+
+			// Create wrapper
+			const wrapper = document.createElement('div');
+			wrapper.className = 'code-block-wrapper';
+
+			// Create copy button (no listener - handled by delegation)
+			const button = document.createElement('button');
+			button.className = 'copy-button';
+			button.innerHTML = copyIcon;
+
+			// Wrap the pre element
+			pre.parentNode?.insertBefore(wrapper, pre);
+			wrapper.appendChild(pre);
+			wrapper.appendChild(button);
+		});
+	}
+
 	onMount(() => {
 		const updateProgress = () => {
 			const scrollTop = window.scrollY;
@@ -32,7 +94,21 @@
 		window.addEventListener('scroll', updateProgress, { passive: true });
 		updateProgress();
 
-		return () => window.removeEventListener('scroll', updateProgress);
+		// Add delegated click handler for copy buttons
+		document.addEventListener('click', handleCopyClick);
+
+		// Add copy buttons after initial render
+		addCopyButtons();
+
+		return () => {
+			window.removeEventListener('scroll', updateProgress);
+			document.removeEventListener('click', handleCopyClick);
+		};
+	});
+
+	// Re-add copy buttons when content changes (navigation between lessons)
+	afterUpdate(() => {
+		addCopyButtons();
 	});
 </script>
 
@@ -452,9 +528,11 @@
 		gap: 1rem;
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border);
-		border-left: 3px solid var(--color-text);
+		border-left: 3px solid var(--color-primary);
+		border-radius: var(--radius-base);
 		padding: 1rem;
 		margin: 1.5rem 0;
+		box-shadow: var(--shadow-sm);
 	}
 
 	.callout-icon {
@@ -466,6 +544,7 @@
 		height: 2rem;
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border);
+		border-radius: var(--radius-sm);
 		color: var(--color-text);
 	}
 
@@ -508,9 +587,11 @@
 		gap: 1rem;
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border);
+		border-radius: var(--radius-base);
 		padding: 1rem;
 		margin-bottom: 0.75rem;
 		overflow: hidden;
+		box-shadow: var(--shadow-sm);
 	}
 
 	.concept-accent {
@@ -519,7 +600,7 @@
 		left: 0;
 		width: 3px;
 		height: 100%;
-		background-color: var(--color-text);
+		background-color: var(--color-primary);
 	}
 
 	.concept-icon {
@@ -531,6 +612,7 @@
 		height: 2rem;
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border);
+		border-radius: var(--radius-sm);
 		color: var(--color-text);
 	}
 
@@ -560,7 +642,9 @@
 	.assignment-card {
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border);
+		border-radius: var(--radius-base);
 		padding: 1.25rem;
+		box-shadow: var(--shadow-sm);
 	}
 
 	.assignment-header {
@@ -591,19 +675,27 @@
 		gap: 0.5rem;
 		font-family: var(--font-body);
 		font-size: 0.9375rem;
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		padding: 0.625rem 1rem;
-		background-color: var(--color-text);
-		color: var(--color-background);
+		background-color: var(--color-primary);
+		color: var(--color-text-inverse);
 		text-decoration: none;
-		border: 1px solid var(--color-border);
+		border: 1px solid var(--color-primary);
+		border-radius: var(--radius-base);
+		transition: background-color var(--transition-base);
+	}
+
+	.assignment-link:hover {
+		background-color: var(--color-primary-hover);
 	}
 
 	/* Knowledge Check */
 	.knowledge-check-section {
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border);
+		border-radius: var(--radius-base);
 		padding: 1.25rem;
+		box-shadow: var(--shadow-sm);
 	}
 
 	.knowledge-check-header {
@@ -636,6 +728,7 @@
 		gap: 0.75rem;
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border);
+		border-radius: var(--radius-base);
 		padding: 0.75rem;
 	}
 
@@ -644,6 +737,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		border-radius: var(--radius-sm);
 		width: 1.5rem;
 		height: 1.5rem;
 		background-color: var(--color-surface);
@@ -684,7 +778,14 @@
 	.resource-card {
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border);
+		border-radius: var(--radius-base);
 		padding: 0.75rem 1rem;
+		box-shadow: var(--shadow-sm);
+		transition: border-color var(--transition-base);
+	}
+
+	.resource-card:hover {
+		border-color: var(--color-primary);
 	}
 
 	.resource-card h4 {

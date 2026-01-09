@@ -161,6 +161,8 @@
 		background-color: var(--color-surface);
 		padding: 2.5rem 2rem;
 		border: 1px solid var(--color-border);
+		border-radius: var(--radius-base);
+		box-shadow: var(--shadow-md);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -196,15 +198,21 @@
 		display: inline-block;
 		font-family: var(--font-body);
 		font-size: 0.875rem;
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
 		padding: 0.75rem 1.5rem;
-		background-color: var(--color-text);
-		color: var(--color-background);
+		background-color: var(--color-primary);
+		color: var(--color-text-inverse);
 		text-decoration: none;
-		border: 1px solid var(--color-border);
+		border: 1px solid var(--color-primary);
+		border-radius: var(--radius-base);
 		margin-top: 0.5rem;
+		transition: background-color var(--transition-base);
+	}
+
+	.book-cta:hover {
+		background-color: var(--color-primary-hover);
 	}
 
 	/* Main Content */
@@ -255,6 +263,14 @@
 		padding: 1.25rem;
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border);
+		border-radius: var(--radius-base);
+		box-shadow: var(--shadow-sm);
+		transition: box-shadow var(--transition-base), border-color var(--transition-base);
+	}
+
+	.cluster-item:hover {
+		border-color: var(--color-primary);
+		box-shadow: var(--shadow-md);
 	}
 
 	.cluster-number {
