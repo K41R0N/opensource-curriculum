@@ -1,56 +1,143 @@
+<script lang="ts">
+	import type { PageData } from './$types';
+
+	export let data: PageData;
+
+	$: about = data.about;
+</script>
+
 <svelte:head>
-	<title>About | Curriculum</title>
-	<meta name="description" content="About this curriculum and its approach to self-directed research." />
+	<title>{about.title} | Curriculum</title>
+	<meta name="description" content={about.subtitle || 'About this curriculum and its approach to self-directed research.'} />
 </svelte:head>
 
 <div class="page-header">
 	<div class="container">
-		<h1>About This Project</h1>
-		<p>A platform for building self-directed research curricula.</p>
+		<h1>{about.title}</h1>
+		{#if about.subtitle}
+			<p>{about.subtitle}</p>
+		{/if}
 	</div>
 </div>
 
 <section class="content-section">
 	<div class="container">
 		<div class="prose">
-			<h2>What is a Self-Directed Curriculum?</h2>
-			<p>
-				A self-directed curriculum is a structured collection of readings, concepts, and exercises that guide learners through a domain of knowledge. Unlike traditional courses, it emphasizes depth over breadth, allowing learners to develop genuine expertise through careful study of primary sources.
-			</p>
-			<p>
-				This platform provides the infrastructure to create, organize, and share such curricula. Each curriculum is organized into clusters (thematic groupings) and lessons (individual study units), creating a clear path through complex material.
-			</p>
-
-			<h2>The Approach</h2>
-			<p>
-				When we went to school, teachers asked us not to use Wikipedia. What we did was cite the Wikipedia sources instead. This is the root of how digital scholarship in the algorithm age should go.
-			</p>
-			<p>
-				You start with the things you know you have to learn, and you branch out as you actually develop an understanding and opinions to challenge. The goal is not comprehensive coverage, but depth. Each reading opens doors to further exploration.
-			</p>
-			<p>
-				In an age where content creation is heavily automated, going for depth instead of breadth is what distinguishes genuine scholarship from surface-level takes. An earned point of view is worth more than a thousand hot takes.
-			</p>
-
-			<h2>How to Use This Curriculum</h2>
-			<p>
-				Each lesson includes:
-			</p>
-			<ul>
-				<li><strong>Introduction:</strong> Context for why this reading matters</li>
-				<li><strong>Key Concepts:</strong> The core ideas you need to understand</li>
-				<li><strong>Assignment:</strong> Direct links to the primary reading</li>
-				<li><strong>Knowledge Check:</strong> Questions to test your understanding</li>
-				<li><strong>Additional Resources:</strong> Related readings to branch out from</li>
-			</ul>
-			<p>
-				The curriculum is designed to be used actively—engaging each text by asking: <em>What new dimensions does this reveal? How does it connect to what I already know?</em>
-			</p>
-
-			<h2>Building Your Own</h2>
-			<p>
-				This platform is open source and designed to be forked. If you want to create your own research curriculum, you can fork this repository and customize it for your domain. See the README for detailed instructions.
-			</p>
+			{@html about.body}
 		</div>
 	</div>
 </section>
+
+<style>
+	.page-header {
+		background-color: var(--color-surface);
+		padding: 3rem 1.5rem;
+		border-bottom: 1px solid var(--color-border);
+		text-align: center;
+	}
+
+	.page-header .container {
+		max-width: 40rem;
+		margin: 0 auto;
+	}
+
+	.page-header h1 {
+		font-family: var(--font-heading);
+		font-size: 2rem;
+		font-weight: 600;
+		color: var(--color-text);
+		margin: 0 0 0.5rem;
+	}
+
+	.page-header p {
+		font-family: var(--font-body);
+		font-size: 1.125rem;
+		color: var(--color-text-muted);
+		margin: 0;
+	}
+
+	.content-section {
+		padding: 3rem 1.5rem;
+	}
+
+	.content-section .container {
+		max-width: 40rem;
+		margin: 0 auto;
+	}
+
+	.prose {
+		font-family: var(--font-body);
+		font-size: 1rem;
+		line-height: 1.7;
+		color: var(--color-text);
+	}
+
+	.prose :global(h2) {
+		font-family: var(--font-heading);
+		font-size: 1.5rem;
+		font-weight: 600;
+		color: var(--color-text);
+		margin: 2rem 0 1rem;
+	}
+
+	.prose :global(h2:first-child) {
+		margin-top: 0;
+	}
+
+	.prose :global(h3) {
+		font-family: var(--font-heading);
+		font-size: 1.25rem;
+		font-weight: 600;
+		color: var(--color-text);
+		margin: 1.5rem 0 0.75rem;
+	}
+
+	.prose :global(p) {
+		margin: 0 0 1rem;
+	}
+
+	.prose :global(ul),
+	.prose :global(ol) {
+		margin: 0 0 1rem;
+		padding-left: 1.5rem;
+	}
+
+	.prose :global(li) {
+		margin-bottom: 0.5rem;
+	}
+
+	.prose :global(strong) {
+		font-weight: 600;
+	}
+
+	.prose :global(em) {
+		font-style: italic;
+	}
+
+	.prose :global(a) {
+		color: var(--color-primary);
+		text-decoration: underline;
+	}
+
+	.prose :global(a:hover) {
+		color: var(--color-primary-hover);
+	}
+
+	@media (max-width: 640px) {
+		.page-header {
+			padding: 2rem 1rem;
+		}
+
+		.page-header h1 {
+			font-size: 1.75rem;
+		}
+
+		.content-section {
+			padding: 2rem 1rem;
+		}
+
+		.prose :global(h2) {
+			font-size: 1.25rem;
+		}
+	}
+</style>

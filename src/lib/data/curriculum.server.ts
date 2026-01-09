@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import type { Cluster, Lesson } from './curriculum';
+import { marked } from 'marked';
+import type { Cluster, Lesson, HomePage, AboutPage } from './curriculum';
 
 /**
  * Validates that a value is a non-empty string
@@ -222,4 +223,189 @@ export function loadCurriculum(): Cluster[] {
 	const clusters = loadClusters();
 	loadLessons(clusters);
 	return clusters;
+}
+
+// ============================================
+// Page Loaders
+// ============================================
+
+/**
+ * Load home page content from CMS
+ */
+export function loadHomePage(): HomePage {
+	const pagesDir = path.join(process.cwd(), 'content', 'pages');
+	const homePath = path.join(pagesDir, 'home.md');
+
+	const defaults: HomePage = {
+		title: 'Curriculum Template',
+		tagline: 'A self-directed research curriculum.',
+		cta_text: 'Begin Reading',
+		body: ''
+	};
+
+	try {
+		if (!fs.existsSync(homePath)) {
+			return defaults;
+		}
+
+		const fileContent = fs.readFileSync(homePath, 'utf-8');
+		const { data, content } = matter(fileContent);
+
+		return {
+			title: isNonEmptyString(data.title) ? data.title : defaults.title,
+			tagline: isNonEmptyString(data.tagline) ? data.tagline : defaults.tagline,
+			cta_text: isNonEmptyString(data.cta_text) ? data.cta_text : defaults.cta_text,
+			body: content.trim()
+		};
+	} catch (e) {
+		console.error('Error loading home content:', e);
+		return defaults;
+	}
+}
+
+/**
+ * Load about page content from CMS
+ */
+export async function loadAboutPage(): Promise<AboutPage> {
+	const pagesDir = path.join(process.cwd(), 'content', 'pages');
+	const aboutPath = path.join(pagesDir, 'about.md');
+
+	const defaults: AboutPage = {
+		title: 'About',
+		subtitle: '',
+		body: ''
+	};
+
+	try {
+		if (!fs.existsSync(aboutPath)) {
+			return defaults;
+		}
+
+		const fileContent = fs.readFileSync(aboutPath, 'utf-8');
+		const { data, content } = matter(fileContent);
+
+		// Convert markdown body to HTML
+		const bodyHtml = content.trim() ? await marked(content.trim()) : '';
+
+		return {
+			title: isNonEmptyString(data.title) ? data.title : defaults.title,
+			subtitle: isNonEmptyString(data.subtitle) ? data.subtitle : defaults.subtitle,
+			body: bodyHtml
+		};
+	} catch (e) {
+		console.error('Error loading about content:', e);
+		return defaults;
+	}
+}
+
+// ============================================
+// Full Lesson Loader
+// ============================================
+
+/**
+ * Parse markdown string to HTML (sync version for simple strings)
+ */
+function parseMarkdown(content: string): string {
+	if (!content) return '';
+	return marked.parse(content, { async: false }) as string;
+}
+
+/**
+ * Load a complete lesson with all fields for the lesson detail page
+ */
+export async function loadFullLesson(clusterSlug: string, lessonSlug: string): Promise<{ lesson: Lesson | null; hasContent: boolean }> {
+	const lessonsDir = path.join(process.cwd(), 'content', 'lessons');
+
+	if (!fs.existsSync(lessonsDir)) {
+		return { lesson: null, hasContent: false };
+	}
+
+	const files = getContentFiles(lessonsDir);
+
+	for (const file of files) {
+		const filepath = path.join(lessonsDir, file);
+
+		try {
+			const fileContent = fs.readFileSync(filepath, 'utf-8');
+			const { data, content } = matter(fileContent);
+
+			// Check if this is the lesson we're looking for
+			if (data.cluster === clusterSlug && data.slug === lessonSlug) {
+				// Validate required fields before constructing Lesson
+				if (!isNonEmptyString(data.title)) {
+					console.warn(`Lesson ${filepath}: missing or invalid title`);
+					continue;
+				}
+				if (!isNonEmptyString(data.slug)) {
+					console.warn(`Lesson ${filepath}: missing or invalid slug`);
+					continue;
+				}
+				if (!isNonEmptyString(data.cluster)) {
+					console.warn(`Lesson ${filepath}: missing or invalid cluster`);
+					continue;
+				}
+				if (!isNonEmptyString(data.description)) {
+					console.warn(`Lesson ${filepath}: missing or invalid description`);
+					continue;
+				}
+				const order = toValidInteger(data.order);
+				if (order === null) {
+					console.warn(`Lesson ${filepath}: missing or invalid order`);
+					continue;
+				}
+
+				// Parse markdown body to HTML
+				const bodyHtml = content.trim() ? await marked(content.trim()) : '';
+
+				// Parse markdown in key_concepts explanations (with safe checks)
+				let parsedConcepts: Array<{ name: string; explanation: string }> | undefined;
+				if (Array.isArray(data.key_concepts)) {
+					parsedConcepts = data.key_concepts
+						.filter((concept): concept is { name: string; explanation: string } =>
+							concept &&
+							typeof concept === 'object' &&
+							isNonEmptyString(concept.name) &&
+							typeof concept.explanation === 'string'
+						)
+						.map((concept) => ({
+							...concept,
+							explanation: parseMarkdown(concept.explanation)
+						}));
+				}
+
+				// Parse markdown in assignment instructions (with safe checks)
+				let parsedAssignment: { instructions: string; url?: string; reading_title?: string } | undefined;
+				if (data.assignment && typeof data.assignment === 'object' && typeof data.assignment.instructions === 'string') {
+					parsedAssignment = {
+						...data.assignment,
+						instructions: parseMarkdown(data.assignment.instructions)
+					};
+				}
+
+				const lesson: Lesson = {
+					id: `${data.cluster}-${order}`,
+					title: data.title,
+					slug: data.slug,
+					cluster: data.cluster,
+					order: order,
+					description: data.description,
+					author: isNonEmptyString(data.author) ? data.author : undefined,
+					featured_image: isNonEmptyString(data.featured_image) ? data.featured_image : undefined,
+					objectives: Array.isArray(data.objectives) ? data.objectives : undefined,
+					key_concepts: parsedConcepts,
+					assignment: parsedAssignment,
+					knowledge_check: Array.isArray(data.knowledge_check) ? data.knowledge_check : undefined,
+					additional_resources: Array.isArray(data.additional_resources) ? data.additional_resources : undefined,
+					content: bodyHtml
+				};
+
+				return { lesson, hasContent: !!bodyHtml };
+			}
+		} catch (e) {
+			console.error(`Error parsing lesson file ${filepath}:`, e);
+			continue;
+		}
+	}
+
+	return { lesson: null, hasContent: false };
 }

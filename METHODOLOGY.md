@@ -256,32 +256,16 @@ Document your visual identity clearly:
 
 | Element | Specification |
 |---------|--------------|
-| Primary style | Linocut/woodcut print |
-| Influences | Polish poster school, constructivism |
-| Color palette | Cream (#f3eee5), Vermillion (#d01c1f), Black |
-| Typography | Kyrios Standard (headings), Merriweather (body) |
-| Composition | Centered, generous negative space, high contrast |
+| Primary style | (Your chosen aesthetic, e.g., minimalist, academic, playful) |
+| Color palette | (Your brand colors - see src/app.css to customize) |
+| Typography | System fonts by default (customize in src/app.css) |
+| Composition | (Your layout preferences) |
 
 ### Step 5.2: Image Generation Workflow
 
 1. **Outline**: List all images needed with pedagogical purpose
 2. **Generate iteratively**: One image at a time for approval
-3. **Use consistent prompting**:
-
-**Sample Image Prompt:**
-```
-Linocut woodcut print illustration in the style of Polish poster school
-and constructivist art.
-
-[Detailed description of the image's subject and composition]
-
-Style requirements:
-- Cream/parchment background (#f3eee5)
-- Bold black outlines, carved woodcut texture
-- No gradients, high contrast
-- Vermillion red (#d01c1f) as the only color accent
-- Balanced composition with generous negative space
-```
+3. **Use consistent prompting**: Create a template for your image generation that maintains visual consistency across all curriculum images.
 
 4. **Add to project**: Place in `static/images/lessons/`
 5. **Update content**: Set `featured_image` field in lesson frontmatter
@@ -352,7 +336,7 @@ Your curriculum automatically provides:
 ### Adding a New Cluster
 
 ```
-Create a new cluster for my DEVICES curriculum with the following details:
+Create a new cluster for my curriculum with the following details:
 
 Title: [Cluster Title]
 Slug: [cluster-slug]
@@ -360,8 +344,8 @@ Order: [number]
 Description: [One-sentence description]
 
 Generate the YAML frontmatter and a 2-3 paragraph overview explaining
-what this cluster covers and why it matters for understanding how
-devices shape reality.
+what this cluster covers and why it matters for the curriculum's
+central question.
 
 Format as a complete Markdown file ready to save as content/clusters/[slug].md
 ```
@@ -369,7 +353,7 @@ Format as a complete Markdown file ready to save as content/clusters/[slug].md
 ### Adding a New Lesson
 
 ```
-Create a new lesson for my DEVICES curriculum:
+Create a new lesson for my curriculum:
 
 Cluster: [cluster-slug]
 Source Text: [Author, Title]

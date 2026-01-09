@@ -6,6 +6,7 @@
 	export let data;
 
 	$: currentPath = $page.url.pathname;
+	$: settings = data.settings;
 
 	// Build absolute URL from path
 	function absoluteUrl(path: string): string {
@@ -21,7 +22,7 @@
 <div class="min-h-screen flex flex-col">
 	<nav class="nav">
 		<div class="container flex items-center justify-between">
-			<a href="/" class="nav-brand">Curriculum</a>
+			<a href="/" class="nav-brand">{settings?.title || 'Curriculum'}</a>
 			<div class="flex items-center gap-6">
 				<a href="/curriculum">Curriculum</a>
 				<a href="/about">About</a>
@@ -35,7 +36,7 @@
 
 	<footer class="footer">
 		<div class="container">
-			<p>Built for depth, not breadth.</p>
+			<p>{settings?.footer_text || 'Built for depth, not breadth.'}</p>
 		</div>
 	</footer>
 </div>

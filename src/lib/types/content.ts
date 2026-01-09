@@ -1,7 +1,7 @@
 /**
  * Content Type Definitions
  *
- * These types define the content schema for the DEVICES Curriculum.
+ * These types define the content schema for the curriculum template.
  * They are front-end agnostic and should match the CMS config and
  * CONTENT_ARCHITECTURE.md documentation.
  *
