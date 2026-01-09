@@ -1,4 +1,4 @@
-# Agent Instructions for DEVICES Curriculum
+# Agent Instructions
 
 Instructions for AI agents working on this project. Read this entire document before making changes.
 

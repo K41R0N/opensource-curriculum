@@ -1,6 +1,6 @@
 # Content Architecture
 
-This document defines the content model for the DEVICES Curriculum. The architecture is **front-end agnostic** - any presentation layer can consume this content as long as it respects the schema.
+This document defines the content model for the curriculum template. The architecture is **front-end agnostic** - any presentation layer can consume this content as long as it respects the schema.
 
 ## Design Principles
 
