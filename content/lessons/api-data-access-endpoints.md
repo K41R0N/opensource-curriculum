@@ -42,6 +42,7 @@ key_concepts:
       It supports query parameters:
       - `?cluster=getting-started` — Filter to a single cluster
       - `?urls=false` — Omit URL fields for smaller response
+      - `?content=true` — Include full lesson content (body, objectives, key concepts, etc.)
   - name: "RSS Feed"
     explanation: |
       The RSS feed at `/feed.xml` follows the RSS 2.0 standard. It lists all clusters and lessons as feed items.
@@ -170,7 +171,15 @@ curl https://yoursite.netlify.app/api/curriculum.json
 }
 ```
 
-### Filtering
+### Query Parameters
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `cluster` | (all) | Filter to a specific cluster by slug |
+| `urls` | `true` | Set to `false` to omit URL fields |
+| `content` | `false` | Set to `true` to include full lesson content |
+
+**Examples:**
 
 Filter to a specific cluster:
 
@@ -183,6 +192,20 @@ Omit URLs for a smaller payload:
 ```bash
 curl "https://yoursite.netlify.app/api/curriculum.json?urls=false"
 ```
+
+**Include full content** (for AI agents and content syndication):
+
+```bash
+curl "https://yoursite.netlify.app/api/curriculum.json?content=true"
+```
+
+With `?content=true`, each lesson includes:
+- `objectives` — Learning objectives array
+- `key_concepts` — Concepts with explanations (HTML)
+- `assignment` — Assignment instructions (HTML)
+- `knowledge_check` — Quiz questions
+- `additional_resources` — External links
+- `content` — Full lesson body (HTML)
 
 ---
 
@@ -201,6 +224,9 @@ https://yoursite.netlify.app/feed.xml
 - **Clusters** appear as items with category "Cluster"
 - **Lessons** appear as items categorized by their cluster name
 - **Authors** are included when specified in lesson frontmatter
+- **Full content** via `<content:encoded>` — the complete lesson body as HTML
+
+The `content:encoded` tag means RSS readers and AI agents can access the full text of each lesson, not just summaries.
 
 ### Using the Feed
 
