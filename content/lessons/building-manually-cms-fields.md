@@ -11,16 +11,17 @@ objectives:
 key_concepts:
   - name: "Required vs. Optional Fields"
     explanation: |
-      **Required** fields must be filled for the lesson to work:
+      **Required** fields (5 total) must be filled for the lesson to work:
       - Title, Slug, Cluster, Order, Description
 
-      **Recommended** fields significantly improve the lesson:
-      - Key Concepts, Assignment, Introduction
+      **Everything else is optional.** Empty sections simply won't appear on the page.
 
-      **Optional** fields add value but aren't essential:
-      - Knowledge Check, Additional Resources, Reading Author, Featured Image
+      **Common combinations**:
+      - *Minimal*: Required fields + Introduction + Assignment (reading link)
+      - *Standard*: Above + Key Concepts + Knowledge Check
+      - *Full*: All sections populated
 
-      Start with required fields, add recommended fields, then enhance with optional ones as time permits.
+      You have complete flexibility—use only what each lesson needs.
   - name: "The Slug Field"
     explanation: |
       The slug becomes part of the URL: `yoursite.com/curriculum/cluster-slug/lesson-slug`
@@ -85,6 +86,19 @@ additional_resources:
 ## CMS Field Reference
 
 This is your complete guide to every field in the lesson editor. Keep this open as you create content.
+
+---
+
+## Flexible Content Structure
+
+**You control what appears on each lesson page.** Only 5 metadata fields are required—everything else is optional and won't render if left empty.
+
+This means you can create:
+- **Minimal lessons**: Just a title, description, intro, and reading link
+- **Full lessons**: All sections filled with rich content
+- **Anything in between**: Mix and match based on what each reading needs
+
+If you leave Knowledge Check empty, that section simply won't appear. Same for Key Concepts, Additional Resources, Learning Objectives, etc. The page adapts to whatever content you provide.
 
 ---
 
@@ -280,20 +294,23 @@ additional_resources:
 
 When creating a lesson, work through this checklist:
 
-**Must have** (lesson won't work without):
+**Required** (lesson won't save without these 5):
 - [ ] Title
 - [ ] Slug (checked for lowercase, hyphens)
 - [ ] Cluster selected
 - [ ] Order number
 - [ ] Description (1-2 sentences)
 
-**Should have** (significantly improves quality):
-- [ ] Key concepts (3-5 with explanations)
-- [ ] Assignment (instructions + URL + title)
-- [ ] Introduction (2-4 introductory paragraphs)
+**Everything below is optional**—empty sections won't render at all.
 
-**Nice to have** (add if time permits):
-- [ ] Knowledge check (2-4 questions)
+**For minimal lessons** (just the reading):
+- [ ] Introduction (why this reading matters)
+- [ ] Assignment (instructions + reading URL)
+
+**For richer lessons** (add as needed):
+- [ ] Key concepts (3-5 with explanations)
+- [ ] Learning objectives (3-5 bullet points)
+- [ ] Knowledge check (2-4 reflection questions)
 - [ ] Additional resources (2-4 links)
 - [ ] Reading author (if relevant)
 - [ ] Featured image (if available)

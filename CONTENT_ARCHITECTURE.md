@@ -62,6 +62,8 @@ An individual learning unit within a cluster. Lessons are the core content of th
 | `additional_resources` | list[Resource] | no | Supplementary materials |
 | `body` | markdown | no | Introduction/overview content |
 
+**Flexible Rendering**: Optional fields that are empty simply won't render on the page. This allows minimal lessons (just metadata + intro + assignment) or full lessons with all sections.
+
 **File Location**: `content/lessons/{cluster}-{slug}.md`
 
 **Nested Types**:
