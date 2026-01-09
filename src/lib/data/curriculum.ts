@@ -14,5 +14,7 @@ export type {
 	LessonCardData,
 	NavigationContext,
 	CurriculumData,
-	LessonPageData
+	LessonPageData,
+	HomePage,
+	AboutPage
 } from '$lib/types/content';

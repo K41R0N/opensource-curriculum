@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import type { Cluster, Lesson } from './curriculum';
+import { marked } from 'marked';
+import type { Cluster, Lesson, HomePage, AboutPage } from './curriculum';
 
 /**
  * Validates that a value is a non-empty string
@@ -222,4 +223,157 @@ export function loadCurriculum(): Cluster[] {
 	const clusters = loadClusters();
 	loadLessons(clusters);
 	return clusters;
+}
+
+// ============================================
+// Page Loaders
+// ============================================
+
+/**
+ * Load home page content from CMS
+ */
+export function loadHomePage(): HomePage {
+	const pagesDir = path.join(process.cwd(), 'content', 'pages');
+	const homePath = path.join(pagesDir, 'home.md');
+
+	const defaults: HomePage = {
+		title: 'Curriculum Template',
+		tagline: 'A self-directed research curriculum.',
+		cta_text: 'Begin Reading',
+		body: ''
+	};
+
+	try {
+		if (!fs.existsSync(homePath)) {
+			return defaults;
+		}
+
+		const fileContent = fs.readFileSync(homePath, 'utf-8');
+		const { data, content } = matter(fileContent);
+
+		return {
+			title: isNonEmptyString(data.title) ? data.title : defaults.title,
+			tagline: isNonEmptyString(data.tagline) ? data.tagline : defaults.tagline,
+			cta_text: isNonEmptyString(data.cta_text) ? data.cta_text : defaults.cta_text,
+			body: content.trim()
+		};
+	} catch (e) {
+		console.error('Error loading home content:', e);
+		return defaults;
+	}
+}
+
+/**
+ * Load about page content from CMS
+ */
+export async function loadAboutPage(): Promise<AboutPage> {
+	const pagesDir = path.join(process.cwd(), 'content', 'pages');
+	const aboutPath = path.join(pagesDir, 'about.md');
+
+	const defaults: AboutPage = {
+		title: 'About',
+		subtitle: '',
+		body: ''
+	};
+
+	try {
+		if (!fs.existsSync(aboutPath)) {
+			return defaults;
+		}
+
+		const fileContent = fs.readFileSync(aboutPath, 'utf-8');
+		const { data, content } = matter(fileContent);
+
+		// Convert markdown body to HTML
+		const bodyHtml = content.trim() ? await marked(content.trim()) : '';
+
+		return {
+			title: isNonEmptyString(data.title) ? data.title : defaults.title,
+			subtitle: isNonEmptyString(data.subtitle) ? data.subtitle : defaults.subtitle,
+			body: bodyHtml
+		};
+	} catch (e) {
+		console.error('Error loading about content:', e);
+		return defaults;
+	}
+}
+
+// ============================================
+// Full Lesson Loader
+// ============================================
+
+/**
+ * Parse markdown string to HTML (sync version for simple strings)
+ */
+function parseMarkdown(content: string): string {
+	if (!content) return '';
+	return marked.parse(content, { async: false }) as string;
+}
+
+/**
+ * Load a complete lesson with all fields for the lesson detail page
+ */
+export async function loadFullLesson(clusterSlug: string, lessonSlug: string): Promise<{ lesson: Lesson | null; hasContent: boolean }> {
+	const lessonsDir = path.join(process.cwd(), 'content', 'lessons');
+
+	if (!fs.existsSync(lessonsDir)) {
+		return { lesson: null, hasContent: false };
+	}
+
+	const files = getContentFiles(lessonsDir);
+
+	for (const file of files) {
+		const filepath = path.join(lessonsDir, file);
+
+		try {
+			const fileContent = fs.readFileSync(filepath, 'utf-8');
+			const { data, content } = matter(fileContent);
+
+			// Check if this is the lesson we're looking for
+			if (data.cluster === clusterSlug && data.slug === lessonSlug) {
+				// Parse markdown body to HTML
+				const bodyHtml = content.trim() ? await marked(content.trim()) : '';
+
+				// Parse markdown in key_concepts explanations
+				const parsedConcepts = Array.isArray(data.key_concepts)
+					? data.key_concepts.map((concept: { name: string; explanation: string }) => ({
+							...concept,
+							explanation: parseMarkdown(concept.explanation)
+						}))
+					: undefined;
+
+				// Parse markdown in assignment instructions
+				const parsedAssignment = data.assignment
+					? {
+							...data.assignment,
+							instructions: parseMarkdown(data.assignment.instructions)
+						}
+					: undefined;
+
+				const lesson: Lesson = {
+					id: `${data.cluster}-${data.order}`,
+					title: data.title as string,
+					slug: data.slug as string,
+					cluster: data.cluster as string,
+					order: data.order as number,
+					description: data.description as string,
+					author: isNonEmptyString(data.author) ? data.author : undefined,
+					featured_image: isNonEmptyString(data.featured_image) ? data.featured_image : undefined,
+					objectives: Array.isArray(data.objectives) ? data.objectives : undefined,
+					key_concepts: parsedConcepts,
+					assignment: parsedAssignment,
+					knowledge_check: Array.isArray(data.knowledge_check) ? data.knowledge_check : undefined,
+					additional_resources: Array.isArray(data.additional_resources) ? data.additional_resources : undefined,
+					content: bodyHtml
+				};
+
+				return { lesson, hasContent: !!bodyHtml };
+			}
+		} catch (e) {
+			console.error(`Error parsing lesson file ${filepath}:`, e);
+			continue;
+		}
+	}
+
+	return { lesson: null, hasContent: false };
 }
