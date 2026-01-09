@@ -1,21 +1,21 @@
 # =============================================================================
 # Curriculum Template CMS Configuration
 # =============================================================================
-# This config defines the content schema for your curriculum.
+# This is a TEMPLATE file. The actual config.yml is generated at build time
+# from environment variables. See docs/cms-setup.md for setup instructions.
 #
-# SETUP INSTRUCTIONS (after forking):
-# 1. Replace 'repo' with your GitHub username/repo
-# 2. Deploy sveltia-cms-auth to Cloudflare Workers (see docs/cms-setup.md)
-# 3. Replace 'base_url' with your worker URL
+# Required environment variables (set in Netlify):
+#   CMS_REPO     - Your GitHub username/repo (e.g., "username/repo-name")
+#   CMS_AUTH_URL - Your Cloudflare Worker URL (e.g., "https://my-auth.workers.dev")
 #
 # Schema Version: 2.0 (Single Language)
 # =============================================================================
 
 backend:
   name: github
-  repo: K41R0N/opensource-curriculum  # FORK: Replace with your-username/your-repo
+  repo: ${CMS_REPO}
   branch: main
-  base_url: https://sveltia-cms-auth.alejandro-057.workers.dev  # FORK: Replace with your worker URL
+  base_url: ${CMS_AUTH_URL}
 
 media_folder: static/images
 public_folder: /images

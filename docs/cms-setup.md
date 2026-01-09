@@ -173,19 +173,16 @@ export default {
 
 ---
 
-## Step 3: Configure the CMS
+## Step 3: Configure Environment Variables
 
-Update `static/admin/config.yml` with your repository and worker URL:
+Add these environment variables in your **Netlify dashboard** (Site settings → Environment variables):
 
-```yaml
-backend:
-  name: github
-  repo: YOUR_GITHUB_USERNAME/YOUR_REPO_NAME  # e.g., johndoe/my-curriculum
-  branch: main
-  base_url: https://your-worker-name.your-subdomain.workers.dev
-```
+| Variable | Value | Example |
+|----------|-------|---------|
+| `CMS_REPO` | Your GitHub username/repo | `johndoe/my-curriculum` |
+| `CMS_AUTH_URL` | Your Cloudflare Worker URL | `https://my-auth.workers.dev` |
 
-Commit and push this change to trigger a rebuild.
+The CMS config is generated automatically at build time from these variables. No file changes needed!
 
 ---
 
@@ -197,9 +194,10 @@ Commit and push this change to trigger a rebuild.
 4. You should see the CMS dashboard
 
 If login fails, check:
-- Worker environment variables are set correctly
+- Netlify environment variables (`CMS_REPO`, `CMS_AUTH_URL`) are set correctly
+- Worker environment variables (`GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`) are set in Cloudflare
 - GitHub OAuth callback URL matches your worker URL
-- The `base_url` in `config.yml` matches your worker URL (without trailing slash)
+- Trigger a redeploy in Netlify after adding environment variables
 
 ---
 
@@ -222,7 +220,7 @@ The GitHub OAuth flow didn't complete. Check:
 
 The worker should handle CORS automatically. If you see CORS errors:
 - Verify the worker code includes CORS headers
-- Check that the worker URL in `config.yml` has no trailing slash
+- Check that `CMS_AUTH_URL` has no trailing slash
 
 ### Changes not appearing on site
 
@@ -247,13 +245,15 @@ After saving in the CMS:
 If you prefer not to use Cloudflare Workers, you can use [Netlify Identity](https://docs.netlify.com/security/secure-access-to-sites/identity/) instead. This requires:
 
 1. Enable Identity in Netlify site settings
-2. Enable Git Gateway
-3. Update `config.yml`:
+2. Enable Git Gateway (Settings → Identity → Services → Git Gateway)
+3. Modify `static/admin/config.template.yml` to use git-gateway:
 
 ```yaml
 backend:
   name: git-gateway
   branch: main
 ```
+
+With this setup, you don't need the `CMS_REPO` or `CMS_AUTH_URL` environment variables.
 
 Note: Netlify Identity has usage limits on the free tier.
