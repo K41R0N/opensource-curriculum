@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { onMount, afterUpdate } from 'svelte';
+	import { onMount, onDestroy, afterUpdate } from 'svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -22,7 +22,45 @@
 		? Math.max(1, Math.ceil(lesson.content.split(/\s+/).length / 200))
 		: 5;
 
-	// Add copy buttons to code blocks
+	// SVG icons for copy button states
+	const copyIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+		<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+		<path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+	</svg>Copy`;
+
+	const copiedIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+		<path d="M20 6L9 17l-5-5"/>
+	</svg>Copied!`;
+
+	// Delegated click handler for copy buttons
+	async function handleCopyClick(event: MouseEvent) {
+		const button = (event.target as Element).closest('.copy-button');
+		if (!button) return;
+
+		const wrapper = button.closest('.code-block-wrapper');
+		if (!wrapper) return;
+
+		const pre = wrapper.querySelector('pre');
+		if (!pre) return;
+
+		const code = pre.querySelector('code');
+		const text = code ? code.textContent : pre.textContent;
+
+		try {
+			await navigator.clipboard.writeText(text || '');
+			button.innerHTML = copiedIcon;
+			button.classList.add('copied');
+
+			setTimeout(() => {
+				button.innerHTML = copyIcon;
+				button.classList.remove('copied');
+			}, 2000);
+		} catch (err) {
+			console.error('Failed to copy:', err);
+		}
+	}
+
+	// Add copy button wrappers to code blocks (DOM creation only, no listeners)
 	function addCopyButtons() {
 		const codeBlocks = document.querySelectorAll('.lesson-content pre, .concept-explanation pre, .assignment-body pre');
 
@@ -34,45 +72,10 @@
 			const wrapper = document.createElement('div');
 			wrapper.className = 'code-block-wrapper';
 
-			// Create copy button
+			// Create copy button (no listener - handled by delegation)
 			const button = document.createElement('button');
 			button.className = 'copy-button';
-			button.innerHTML = `
-				<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-					<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-					<path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
-				</svg>
-				Copy
-			`;
-
-			button.addEventListener('click', async () => {
-				const code = pre.querySelector('code');
-				const text = code ? code.textContent : pre.textContent;
-
-				try {
-					await navigator.clipboard.writeText(text || '');
-					button.innerHTML = `
-						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<path d="M20 6L9 17l-5-5"/>
-						</svg>
-						Copied!
-					`;
-					button.classList.add('copied');
-
-					setTimeout(() => {
-						button.innerHTML = `
-							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-								<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-								<path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
-							</svg>
-							Copy
-						`;
-						button.classList.remove('copied');
-					}, 2000);
-				} catch (err) {
-					console.error('Failed to copy:', err);
-				}
-			});
+			button.innerHTML = copyIcon;
 
 			// Wrap the pre element
 			pre.parentNode?.insertBefore(wrapper, pre);
@@ -91,10 +94,16 @@
 		window.addEventListener('scroll', updateProgress, { passive: true });
 		updateProgress();
 
+		// Add delegated click handler for copy buttons
+		document.addEventListener('click', handleCopyClick);
+
 		// Add copy buttons after initial render
 		addCopyButtons();
 
-		return () => window.removeEventListener('scroll', updateProgress);
+		return () => {
+			window.removeEventListener('scroll', updateProgress);
+			document.removeEventListener('click', handleCopyClick);
+		};
 	});
 
 	// Re-add copy buttons when content changes (navigation between lessons)

@@ -85,7 +85,7 @@ additional_resources:
 
 ## Overview: What We're Building
 
-```
+```text
 You                         CMS                         GitHub
  │                           │                            │
  ├── Click "Login" ─────────→│                            │
@@ -205,7 +205,7 @@ export default {
 
 After deploying, you'll see your worker URL. It looks like:
 
-```
+```text
 https://curriculum-auth.YOUR-USERNAME.workers.dev
 ```
 

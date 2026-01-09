@@ -52,7 +52,7 @@ assignment:
     - About 30 minutes of uninterrupted time
 
     The detailed reference guide is available if you get stuck or want more context.
-  url: /docs/obsidian-setup.md
+  url: "/docs/obsidian-setup.md"
   reading_title: "Detailed Obsidian Setup Reference"
 knowledge_check:
   - question: "When would you choose local editing over the CMS?"

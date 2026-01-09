@@ -19,7 +19,7 @@ A beginner-friendly guide to editing your curriculum content locally using Obsid
 
 Here's what we'll set up:
 
-```
+```text
 Your Computer                          GitHub                         Your Website
 ─────────────────                      ──────                         ────────────
 Obsidian                               Repository                     Netlify
@@ -146,7 +146,7 @@ Obsidian may ask if you trust this folder. Click **Trust author and enable plugi
 
 You should now see your curriculum structure:
 
-```
+```text
 content/
 ├── clusters/          ← Thematic groupings
 ├── lessons/           ← Individual lessons
@@ -192,7 +192,7 @@ This plugin lets you sync changes without leaving Obsidian.
 
 The first time you push, Git needs to verify it's you.
 
-**Option A: Personal Access Token (Recommended)**
+### Option A: Personal Access Token (Recommended)
 
 1. Go to [GitHub Settings → Developer Settings → Personal Access Tokens → Tokens (classic)](https://github.com/settings/tokens)
 2. Click **Generate new token (classic)**
@@ -203,7 +203,7 @@ The first time you push, Git needs to verify it's you.
 
 When Git asks for your password, paste this token instead.
 
-**Option B: GitHub Desktop**
+### Option B: GitHub Desktop
 
 If you prefer a visual interface:
 

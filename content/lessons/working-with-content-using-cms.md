@@ -50,7 +50,7 @@ knowledge_check:
 
 Once you've completed the OAuth setup (covered in the Deployment cluster), you can access the CMS at:
 
-```
+```text
 https://your-site.netlify.app/admin/
 ```
 
