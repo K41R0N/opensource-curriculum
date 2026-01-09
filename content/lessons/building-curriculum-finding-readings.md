@@ -114,18 +114,18 @@ As you evaluate readings, patterns will emerge. You might notice:
 
 These patterns suggest your cluster structure. Group related readings, and you'll start to see your curriculum take shape.
 
-## Example: Organizing Device Theory Readings
+## Example: Organizing Readings
 
-When developing the DEVICES curriculum, readings naturally grouped into:
+Readings often naturally group into themes. For example, a curriculum on social theory might organize like this:
 
 | Cluster | Theme | Key Texts |
 |---------|-------|-----------|
-| Foundations | How reality is socially constructed | Berger & Luckmann, Searle |
-| Embodiment | How practices become habit | Bourdieu, Mauss, Connerton |
-| Technology | How tools shape thought | McLuhan, Postman, Heidegger |
-| Ritual | How ceremonies create meaning | Durkheim, Bell, Turner |
+| Foundations | Core theoretical frameworks | Foundational authors in the field |
+| Methods | How to apply the theory | Methodological texts |
+| Applications | Theory in practice | Case studies and examples |
+| Critiques | Challenges and alternatives | Responses and revisions |
 
-This structure emerged from the readings themselves, not from an abstract plan.
+This structure should emerge from the readings themselves, not from an abstract plan.
 
 ## Quality Over Quantity
 

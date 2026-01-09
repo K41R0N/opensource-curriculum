@@ -336,7 +336,7 @@ Your curriculum automatically provides:
 ### Adding a New Cluster
 
 ```
-Create a new cluster for my DEVICES curriculum with the following details:
+Create a new cluster for my curriculum with the following details:
 
 Title: [Cluster Title]
 Slug: [cluster-slug]
@@ -344,8 +344,8 @@ Order: [number]
 Description: [One-sentence description]
 
 Generate the YAML frontmatter and a 2-3 paragraph overview explaining
-what this cluster covers and why it matters for understanding how
-devices shape reality.
+what this cluster covers and why it matters for the curriculum's
+central question.
 
 Format as a complete Markdown file ready to save as content/clusters/[slug].md
 ```
@@ -353,7 +353,7 @@ Format as a complete Markdown file ready to save as content/clusters/[slug].md
 ### Adding a New Lesson
 
 ```
-Create a new lesson for my DEVICES curriculum:
+Create a new lesson for my curriculum:
 
 Cluster: [cluster-slug]
 Source Text: [Author, Title]

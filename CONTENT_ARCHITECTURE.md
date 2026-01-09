@@ -418,17 +418,17 @@ GET /api/curriculum.json?urls=false
 **Response Structure**:
 ```json
 {
-  "$schema": "https://devices-curriculum.netlify.app/api/schema.json",
+  "$schema": "https://byocurriculum.dev/api/schema.json",
   "version": "1.0",
   "generated": "2025-01-03T00:00:00.000Z",
   "site": {
-    "name": "DEVICES Curriculum",
-    "url": "https://devices-curriculum.netlify.app",
+    "name": "Curriculum Template",
+    "url": "https://byocurriculum.dev",
     "description": "..."
   },
   "stats": {
-    "totalClusters": 9,
-    "totalLessons": 25
+    "totalClusters": 3,
+    "totalLessons": 11
   },
   "clusters": [...]
 }

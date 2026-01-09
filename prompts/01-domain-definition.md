@@ -53,7 +53,7 @@ For a curriculum on "Device Theory":
 **Audience**: Graduate students and advanced undergraduates in media studies, anthropology, or sociology with basic familiarity in social theory.
 
 **Names**:
-1. "DEVICES: Material Practice & Social Memory"
+1. "Material Practice & Social Memory"
 2. "Objects of Ritual"
 3. "The Device Theory Reader"
 

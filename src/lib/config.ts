@@ -5,7 +5,7 @@
  * Uses environment variables where available, with sensible defaults.
  *
  * Environment Variables (set in Netlify):
- * - PUBLIC_SITE_URL: The canonical URL of the site (e.g., https://my-curriculum.netlify.app)
+ * - PUBLIC_SITE_URL: The canonical URL of the site (e.g., https://byocurriculum.dev)
  */
 
 import fs from 'fs';
@@ -16,7 +16,7 @@ import type { SiteSettings } from '$lib/types/content';
  * The canonical site URL (no trailing slash)
  * Set PUBLIC_SITE_URL in Netlify environment variables
  */
-export const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://curriculum-template.netlify.app';
+export const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://byocurriculum.dev';
 
 /**
  * Load site settings from CMS-managed JSON file
