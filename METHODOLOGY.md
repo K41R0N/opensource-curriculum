@@ -256,32 +256,16 @@ Document your visual identity clearly:
 
 | Element | Specification |
 |---------|--------------|
-| Primary style | Linocut/woodcut print |
-| Influences | Polish poster school, constructivism |
-| Color palette | Cream (#f3eee5), Vermillion (#d01c1f), Black |
-| Typography | Kyrios Standard (headings), Merriweather (body) |
-| Composition | Centered, generous negative space, high contrast |
+| Primary style | (Your chosen aesthetic, e.g., minimalist, academic, playful) |
+| Color palette | (Your brand colors - see src/app.css to customize) |
+| Typography | System fonts by default (customize in src/app.css) |
+| Composition | (Your layout preferences) |
 
 ### Step 5.2: Image Generation Workflow
 
 1. **Outline**: List all images needed with pedagogical purpose
 2. **Generate iteratively**: One image at a time for approval
-3. **Use consistent prompting**:
-
-**Sample Image Prompt:**
-```
-Linocut woodcut print illustration in the style of Polish poster school
-and constructivist art.
-
-[Detailed description of the image's subject and composition]
-
-Style requirements:
-- Cream/parchment background (#f3eee5)
-- Bold black outlines, carved woodcut texture
-- No gradients, high contrast
-- Vermillion red (#d01c1f) as the only color accent
-- Balanced composition with generous negative space
-```
+3. **Use consistent prompting**: Create a template for your image generation that maintains visual consistency across all curriculum images.
 
 4. **Add to project**: Place in `static/images/lessons/`
 5. **Update content**: Set `featured_image` field in lesson frontmatter
