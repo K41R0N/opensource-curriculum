@@ -6,7 +6,7 @@ subtitle: An open-source platform for building self-directed research curricula.
 
 (I know how ironic it is that most of this template's content is AI-written, gimme a break)
 
-This is a template for creating **self-directed research curricula: **structured paths through foundational texts that help learners go deep on a topic.
+This is a template for creating \*\*self-directed research curricula: \*\*structured paths through foundational texts that help learners go deep on a topic.
 
 The curriculum you're reading now is both the template and the guide. Follow it to learn how to build your own, then replace the content with your domain of expertise.
 
