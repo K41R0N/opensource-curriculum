@@ -15,10 +15,10 @@ key_concepts:
       - Title, Slug, Cluster, Order, Description
 
       **Recommended** fields significantly improve the lesson:
-      - Key Concepts, Assignment, Body content
+      - Key Concepts, Assignment, Introduction
 
       **Optional** fields add value but aren't essential:
-      - Knowledge Check, Additional Resources, Author, Featured Image
+      - Knowledge Check, Additional Resources, Reading Author, Featured Image
 
       Start with required fields, add recommended fields, then enhance with optional ones as time permits.
   - name: "The Slug Field"
@@ -32,7 +32,7 @@ key_concepts:
       - **Short but clear**: `media-ecology` not `the-study-of-media-ecology`
 
       Don't change slugs after publishing—it breaks existing links.
-  - name: "Description vs. Body"
+  - name: "Description vs. Introduction"
     explanation: |
       These serve different purposes:
 
@@ -41,9 +41,9 @@ key_concepts:
       - Helps learners decide whether to read
       - Should answer: "What will I learn?"
 
-      **Body** (paragraphs):
+      **Introduction** (paragraphs):
       - Appears at the top of the lesson page
-      - Provides context and introduction
+      - Provides context and motivation
       - Sets up why the reading matters
   - name: "Key Concepts Structure"
     explanation: |
@@ -199,7 +199,7 @@ assignment:
 - Estimate time if known ("Approximately 90 minutes")
 - Verify the URL works before publishing
 
-### Body Content
+### Introduction (Body Content)
 **What it is**: Introductory paragraphs shown at top of lesson
 
 **Best practices**:
@@ -258,13 +258,13 @@ additional_resources:
 - These are optional—not required for completing the lesson
 - Describe what each resource adds
 
-### Author
-**What it is**: Who wrote this lesson (optional attribution)
+### Reading Author
+**What it is**: The author of the primary reading (optional)
 
 **Best practices**:
-- Use if multiple people contribute to the curriculum
-- Leave blank if you're the sole author
-- Can be different from the reading's author
+- Fill in if you want to credit the reading's author
+- This appears on the lesson page
+- Leave blank if the author is obvious from context
 
 ### Featured Image
 **What it is**: Image displayed with the lesson (optional)
@@ -290,12 +290,12 @@ When creating a lesson, work through this checklist:
 **Should have** (significantly improves quality):
 - [ ] Key concepts (3-5 with explanations)
 - [ ] Assignment (instructions + URL + title)
-- [ ] Body content (2-4 introductory paragraphs)
+- [ ] Introduction (2-4 introductory paragraphs)
 
 **Nice to have** (add if time permits):
 - [ ] Knowledge check (2-4 questions)
 - [ ] Additional resources (2-4 links)
-- [ ] Author (if relevant)
+- [ ] Reading author (if relevant)
 - [ ] Featured image (if available)
 
 ---

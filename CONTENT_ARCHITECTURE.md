@@ -282,13 +282,18 @@ When redesigning the front-end:
 ```
 content/
 ├── clusters/
-│   ├── mediation-architecture.md
-│   ├── embodiment-repetition.md
-│   └── ... (9 total)
+│   ├── getting-started.md
+│   ├── building-curriculum.md      # AI-assisted path
+│   ├── building-manually.md        # Manual path
+│   ├── deployment-customization.md
+│   ├── working-with-content.md
+│   ├── making-it-yours.md
+│   └── api-data-access.md          # 7 total
 ├── lessons/
-│   ├── mediation-architecture-framing.md
-│   ├── mediation-architecture-culture-in-action.md
-│   └── ... (25 total)
+│   ├── getting-started-why-curriculum.md
+│   ├── building-curriculum-defining-domain.md
+│   ├── building-manually-choosing-topic.md
+│   └── ...                         # 23 total
 ├── pages/
 │   ├── home.md
 │   └── about.md
