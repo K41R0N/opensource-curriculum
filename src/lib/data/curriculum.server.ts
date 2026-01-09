@@ -101,12 +101,16 @@ export function loadClusters(): Cluster[] {
 		// Handle overview/body - trim and convert empty to undefined
 		const overview = body?.trim() || undefined;
 
+		// Handle is_foundation boolean (default: false)
+		const isFoundation = data.is_foundation === true;
+
 		clustersData.push({
 			id: order!,
 			title: data.title as string,
 			slug: data.slug as string,
 			description: data.description as string,
 			overview,
+			is_foundation: isFoundation,
 			lessons: []
 		});
 	}
@@ -455,6 +459,14 @@ export async function loadFullLesson(clusterSlug: string, lessonSlug: string): P
 					}
 				}
 
+				// Sanitize hidden_sections to string[] only
+				const allowedHiddenSections = ['body', 'assignment', 'blocks'];
+				const sanitizedHiddenSections = Array.isArray(data.hidden_sections)
+					? [...new Set(data.hidden_sections.filter(
+						(s): s is string => typeof s === 'string' && allowedHiddenSections.includes(s)
+					))]
+					: undefined;
+
 				const lesson: Lesson = {
 					id: `${data.cluster}-${order}`,
 					title: data.title,
@@ -467,7 +479,7 @@ export async function loadFullLesson(clusterSlug: string, lessonSlug: string): P
 					assignment: parsedAssignment,
 					blocks: parsedBlocks.length > 0 ? parsedBlocks as Lesson['blocks'] : undefined,
 					content: bodyHtml,
-					hidden_sections: Array.isArray(data.hidden_sections) ? data.hidden_sections : undefined
+					hidden_sections: sanitizedHiddenSections?.length ? sanitizedHiddenSections : undefined
 				};
 
 				return { lesson, hasContent: !!bodyHtml };

@@ -164,7 +164,7 @@ Focus on what makes each reading foundational, not just what it contains.
 
 For each generated lesson:
 
-1. Click "Lessons" β†' "New Lesson"
+1. Click "Lessons" → "New Lesson"
 2. Fill in basic fields:
    - **Title**: From your AI output
    - **Slug**: URL-friendly version (e.g., `social-construction`)
@@ -191,7 +191,7 @@ For each generated lesson:
    - Paste the introduction/context paragraphs
    - This appears at the top of the lesson page
 
-7. **Save** β†' Triggers automatic deployment
+7. **Save** → Triggers automatic deployment
 
 ### Step 3: Batch Your Work
 

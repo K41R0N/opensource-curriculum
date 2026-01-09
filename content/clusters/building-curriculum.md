@@ -3,6 +3,7 @@ title: Building with AI
 slug: building-curriculum
 order: 2
 description: "Use AI prompts to define your domain, discover readings, and auto-populate your curriculum."
+is_foundation: true
 ---
 
 This is the AI-assisted path for building your curriculum. If you're comfortable using Claude, GPT-4, or similar tools, this approach lets you generate a complete first draft quickly—then refine it over time.

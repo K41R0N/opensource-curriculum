@@ -212,9 +212,9 @@ Within and across clusters, consider:
 - Add these as potential earlier foundations
 
 ### Step 3: Access check
-- Berger & Luckmann: Internet Archive βœ"
-- Douglas: In print, $18 βœ"
-- Searle: Library access βœ"
+- Berger & Luckmann: Internet Archive ✓
+- Douglas: In print, $18 ✓
+- Searle: Library access ✓
 - Schutz: Academic paywall ✗ (move to additional resources)
 
 ### Step 4: Organization

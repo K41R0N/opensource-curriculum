@@ -3,9 +3,6 @@
 
 	export let data: PageData;
 
-	// Configuration: number of foundation clusters (first N clusters)
-	const FOUNDATION_COUNT = 3;
-
 	// Defensive access to page data
 	$: home = data.home;
 	$: settings = data.settings;
@@ -13,9 +10,9 @@
 	// Safe clusters array with defensive check
 	$: clusters = Array.isArray(data?.clusters) ? data.clusters : [];
 
-	// Group clusters by foundation vs specialization
-	$: foundationClusters = clusters.slice(0, FOUNDATION_COUNT);
-	$: specializationClusters = clusters.slice(FOUNDATION_COUNT);
+	// Group clusters by foundation vs specialization (user-configurable via CMS)
+	$: foundationClusters = clusters.filter(c => c.is_foundation);
+	$: specializationClusters = clusters.filter(c => !c.is_foundation);
 
 	// Compute total lessons across all clusters
 	$: totalLessons = clusters.reduce((sum, c) => sum + (c.lessons?.length ?? 0), 0);

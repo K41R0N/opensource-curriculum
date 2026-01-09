@@ -41,10 +41,10 @@ key_concepts:
     explanation: |
       Some topics don't fit the depth-first model:
 
-      - **Too practical**: "How to use Excel" β†' skills, not research
-      - **Too current**: "AI ethics in 2024" β†' no foundational canon yet
-      - **Too broad**: "Psychology" β†' needs focus on specific area
-      - **Too personal**: "My leadership philosophy" β†' curriculum needs external foundations
+      - **Too practical**: "How to use Excel" → skills, not research
+      - **Too current**: "AI ethics in 2024" → no foundational canon yet
+      - **Too broad**: "Psychology" → needs focus on specific area
+      - **Too personal**: "My leadership philosophy" → curriculum needs external foundations
 
       These aren't bad topics—they just need different formats than a research curriculum.
 assignment:

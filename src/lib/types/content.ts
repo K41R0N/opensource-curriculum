@@ -23,6 +23,8 @@ export interface Cluster {
 	description: string;
 	/** Extended overview (markdown body) */
 	overview?: string;
+	/** Whether this cluster is part of the foundation section (default: false) */
+	is_foundation?: boolean;
 	/** Lessons in this cluster (populated by loader) */
 	lessons: Lesson[];
 }

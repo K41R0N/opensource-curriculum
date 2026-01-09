@@ -119,8 +119,8 @@ These fields must be filled for the lesson to function.
 - Don't include lesson numbers—order is handled separately
 
 **Examples**:
-- βœ" "Finding Foundational Readings"
-- βœ" "How Institutions Shape Thought"
+- ✓ "Finding Foundational Readings"
+- ✓ "How Institutions Shape Thought"
 - ✗ "Lesson 3: Readings" (too vague, includes number)
 - ✗ "THE SOCIAL CONSTRUCTION OF REALITY CHAPTER ONE" (too long, all caps)
 
@@ -134,8 +134,8 @@ These fields must be filled for the lesson to function.
 - Never change after publishing
 
 **Examples**:
-- βœ" `social-construction`
-- βœ" `finding-readings`
+- ✓ `social-construction`
+- ✓ `finding-readings`
 - ✗ `Social Construction` (spaces, caps)
 - ✗ `lesson_3` (underscore, not descriptive)
 
@@ -164,7 +164,7 @@ These fields must be filled for the lesson to function.
 - Avoid jargon—this is a preview for potential readers
 
 **Examples**:
-- βœ" "How Berger and Luckmann explain the process by which human activity becomes objective social reality."
+- ✓ "How Berger and Luckmann explain the process by which human activity becomes objective social reality."
 - ✗ "An important reading in sociology." (too vague)
 - ✗ "This lesson covers social construction theory including externalization, objectivation, and internalization as described in the 1966 text." (too long for a description)
 

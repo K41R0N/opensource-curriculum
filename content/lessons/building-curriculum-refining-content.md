@@ -44,7 +44,7 @@ key_concepts:
     explanation: |
       Watch for these patterns in generated content:
 
-      - **Hedging language**: "It could be argued that..." β†' State your view
+      - **Hedging language**: "It could be argued that..." → State your view
       - **Generic examples**: Make them specific to your domain
       - **Missing context**: Why does this matter *for your audience*?
       - **Superficial connections**: Deepen links between readings
@@ -113,7 +113,7 @@ Some fixes take 2 minutes and significantly improve quality:
 
 - **Fix broken links**: Nothing kills credibility faster
 - **Add a specific example**: Replace "for instance, in many fields..." with a real case
-- **Cut hedging**: "It might be argued" β†' just state the point
+- **Cut hedging**: "It might be argued" → just state the point
 - **Add a sentence of context**: "This matters because..."
 
 Do these first. Save deep rewrites for later.
@@ -143,19 +143,19 @@ You don't need to add personal perspective everywhere. One or two moments per le
 
 ## Common Refinements
 
-### Generic β†' Specific
+### Generic → Specific
 
 **Before**: "This concept appears in many contexts."
 
 **After**: "This concept explains why design systems feel constraining at first but liberating once internalized—the initial friction is institutionalization in progress."
 
-### Abstract β†' Concrete
+### Abstract → Concrete
 
 **Before**: "The author argues that social facts constrain individual behavior."
 
 **After**: "Think about money. A $20 bill is paper. Its value exists only because we collectively agree it does. You can't individually decide it's worth $100. That's a social fact constraining your behavior—and you barely notice it."
 
-### Passive β†' Active
+### Passive → Active
 
 **Before**: "It has been suggested that media shapes perception."
 

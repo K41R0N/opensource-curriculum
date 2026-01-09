@@ -59,6 +59,12 @@ collections:
         name: description
         widget: text
         hint: "Brief description shown on curriculum overview (1-2 sentences)"
+      - label: Foundation Cluster
+        name: is_foundation
+        widget: boolean
+        default: false
+        required: false
+        hint: "Foundation clusters appear in 'Start Here' section; others in 'Specializations'"
       - label: Overview
         name: body
         widget: markdown
