@@ -51,11 +51,11 @@ The CMS needs OAuth to edit your GitHub repository. This requires:
    - Create a worker with the OAuth code (see `docs/cms-setup.md`)
    - Add your GitHub Client ID and Secret as environment variables
 
-3. **Update CMS Config**
-   - Edit `static/admin/config.yml`
-   - Set your repository and worker URL
+3. **Add Environment Variables in Netlify**
+   - `CMS_REPO` = your GitHub username/repo (e.g., `johndoe/my-curriculum`)
+   - `CMS_AUTH_URL` = your Cloudflare Worker URL
 
-See the "Setting Up the CMS" lesson in the curriculum for detailed instructions.
+See `docs/cms-setup.md` for detailed instructions.
 
 ### Step 4: Start Creating
 

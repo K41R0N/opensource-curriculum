@@ -36,9 +36,9 @@ key_concepts:
 
       1. **GitHub OAuth App** — Tells GitHub which app is asking for permission
       2. **Cloudflare Worker** — A tiny helper that handles the login handshake
-      3. **CMS Configuration** — Points the CMS to your helper
+      3. **Environment Variables** — Tell your site where to find everything
 
-      It sounds complex, but you'll just be copying and pasting values between three websites. Follow the steps in order, and it will work.
+      It sounds complex, but you'll just be copying and pasting values between websites. Follow the steps in order, and it will work.
 assignment:
   instructions: |
     This is the most technical lesson in the curriculum. Set aside 20-30 minutes of focused time.
@@ -46,7 +46,7 @@ assignment:
     **You'll be working across three websites:**
     - GitHub (where your files live)
     - Cloudflare (free helper service)
-    - Your curriculum repository
+    - Netlify (where your site is hosted)
 
     **Before starting, have ready:**
     - Your Netlify site URL (e.g., `https://my-curriculum.netlify.app`)
@@ -57,7 +57,7 @@ knowledge_check:
   - question: "Why does the CMS need you to log in with GitHub?"
     hint: "Think about who should be allowed to change your curriculum content."
   - question: "If something goes wrong, where would you check the callback URL?"
-    hint: "The callback URL appears in both GitHub and your CMS config."
+    hint: "The callback URL appears in both GitHub and Cloudflare."
 additional_resources:
   - title: "Cloudflare Workers Documentation"
     author: "Cloudflare"
@@ -145,8 +145,8 @@ export default {
     // Step 1: Start the login - redirect to GitHub
     if (url.pathname === '/auth') {
       const authUrl = new URL('https://github.com/login/oauth/authorize');
-      authUrl.searchParams.set('client_id', env.CLIENT_ID);
-      authUrl.searchParams.set('redirect_uri', env.REDIRECT_URI);
+      authUrl.searchParams.set('client_id', env.GITHUB_CLIENT_ID);
+      authUrl.searchParams.set('redirect_uri', `${url.origin}/callback`);
       authUrl.searchParams.set('scope', 'repo user');
       authUrl.searchParams.set('state', crypto.randomUUID());
       return Response.redirect(authUrl.toString(), 302);
@@ -164,8 +164,8 @@ export default {
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          client_id: env.CLIENT_ID,
-          client_secret: env.CLIENT_SECRET,
+          client_id: env.GITHUB_CLIENT_ID,
+          client_secret: env.GITHUB_CLIENT_SECRET,
           code: code
         })
       });
@@ -258,50 +258,29 @@ Go back to Cloudflare and add your GitHub credentials to the worker.
 
 | Variable Name | Value | Type |
 |---------------|-------|------|
-| `CLIENT_ID` | Your GitHub Client ID | Text |
-| `CLIENT_SECRET` | Your GitHub Client Secret | Secret (click "Encrypt") |
-| `REDIRECT_URI` | `https://your-worker.workers.dev/callback` | Text |
-
-**Make sure REDIRECT_URI matches exactly** what you put in GitHub (including `/callback`).
+| `GITHUB_CLIENT_ID` | Your GitHub Client ID | Text |
+| `GITHUB_CLIENT_SECRET` | Your GitHub Client Secret | Secret (click "Encrypt") |
 
 5. Click **Deploy** to save the changes
 
 ---
 
-## Step 5: Update Your CMS Config
+## Step 5: Add Netlify Environment Variables
 
-Now we need to tell your CMS where to find the worker.
+Now tell your Netlify site where to find everything.
 
-### Edit the Config File
+1. Go to your site in the **Netlify dashboard**
+2. Click **Site settings** → **Environment variables**
+3. Add these two variables:
 
-1. Go to your repository on GitHub
-2. Navigate to `static/admin/config.yml`
-3. Click the **pencil icon** to edit
+| Variable Name | Value |
+|---------------|-------|
+| `CMS_REPO` | Your GitHub username/repo (e.g., `myname/my-curriculum`) |
+| `CMS_AUTH_URL` | Your Cloudflare Worker URL (e.g., `https://curriculum-auth.yourname.workers.dev`) |
 
-### Update the Backend Section
+4. Go to **Deploys** → Click **Trigger deploy** → **Deploy site**
 
-Find the `backend` section at the top and update it:
-
-```yaml
-backend:
-  name: github
-  repo: YOUR-USERNAME/YOUR-REPO-NAME
-  branch: main
-  base_url: https://curriculum-auth.yourname.workers.dev
-  auth_endpoint: /auth
-```
-
-**Replace**:
-- `YOUR-USERNAME/YOUR-REPO-NAME` with your actual GitHub username and repository name
-- `curriculum-auth.yourname.workers.dev` with your actual worker URL (without `/callback`)
-
-### Commit the Change
-
-1. Scroll down to "Commit changes"
-2. Write a commit message like "Configure CMS authentication"
-3. Click **Commit changes**
-
-Wait 1-2 minutes for Netlify to rebuild your site.
+Wait 1-2 minutes for Netlify to rebuild your site with the new configuration.
 
 ---
 
@@ -322,13 +301,13 @@ The moment of truth!
 
 ### "Failed to fetch" or blank screen after clicking login
 
-**Likely cause**: Worker URL is wrong in your `config.yml`.
+**Likely cause**: Environment variables not set correctly, or site not redeployed.
 
 **Fix**:
-1. Visit your worker URL directly (e.g., `https://curriculum-auth.yourname.workers.dev`)
-2. You should see "OAuth Worker - visit /auth to begin"
-3. If not, check the worker was deployed correctly
-4. Make sure `config.yml` has the correct URL (no `/callback` at the end)
+1. Check that `CMS_AUTH_URL` is set in Netlify environment variables
+2. Make sure you triggered a redeploy after adding the variables
+3. Visit your worker URL directly (e.g., `https://curriculum-auth.yourname.workers.dev`)
+4. You should see "OAuth Worker - visit /auth to begin"
 
 ### "Bad credentials" error
 
@@ -345,8 +324,8 @@ The moment of truth!
 
 **Fix**:
 1. In GitHub OAuth App settings, check the "Authorization callback URL"
-2. In Cloudflare worker variables, check `REDIRECT_URI`
-3. These must match **exactly** (including `https://` and `/callback`)
+2. It should be your worker URL + `/callback`
+3. These must match **exactly** (including `https://`)
 
 ### "Not found" or 404 errors
 
@@ -359,10 +338,10 @@ The moment of truth!
 
 ### Can see CMS but changes won't save
 
-**Likely cause**: Repository name is wrong in config, or you don't have write access.
+**Likely cause**: Repository name is wrong, or you don't have write access.
 
 **Fix**:
-1. Check `repo` in `config.yml` matches your exact username and repo name
+1. Check `CMS_REPO` in Netlify matches your exact username and repo name
 2. Make sure you're logged into the GitHub account that owns the repository
 
 ---

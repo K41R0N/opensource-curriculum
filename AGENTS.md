@@ -31,7 +31,7 @@ content/pages/*.md     ──┘
 |------|---------|----------------|
 | `src/lib/data/curriculum.server.ts` | Loads & validates content | Changing content loading logic |
 | `src/lib/types/content.ts` | TypeScript type definitions | Adding new content fields |
-| `static/admin/config.yml` | CMS schema definition | Adding new fields (must match types) |
+| `static/admin/config.template.yml` | CMS schema template | Adding new fields (must match types) |
 | `CONTENT_ARCHITECTURE.md` | Content schema documentation | After any schema changes |
 
 ### Files You Should NOT Modify (Usually)
@@ -153,7 +153,7 @@ Body content...
 When adding new fields:
 
 1. Update `src/lib/types/content.ts` with TypeScript types
-2. Update `static/admin/config.yml` with CMS field definition
+2. Update `static/admin/config.template.yml` with CMS field definition
 3. Update `CONTENT_ARCHITECTURE.md` documentation
 4. Update `curriculum.server.ts` if field needs special handling
 
@@ -323,7 +323,7 @@ src/lib/
     └── content.ts           # All TypeScript types
 
 static/admin/
-└── config.yml               # CMS schema
+└── config.template.yml      # CMS schema template (config.yml generated at build)
 
 src/routes/
 ├── +layout.server.ts        # Loads clusters for all pages
