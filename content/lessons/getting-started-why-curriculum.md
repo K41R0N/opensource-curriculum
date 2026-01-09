@@ -31,6 +31,42 @@ knowledge_check:
     hint: "Consider how you'd use Wikipedia as a starting point, not an endpoint."
 ---
 
+## Welcome to the Curriculum Builder
+
+**You're about to build your own curriculum platform.** By the end of this guide, you'll have a live website where you can publish curated learning paths on any topic you're passionate about.
+
+### What You'll Create
+
+- A beautiful, responsive website for your curriculum
+- A simple way to add and edit lessons
+- Automatic deployment—edit content, and it goes live
+- A structure that guides learners through foundational readings
+
+### What You'll Need
+
+This curriculum is designed for non-technical users. You'll need:
+
+- **A computer** with internet access
+- **An email address** for creating free accounts
+- **A topic you're passionate about** (philosophy, design, history, anything!)
+- **About 2-3 hours** spread across multiple sessions
+
+No coding experience required. If you can fill out web forms and follow step-by-step instructions, you can do this.
+
+### How This Curriculum Is Organized
+
+| Cluster | What You'll Learn |
+|---------|-------------------|
+| **Getting Started** | Why curricula matter, how the platform works |
+| **Building Your Curriculum** | Define your topic, find readings, structure content |
+| **Deployment & Setup** | Get your site live, set up the CMS |
+| **Working With Content** | Edit via browser or locally |
+| **Making It Yours** | Customize colors, fonts, and styling |
+
+Work through the clusters in order. Each builds on the previous one.
+
+---
+
 ## The Case for Self-Directed Curricula
 
 We're living through a fundamental shift in how knowledge is created and consumed. AI can now generate passable summaries of almost any topic. Search engines surface millions of results for any query. Content mills produce endless "ultimate guides" and "everything you need to know" articles.

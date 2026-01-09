@@ -226,7 +226,15 @@
 		text-decoration: none;
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border);
+		border-radius: var(--radius-base);
 		padding: 1rem;
+		box-shadow: var(--shadow-sm);
+		transition: border-color var(--transition-base), box-shadow var(--transition-base);
+	}
+
+	.lesson-card:hover {
+		border-color: var(--color-primary);
+		box-shadow: var(--shadow-md);
 	}
 
 	.lesson-card-content {
@@ -244,9 +252,10 @@
 		height: 2.5rem;
 		background-color: var(--color-surface);
 		border: 1px solid var(--color-border);
+		border-radius: var(--radius-sm);
 		color: var(--color-text);
 		font-family: var(--font-body);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		font-size: 0.875rem;
 	}
 

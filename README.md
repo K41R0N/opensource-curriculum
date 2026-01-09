@@ -187,7 +187,13 @@ Edit CSS custom properties in `src/app.css`:
 - Use the visual editor
 - Changes auto-commit to GitHub
 
-**Via Git:**
+**Via Obsidian (local editing):**
+- Clone the repo and open `content/` as an Obsidian vault
+- Edit with live preview and graph view
+- Use the Obsidian Git plugin to sync changes
+- See [docs/obsidian-setup.md](./docs/obsidian-setup.md) for the complete guide
+
+**Via Git (manual):**
 - Create Markdown files in `content/`
 - Follow the frontmatter schema in existing files
 - Commit and push to trigger rebuild
@@ -209,6 +215,9 @@ Edit CSS custom properties in `src/app.css`:
 | [METHODOLOGY.md](./METHODOLOGY.md) | Complete curriculum-building guide |
 | [CONTENT_ARCHITECTURE.md](./CONTENT_ARCHITECTURE.md) | Content schema and types |
 | [AGENTS.md](./AGENTS.md) | Instructions for AI agents |
+| [docs/cms-setup.md](./docs/cms-setup.md) | CMS OAuth setup (Sveltia) |
+| [docs/obsidian-setup.md](./docs/obsidian-setup.md) | Local editing with Obsidian |
+| [docs/styling-guide.md](./docs/styling-guide.md) | Visual customization (colors, fonts, borders) |
 
 ## License
 
