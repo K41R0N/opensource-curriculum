@@ -427,8 +427,8 @@ GET /api/curriculum.json?urls=false
     "description": "..."
   },
   "stats": {
-    "totalClusters": 3,
-    "totalLessons": 11
+    "totalClusters": 6,
+    "totalLessons": 16
   },
   "clusters": [...]
 }

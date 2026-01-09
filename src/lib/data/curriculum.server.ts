@@ -331,32 +331,64 @@ export async function loadFullLesson(clusterSlug: string, lessonSlug: string): P
 
 			// Check if this is the lesson we're looking for
 			if (data.cluster === clusterSlug && data.slug === lessonSlug) {
+				// Validate required fields before constructing Lesson
+				if (!isNonEmptyString(data.title)) {
+					console.warn(`Lesson ${filepath}: missing or invalid title`);
+					continue;
+				}
+				if (!isNonEmptyString(data.slug)) {
+					console.warn(`Lesson ${filepath}: missing or invalid slug`);
+					continue;
+				}
+				if (!isNonEmptyString(data.cluster)) {
+					console.warn(`Lesson ${filepath}: missing or invalid cluster`);
+					continue;
+				}
+				if (!isNonEmptyString(data.description)) {
+					console.warn(`Lesson ${filepath}: missing or invalid description`);
+					continue;
+				}
+				const order = toValidInteger(data.order);
+				if (order === null) {
+					console.warn(`Lesson ${filepath}: missing or invalid order`);
+					continue;
+				}
+
 				// Parse markdown body to HTML
 				const bodyHtml = content.trim() ? await marked(content.trim()) : '';
 
-				// Parse markdown in key_concepts explanations
-				const parsedConcepts = Array.isArray(data.key_concepts)
-					? data.key_concepts.map((concept: { name: string; explanation: string }) => ({
+				// Parse markdown in key_concepts explanations (with safe checks)
+				let parsedConcepts: Array<{ name: string; explanation: string }> | undefined;
+				if (Array.isArray(data.key_concepts)) {
+					parsedConcepts = data.key_concepts
+						.filter((concept): concept is { name: string; explanation: string } =>
+							concept &&
+							typeof concept === 'object' &&
+							isNonEmptyString(concept.name) &&
+							typeof concept.explanation === 'string'
+						)
+						.map((concept) => ({
 							...concept,
 							explanation: parseMarkdown(concept.explanation)
-						}))
-					: undefined;
+						}));
+				}
 
-				// Parse markdown in assignment instructions
-				const parsedAssignment = data.assignment
-					? {
-							...data.assignment,
-							instructions: parseMarkdown(data.assignment.instructions)
-						}
-					: undefined;
+				// Parse markdown in assignment instructions (with safe checks)
+				let parsedAssignment: { instructions: string; url?: string; reading_title?: string } | undefined;
+				if (data.assignment && typeof data.assignment === 'object' && typeof data.assignment.instructions === 'string') {
+					parsedAssignment = {
+						...data.assignment,
+						instructions: parseMarkdown(data.assignment.instructions)
+					};
+				}
 
 				const lesson: Lesson = {
-					id: `${data.cluster}-${data.order}`,
-					title: data.title as string,
-					slug: data.slug as string,
-					cluster: data.cluster as string,
-					order: data.order as number,
-					description: data.description as string,
+					id: `${data.cluster}-${order}`,
+					title: data.title,
+					slug: data.slug,
+					cluster: data.cluster,
+					order: order,
+					description: data.description,
 					author: isNonEmptyString(data.author) ? data.author : undefined,
 					featured_image: isNonEmptyString(data.featured_image) ? data.featured_image : undefined,
 					objectives: Array.isArray(data.objectives) ? data.objectives : undefined,
