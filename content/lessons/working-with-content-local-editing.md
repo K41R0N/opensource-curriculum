@@ -4,8 +4,9 @@ slug: local-editing
 cluster: working-with-content
 order: 2
 description: "Set up a powerful local editing environment for longer writing sessions and offline work."
-key_concepts:
-  - name: "Why Edit Locally?"
+blocks:
+  - type: concept
+    name: "Why Edit Locally?"
     explanation: |
       The web CMS is great for quick edits, but local editing shines for:
 
@@ -15,7 +16,8 @@ key_concepts:
       - **Power features**: Obsidian's graph view, backlinks, and plugins
 
       Many curriculum authors use both: CMS for quick fixes, local editing for serious writing.
-  - name: "What is Git?"
+  - type: concept
+    name: "What is Git?"
     explanation: |
       Git is version control software that tracks changes to files. Think of it like "Track Changes" in Word, but for your entire project.
 
@@ -27,7 +29,8 @@ key_concepts:
       - **Pull**: Download changes from GitHub to your computer
 
       You don't need to master Git—the Obsidian Git plugin handles most of this automatically.
-  - name: "Obsidian as a Curriculum Editor"
+  - type: concept
+    name: "Obsidian as a Curriculum Editor"
     explanation: |
       Obsidian is a free Markdown editor that treats a folder of files as a "vault." For curriculum editing, this means:
 
@@ -49,13 +52,14 @@ assignment:
     The detailed reference guide is available if you get stuck or want more context.
   url: "/docs/obsidian-setup.md"
   reading_title: "Detailed Obsidian Setup Reference"
-knowledge_check:
-  - question: "When would you choose local editing over the CMS?"
+  - type: check
+    question: "When would you choose local editing over the CMS?"
     hint: "Think about session length, internet access, and feature needs."
-  - question: "What does 'pull before you push' mean and why does it matter?"
+  - type: check
+    question: "What does 'pull before you push' mean and why does it matter?"
     hint: "Consider what happens if someone else edited while you were working."
-additional_resources:
-  - title: "Obsidian Help Documentation"
+  - type: resource
+    title: "Obsidian Help Documentation"
     author: "Obsidian"
     url: "https://help.obsidian.md"
     description: "Official documentation for all Obsidian features."

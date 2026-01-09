@@ -4,15 +4,17 @@ slug: theme-system
 cluster: making-it-yours
 order: 1
 description: "How the site's styling is organized and why it's safe to customize."
-key_concepts:
-  - name: "CSS Custom Properties"
+blocks:
+  - type: concept
+    name: "CSS Custom Properties"
     explanation: |
       The site uses CSS custom properties (also called CSS variables) to control its appearance. These are defined once in `src/app.css` and used throughout all components.
 
       For example, `--color-primary` defines your main brand color. Change it once, and every button, link, and accent updates automatically.
 
       This means you can transform the entire look of the site by editing a handful of values in one file.
-  - name: "The Three Layers"
+  - type: concept
+    name: "The Three Layers"
     explanation: |
       The site is built in three distinct layers:
 
@@ -21,7 +23,8 @@ key_concepts:
       3. **Styling** — CSS variables in `src/app.css`. Controls visual appearance.
 
       You customize layer 3 (styling) without touching layers 1 or 2. This separation means your visual changes won't break content or functionality.
-  - name: "Safe vs. Unsafe Changes"
+  - type: concept
+    name: "Safe vs. Unsafe Changes"
     explanation: |
       **Safe to change:**
       - Values of CSS variables (colors, fonts, sizes)
@@ -33,10 +36,11 @@ key_concepts:
       - Field names in the CMS config
 
       Stick to changing values, not names, and you'll never break anything.
-knowledge_check:
-  - question: "Where are all the theme variables defined?"
+  - type: check
+    question: "Where are all the theme variables defined?"
     hint: "It's a single CSS file at the root of the src directory."
-  - question: "Why is it safe to change variable values but not variable names?"
+  - type: check
+    question: "Why is it safe to change variable values but not variable names?"
     hint: "Think about what happens when a component tries to use a variable that doesn't exist."
 ---
 

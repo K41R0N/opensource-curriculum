@@ -5,8 +5,9 @@ cluster: building-curriculum
 author: ''
 order: 1
 description: Use AI prompts to articulate your curriculum's scope, central questions, and boundaries.
-key_concepts:
-  - name: The Central Question
+blocks:
+  - type: concept
+    name: The Central Question
     explanation: |-
       Every good curriculum answers a central question. Not "What topics does this cover?" but "What will someone who completes this be able to understand or do?"
 
@@ -15,11 +16,23 @@ key_concepts:
       - "What makes distributed systems reliable?"
 
       Your central question defines what's in scope and what's not.
-  - name: AI as Brainstorming Partner
+  - type: concept
+    name: AI as Brainstorming Partner
     explanation: |-
       LLMs are excellent for domain definition. They can suggest canonical texts, identify adjacent fields, point out gaps in your framing, and generate alternative structures.
 
       But remember: the AI is helping you think, not thinking for you. You need to critically evaluate every suggestion and bring your own judgment about what matters.
+  - type: check
+    question: What's your curriculum's central question?
+    hint: Frame it as what someone will understand or be able to do after completing it.
+  - type: check
+    question: What intellectual traditions does your domain draw from?
+    hint: Think about the schools of thought and key thinkers who shaped the field.
+  - type: resource
+    title: How to Define Research Questions
+    author: Various
+    url: https://writingcenter.gmu.edu/writing-resources/research-based-writing/how-to-write-a-research-question
+    description: While focused on academic research, the principles apply to curriculum design.
 assignment:
   instructions: |-
     Use the Domain Definition Prompt (below) with your preferred AI assistant (Claude, GPT-4, etc.) to generate an initial framework for your curriculum.
@@ -32,16 +45,6 @@ assignment:
     4. Iterate by asking follow-up questions
   url: /prompts/01-domain-definition.md
   reading_title: Domain Definition Prompt
-knowledge_check:
-  - question: What's your curriculum's central question?
-    hint: Frame it as what someone will understand or be able to do after completing it.
-  - question: What intellectual traditions does your domain draw from?
-    hint: Think about the schools of thought and key thinkers who shaped the field.
-additional_resources:
-  - title: How to Define Research Questions
-    author: Various
-    url: https://writingcenter.gmu.edu/writing-resources/research-based-writing/how-to-write-a-research-question
-    description: While focused on academic research, the principles apply to curriculum design.
 ---
 ## The Art of Domain Definition
 

@@ -4,8 +4,9 @@ slug: deploying-netlify
 cluster: deployment-customization
 order: 1
 description: "Fork the repository, connect to Netlify, and get your curriculum online in minutes."
-key_concepts:
-  - name: "What is Forking?"
+blocks:
+  - type: concept
+    name: "What is Forking?"
     explanation: |
       "Forking" creates your own copy of a template repository on GitHub. It's like photocopying a workbook—you get an identical copy that you can fill in and modify without affecting the original.
 
@@ -13,7 +14,8 @@ key_concepts:
       - Your own repository at `github.com/YOUR-USERNAME/your-curriculum`
       - Full control to edit, delete, or add content
       - No connection to other people's copies
-  - name: "What is Netlify?"
+  - type: concept
+    name: "What is Netlify?"
     explanation: |
       Netlify is a free service that turns your GitHub repository into a live website. It:
 
@@ -23,7 +25,8 @@ key_concepts:
       - **Provides a free URL** like `your-site.netlify.app`
 
       You don't need to understand servers or hosting—Netlify handles everything.
-  - name: "The Automatic Update Flow"
+  - type: concept
+    name: "The Automatic Update Flow"
     explanation: |
       Once deployed, updates are automatic:
 
@@ -43,13 +46,14 @@ assignment:
     - About 15 minutes of uninterrupted time
 
     No coding or technical knowledge required!
-knowledge_check:
-  - question: "Why does the curriculum use static site hosting instead of a traditional server?"
+  - type: check
+    question: "Why does the curriculum use static site hosting instead of a traditional server?"
     hint: "Think about speed, security, cost, and maintenance."
-  - question: "What triggers a rebuild of your site?"
+  - type: check
+    question: "What triggers a rebuild of your site?"
     hint: "Consider what actions push changes to your repository."
-additional_resources:
-  - title: "Netlify Documentation"
+  - type: resource
+    title: "Netlify Documentation"
     author: "Netlify"
     url: "https://docs.netlify.com/"
     description: "Official documentation for all Netlify features."

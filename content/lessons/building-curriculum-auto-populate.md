@@ -4,8 +4,9 @@ slug: auto-populate
 cluster: building-curriculum
 order: 4
 description: "Use AI to generate complete lesson content and batch-populate your curriculum for first deployment."
-key_concepts:
-  - name: "The Batch Generation Approach"
+blocks:
+  - type: concept
+    name: "The Batch Generation Approach"
     explanation: |
       Rather than writing each lesson from scratch, you can use AI to generate a complete first draft of your entire curriculum. This gives you:
 
@@ -14,7 +15,8 @@ key_concepts:
       - **A starting point**: Something to edit rather than a blank page
 
       The goal isn't perfection—it's a complete draft you can refine over time.
-  - name: "The Lesson Generation Prompt"
+  - type: concept
+    name: "The Lesson Generation Prompt"
     explanation: |
       For each reading in your curriculum, the Lesson Generation Prompt creates:
 
@@ -25,7 +27,8 @@ key_concepts:
       - Additional resource suggestions
 
       Feed it your reading list and domain context, and it produces structured lesson content ready for the CMS.
-  - name: "Formatting for CMS Entry"
+  - type: concept
+    name: "Formatting for CMS Entry"
     explanation: |
       The CMS expects specific fields:
 
@@ -38,7 +41,8 @@ key_concepts:
       - **body**: Main lesson content (markdown)
 
       Ask the AI to output in this format so you can copy directly into CMS fields.
-  - name: "Quality vs. Speed Tradeoff"
+  - type: concept
+    name: "Quality vs. Speed Tradeoff"
     explanation: |
       AI-generated content is a draft, not a finished product. Common issues to watch for:
 
@@ -48,6 +52,16 @@ key_concepts:
       - **Missing connections**: AI doesn't see your full vision
 
       Plan to spend 5-10 minutes reviewing each generated lesson before publishing.
+  - type: check
+    question: "Why generate a complete draft before refining individual lessons?"
+    hint: "Think about momentum and having something to react to."
+  - type: check
+    question: "What should you always verify in AI-generated lesson content?"
+    hint: "Consider what AI is known to get wrong."
+  - type: resource
+    title: "Sveltia CMS Documentation"
+    url: "https://github.com/sveltia/sveltia-cms"
+    description: "Reference for the CMS interface and field types."
 assignment:
   instructions: |
     Generate complete lesson content for your curriculum:
@@ -74,15 +88,6 @@ assignment:
        - Don't perfect—just publish
 
     Your curriculum is now live. Refinement comes next.
-knowledge_check:
-  - question: "Why generate a complete draft before refining individual lessons?"
-    hint: "Think about momentum and having something to react to."
-  - question: "What should you always verify in AI-generated lesson content?"
-    hint: "Consider what AI is known to get wrong."
-additional_resources:
-  - title: "Sveltia CMS Documentation"
-    url: "https://github.com/sveltia/sveltia-cms"
-    description: "Reference for the CMS interface and field types."
 ---
 
 ## The Case for Batch Generation

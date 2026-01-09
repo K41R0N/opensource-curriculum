@@ -4,8 +4,9 @@ slug: core-readings
 cluster: building-manually
 order: 2
 description: "How to select foundational texts without AI assistance—using your judgment and research skills."
-key_concepts:
-  - name: "Primary vs. Secondary Sources"
+blocks:
+  - type: concept
+    name: "Primary vs. Secondary Sources"
     explanation: |
       **Primary sources** are original works that introduced ideas. These should form the core of your curriculum.
 
@@ -16,7 +17,8 @@ key_concepts:
       - Secondary: A textbook chapter explaining social constructionism
 
       Always ask: "Is this the original, or is it explaining something else?"
-  - name: "The Citation Test"
+  - type: concept
+    name: "The Citation Test"
     explanation: |
       In established fields, foundational texts are frequently cited by later works. Use this to validate your selections:
 
@@ -26,7 +28,8 @@ key_concepts:
       4. Texts that appear repeatedly are likely foundational
 
       If a text is rarely cited by work in the field, it may be interesting but not foundational.
-  - name: "Accessibility Matters"
+  - type: concept
+    name: "Accessibility Matters"
     explanation: |
       A curriculum only works if learners can access the readings. For each text, verify:
 
@@ -36,7 +39,8 @@ key_concepts:
       - **Reasonable purchase**: In-print books learners might buy
 
       A foundational text that no one can access doesn't belong in your curriculum.
-  - name: "The Coherence Check"
+  - type: concept
+    name: "The Coherence Check"
     explanation: |
       Your readings should form a coherent conversation, not a random collection:
 
@@ -46,6 +50,16 @@ key_concepts:
       - Do they address related aspects of your central question?
 
       If texts feel disconnected, either your topic is too broad or you need different selections.
+  - type: check
+    question: "How does the citation test help identify foundational texts?"
+    hint: "Think about what it means when many later works reference something."
+  - type: check
+    question: "Why prioritize primary sources over secondary sources?"
+    hint: "Consider the difference between engaging with ideas directly vs. through interpretation."
+  - type: resource
+    title: "Google Scholar"
+    url: "https://scholar.google.com"
+    description: "Search academic literature and see citation counts."
 assignment:
   instructions: |
     Build your reading list through research:
@@ -72,15 +86,6 @@ assignment:
     - Note which readings seem foundational vs. advanced
 
     **Final list**: 10-20 texts organized by theme
-knowledge_check:
-  - question: "How does the citation test help identify foundational texts?"
-    hint: "Think about what it means when many later works reference something."
-  - question: "Why prioritize primary sources over secondary sources?"
-    hint: "Consider the difference between engaging with ideas directly vs. through interpretation."
-additional_resources:
-  - title: "Google Scholar"
-    url: "https://scholar.google.com"
-    description: "Search academic literature and see citation counts."
 ---
 
 ## Building Your Reading List

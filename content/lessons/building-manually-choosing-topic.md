@@ -4,21 +4,29 @@ slug: choosing-topic
 cluster: building-manually
 order: 1
 description: "What kinds of topics work best for this platform, and how to scope yours appropriately."
-key_concepts:
-  - name: "The Foundational Text Test"
+blocks:
+  - type: concept
+    name: "The Foundational Text Test"
     explanation: |
       A topic works well if you can answer: "What are the 10-20 texts someone *must* read to understand this deeply?"
 
       If you can name specific, canonical texts that shaped the field, your topic has the intellectual infrastructure this platform needs.
 
       If your topic is too new, too broad, or too applied, consider narrowing to a specific school of thought or focusing on theoretical foundations.
-  - name: "What Works (and What Doesn't)"
+  - type: concept
+    name: "What Works (and What Doesn't)"
     explanation: |
       **Good topics** have: established intellectual traditions, accessible primary sources, ideas that reward close reading, and a domain you've personally engaged with.
 
       **Topics that struggle**: Too practical ("How to use Excel"), too current (no canon yet), too broad ("Psychology"), or too personal ("My leadership philosophy").
 
       These aren't bad topics—they just need different formats than a research curriculum.
+  - type: check
+    question: "What makes a topic 'depth-first' rather than 'breadth-first'?"
+    hint: "Think about the difference between surveying and mastering."
+  - type: check
+    question: "Why does having foundational texts matter for this platform?"
+    hint: "Consider what the curriculum is actually built around."
 assignment:
   instructions: |
     Evaluate your curriculum topic:
@@ -41,11 +49,6 @@ assignment:
        - Can you guide others through the difficulty?
 
     If you answered "no" to several questions, consider narrowing or refocusing your topic.
-knowledge_check:
-  - question: "What makes a topic 'depth-first' rather than 'breadth-first'?"
-    hint: "Think about the difference between surveying and mastering."
-  - question: "Why does having foundational texts matter for this platform?"
-    hint: "Consider what the curriculum is actually built around."
 ---
 
 ## Finding the Right Topic

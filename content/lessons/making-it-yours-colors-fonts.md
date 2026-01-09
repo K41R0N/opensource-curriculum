@@ -4,8 +4,9 @@ slug: colors-fonts
 cluster: making-it-yours
 order: 2
 description: "Practical guide to changing your site's color palette and typography."
-key_concepts:
-  - name: "Color Semantics"
+blocks:
+  - type: concept
+    name: "Color Semantics"
     explanation: |
       Colors aren't just aesthetic—they communicate meaning:
 
@@ -15,7 +16,8 @@ key_concepts:
       - **Border**: Defines boundaries. Can be subtle or bold.
 
       When choosing colors, think about what each will communicate.
-  - name: "Font Pairing"
+  - type: concept
+    name: "Font Pairing"
     explanation: |
       The site uses two font variables:
 
@@ -29,7 +31,8 @@ key_concepts:
       3. **Sans headings, serif body**: Modern but readable
 
       System fonts (the default) load instantly. Custom fonts add personality but require loading.
-  - name: "Contrast and Accessibility"
+  - type: concept
+    name: "Contrast and Accessibility"
     explanation: |
       Your text must be readable. The WCAG guidelines recommend:
 
@@ -39,6 +42,17 @@ key_concepts:
       The default theme uses black on white (21:1 ratio)—maximum contrast. If you lighten text or darken backgrounds, verify you maintain readability.
 
       Use a contrast checker like [WebAIM's tool](https://webaim.org/resources/contrastchecker/).
+  - type: check
+    question: "What's the difference between --color-primary and --color-accent?"
+    hint: "Think about frequency of use and where each appears."
+  - type: check
+    question: "Why might you choose system fonts over a custom font like Inter?"
+    hint: "Consider loading performance and dependencies."
+  - type: resource
+    title: "Realtime Colors"
+    author: "Juxtopposed"
+    url: "https://www.realtimecolors.com/"
+    description: "Generate and preview color palettes in real-time."
 assignment:
   instructions: |
     Apply a custom color palette to your curriculum site:
@@ -52,16 +66,6 @@ assignment:
     **Bonus**: Try a custom font. Add a Google Fonts link to `src/app.html` and update the font variables.
   url: /docs/styling-guide.md
   reading_title: "Styling Guide - Color Palettes"
-knowledge_check:
-  - question: "What's the difference between --color-primary and --color-accent?"
-    hint: "Think about frequency of use and where each appears."
-  - question: "Why might you choose system fonts over a custom font like Inter?"
-    hint: "Consider loading performance and dependencies."
-additional_resources:
-  - title: "Realtime Colors"
-    author: "Juxtopposed"
-    url: "https://www.realtimecolors.com/"
-    description: "Generate and preview color palettes in real-time."
 ---
 
 ## Choosing a Color Palette

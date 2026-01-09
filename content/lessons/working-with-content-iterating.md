@@ -4,8 +4,9 @@ slug: iterating
 cluster: working-with-content
 order: 3
 description: "Develop a practice of continuous improvement based on feedback and deeper understanding."
-key_concepts:
-  - name: "The Living Curriculum"
+blocks:
+  - type: concept
+    name: "The Living Curriculum"
     explanation: |
       A curriculum isn't finished when you publish it—it's a living document that evolves as:
 
@@ -15,7 +16,8 @@ key_concepts:
       - You discover new foundational texts
 
       The best curricula are maintained over years, not abandoned after launch.
-  - name: "Feedback Loops"
+  - type: concept
+    name: "Feedback Loops"
     explanation: |
       Improvement requires feedback. For a self-directed curriculum, feedback comes from:
 
@@ -25,7 +27,8 @@ key_concepts:
       - **Domain developments**: New scholarship, updated sources
 
       Build channels for each type of feedback.
-  - name: "Addition vs. Revision"
+  - type: concept
+    name: "Addition vs. Revision"
     explanation: |
       Not all improvements require new content. Often, the better move is:
 
@@ -35,13 +38,14 @@ key_concepts:
       - **Link**: Connect related lessons that didn't reference each other
 
       Adding new lessons should be the exception, not the default response to feedback.
-knowledge_check:
-  - question: "How often should you review your curriculum for improvements?"
+  - type: check
+    question: "How often should you review your curriculum for improvements?"
     hint: "Think about what cadence is sustainable long-term."
-  - question: "When is adding a new lesson the wrong response to feedback?"
+  - type: check
+    question: "When is adding a new lesson the wrong response to feedback?"
     hint: "Consider whether the issue is missing content or unclear existing content."
-additional_resources:
-  - title: "On Writing Well"
+  - type: resource
+    title: "On Writing Well"
     author: "William Zinsser"
     url: "https://www.harpercollins.com/products/on-writing-well-william-zinsser"
     description: "Classic guide to clear writing—relevant for curriculum revision."

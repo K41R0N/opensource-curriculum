@@ -4,8 +4,9 @@ slug: using-cms
 cluster: working-with-content
 order: 1
 description: "Add and edit content through the browser-based CMS without touching code."
-key_concepts:
-  - name: "Git-Based CMS"
+blocks:
+  - type: concept
+    name: "Git-Based CMS"
     explanation: |
       Sveltia CMS is a "git-based" CMS, meaning every edit you make becomes a commit to your GitHub repository. This gives you:
 
@@ -14,7 +15,8 @@ key_concepts:
       - **Portability**: Your content is plain Markdown, never locked in
 
       When you save in the CMS, it commits directly to your repo, which triggers a rebuild of your site.
-  - name: "Content Collections"
+  - type: concept
+    name: "Content Collections"
     explanation: |
       The CMS organizes content into "collections"—groupings of similar content types:
 
@@ -24,7 +26,8 @@ key_concepts:
       - **Settings**: Site-wide configuration (maps to `content/settings/`)
 
       Each collection has its own fields and validation rules.
-  - name: "The Editorial Workflow"
+  - type: concept
+    name: "The Editorial Workflow"
     explanation: |
       The CMS provides a visual editor that handles the Markdown and YAML for you. You fill in fields, and it generates the right file format.
 
@@ -35,10 +38,11 @@ key_concepts:
       4. Fill in the fields using the visual editor
       5. Click "Publish" to commit changes
       6. Wait 1-2 minutes for the site to rebuild
-knowledge_check:
-  - question: "What happens when you click 'Publish' in the CMS?"
+  - type: check
+    question: "What happens when you click 'Publish' in the CMS?"
     hint: "Think about what git-based means."
-  - question: "Where can you see the history of all changes made through the CMS?"
+  - type: check
+    question: "Where can you see the history of all changes made through the CMS?"
     hint: "Consider where the content actually lives."
 ---
 

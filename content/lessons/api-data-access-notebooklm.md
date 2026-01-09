@@ -4,8 +4,9 @@ slug: notebooklm
 cluster: api-data-access
 order: 3
 description: "Use Google's NotebookLM to consume your curriculum or generate new content from source readings."
-key_concepts:
-  - name: "Two Integration Directions"
+blocks:
+  - type: concept
+    name: "Two Integration Directions"
     explanation: |
       NotebookLM can work with your curriculum in two ways:
 
@@ -15,7 +16,8 @@ key_concepts:
       | **Generator** | Your source readings | Insights for writing lessons |
 
       Both leverage the same insight: structured, well-organized content is easier for AI to work with.
-  - name: "Consuming Your Curriculum"
+  - type: concept
+    name: "Consuming Your Curriculum"
     explanation: |
       Add your curriculum to NotebookLM using the JSON API (`/api/curriculum.json?content=true`) or individual lesson URLs. Once imported, you can:
 
@@ -24,7 +26,8 @@ key_concepts:
       - Create study guides and summaries
 
       The structured nature of your lessons gives NotebookLM better material to synthesize.
-  - name: "Generating Curriculum Content"
+  - type: concept
+    name: "Generating Curriculum Content"
     explanation: |
       Upload your foundational readings (PDFs, articles) to NotebookLM, then query it for:
 
@@ -61,13 +64,14 @@ assignment:
        - "What would make good reflection questions?"
     4. Use the responses to draft a new lesson
     5. Add it to your curriculum via the CMS
-knowledge_check:
-  - question: "Why is the JSON API with ?content=true more useful for NotebookLM than just the basic API?"
+  - type: check
+    question: "Why is the JSON API with ?content=true more useful for NotebookLM than just the basic API?"
     hint: "Think about what NotebookLM needs to generate meaningful insights."
-  - question: "In the generator workflow, what role does editorial judgment play?"
+  - type: check
+    question: "In the generator workflow, what role does editorial judgment play?"
     hint: "NotebookLM analyzes, but who decides what belongs in the curriculum?"
-additional_resources:
-  - title: "NotebookLM"
+  - type: resource
+    title: "NotebookLM"
     author: "Google"
     url: "https://notebooklm.google.com"
     description: "Google's AI-powered research assistant."

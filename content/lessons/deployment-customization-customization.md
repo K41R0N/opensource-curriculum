@@ -4,8 +4,9 @@ slug: customization
 cluster: deployment-customization
 order: 3
 description: "Brand your curriculum with custom colors, logos, and site settings—no code required."
-key_concepts:
-  - name: "Site Settings"
+blocks:
+  - type: concept
+    name: "Site Settings"
     explanation: |
       Core site information is stored in `content/settings/site.json`:
 
@@ -15,7 +16,8 @@ key_concepts:
       - **logo**: Path to your logo image
 
       Edit these through the CMS under "Settings" → "Site Settings".
-  - name: "CSS Custom Properties"
+  - type: concept
+    name: "CSS Custom Properties"
     explanation: |
       The curriculum uses CSS custom properties (variables) for theming. Key variables in `src/app.css`:
 
@@ -30,7 +32,8 @@ key_concepts:
       ```
 
       Change these values to instantly update colors across the entire site.
-  - name: "Content-First Customization"
+  - type: concept
+    name: "Content-First Customization"
     explanation: |
       The most important customization isn't visual—it's your content.
 
@@ -73,10 +76,11 @@ assignment:
     1. Add your logo image to `static/images/`
     2. Update the logo path in Site Settings
     3. Or edit the header component directly
-knowledge_check:
-  - question: "What should you customize before changing colors?"
+  - type: check
+    question: "What should you customize before changing colors?"
     hint: "Think about what visitors actually read vs. what they see."
-  - question: "How do CSS custom properties make theming easier?"
+  - type: check
+    question: "How do CSS custom properties make theming easier?"
     hint: "Consider what happens when you change a variable in one place."
 ---
 

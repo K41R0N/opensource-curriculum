@@ -5,26 +5,30 @@ cluster: getting-started
 author: ''
 order: 1
 description: The philosophy behind depth-first learning and why curated curricula matter more than ever.
-key_concepts:
-  - name: Depth Over Breadth
+blocks:
+  - type: concept
+    name: Depth Over Breadth
     explanation: |-
       In an age where content creation is heavily automated, going for depth instead of breadth is what distinguishes genuine scholarship from surface-level takes. An earned point of view is worth more than a thousand hot takes.
 
       When everyone can generate summaries and overviews, the value shifts to those who have actually done the reading—who can engage with primary sources, identify nuances, and form original arguments.
-  - name: The Wikipedia Method
+  - type: concept
+    name: The Wikipedia Method
     explanation: |-
       When we went to school, teachers asked us not to use Wikipedia. What we did was cite the Wikipedia sources instead. This is the root of how digital scholarship in the algorithm age should go.
 
       You start with the things you know you have to learn, and you branch out as you actually develop an understanding and opinions to challenge. The goal is not comprehensive coverage, but depth. Each reading opens doors to further exploration.
-  - name: Self-Directed vs. Traditional Education
+  - type: concept
+    name: Self-Directed vs. Traditional Education
     explanation: |-
       Traditional education optimizes for coverage: survey courses that expose students to many topics briefly. Self-directed curricula optimize for mastery: fewer topics, explored deeply.
 
       A self-directed curriculum is a commitment to genuine understanding. It says: "These are the foundational texts in this domain. I will engage with them seriously, form my own views, and build from there."
-knowledge_check:
-  - question: Why does depth matter more than breadth in the age of AI?
+  - type: check
+    question: Why does depth matter more than breadth in the age of AI?
     hint: Think about what becomes commoditized when anyone can generate summaries.
-  - question: What's the 'Wikipedia method' of scholarship?
+  - type: check
+    question: What's the 'Wikipedia method' of scholarship?
     hint: Consider how you'd use Wikipedia as a starting point, not an endpoint.
 ---
 ## Welcome to Bring your Own Curriculum!

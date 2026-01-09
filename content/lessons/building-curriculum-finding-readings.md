@@ -4,8 +4,9 @@ slug: finding-readings
 cluster: building-curriculum
 order: 2
 description: "Use AI prompts to discover the canonical texts and influential works in your domain."
-key_concepts:
-  - name: "Foundational vs. Popular"
+blocks:
+  - type: concept
+    name: "Foundational vs. Popular"
     explanation: |
       Not all well-known texts are foundational. A foundational text is one that:
 
@@ -15,18 +16,30 @@ key_concepts:
       - Rewards careful, close reading
 
       Popular texts might summarize ideas well but don't necessarily reward the same depth of engagement.
-  - name: "Primary vs. Secondary Sources"
+  - type: concept
+    name: "Primary vs. Secondary Sources"
     explanation: |
       Primary sources are the original works—the texts that introduced ideas. Secondary sources explain, interpret, or build on primary sources.
 
       A good curriculum emphasizes primary sources. You want learners engaging with Berger & Luckmann's original arguments, not just summaries of them.
 
       Secondary sources can be valuable as additional resources, but shouldn't be the main readings.
-  - name: "The Citation Network"
+  - type: concept
+    name: "The Citation Network"
     explanation: |
       Academic texts form a citation network—each work builds on previous work and influences future work. Foundational texts sit at the nodes of this network.
 
       When evaluating potential readings, ask: "Is this text cited by the other texts in my curriculum?" Texts that appear repeatedly in citations are likely foundational.
+  - type: check
+    question: "How do you distinguish a foundational text from a popular one?"
+    hint: "Think about the text's influence on the field, not just its sales."
+  - type: check
+    question: "Why verify AI-suggested readings?"
+    hint: "Consider the known limitations of language models."
+  - type: resource
+    title: "Google Scholar"
+    url: "https://scholar.google.com"
+    description: "Use citation counts and 'Cited by' links to identify influential works."
 assignment:
   instructions: |
     Use the Reading Discovery Prompt with your AI assistant to generate an initial reading list for your domain.
@@ -34,15 +47,6 @@ assignment:
     **Important**: After generating the list, verify each text actually exists. AI can hallucinate plausible-sounding but non-existent books. Cross-check with Google Scholar, WorldCat, or library catalogs.
   url: /prompts/02-reading-discovery.md
   reading_title: "Reading Discovery Prompt"
-knowledge_check:
-  - question: "How do you distinguish a foundational text from a popular one?"
-    hint: "Think about the text's influence on the field, not just its sales."
-  - question: "Why verify AI-suggested readings?"
-    hint: "Consider the known limitations of language models."
-additional_resources:
-  - title: "Google Scholar"
-    url: "https://scholar.google.com"
-    description: "Use citation counts and 'Cited by' links to identify influential works."
 ---
 
 ## Finding the Right Readings

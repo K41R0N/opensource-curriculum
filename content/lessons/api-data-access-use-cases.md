@@ -4,8 +4,9 @@ slug: use-cases
 cluster: api-data-access
 order: 2
 description: "Practical applications for the curriculum APIs—from AI agents to custom dashboards."
-key_concepts:
-  - name: "AI Integration"
+blocks:
+  - type: concept
+    name: "AI Integration"
     explanation: |
       AI assistants can consume your curriculum via the JSON API:
 
@@ -14,12 +15,14 @@ key_concepts:
       - **Tutoring bots**: Point any AI at `/api/curriculum.json` and it instantly understands your content
 
       The structured format makes it easy for AI to understand relationships between clusters, lessons, and concepts.
-  - name: "Automation & Syndication"
+  - type: concept
+    name: "Automation & Syndication"
     explanation: |
       The RSS feed integrates with automation platforms like Zapier, Make, and IFTTT. When you publish a new lesson, automatically tweet about it, notify a Discord channel, or send a newsletter.
 
       The API also enables syndication—pull your curriculum into documentation sites, learning management systems, or partner sites. Your API is the single source of truth.
-  - name: "Custom Applications"
+  - type: concept
+    name: "Custom Applications"
     explanation: |
       Build custom tools on top of the JSON API:
 
@@ -70,13 +73,14 @@ assignment:
     ```
     2. Replace `YOURSITE` with your actual domain
     3. Open the HTML file in a browser
-knowledge_check:
-  - question: "Why is structured JSON better than scraping HTML for AI integrations?"
+  - type: check
+    question: "Why is structured JSON better than scraping HTML for AI integrations?"
     hint: "Think about reliability, clarity of relationships, and maintenance."
-  - question: "What's a practical automation you could build with the RSS feed for your curriculum?"
+  - type: check
+    question: "What's a practical automation you could build with the RSS feed for your curriculum?"
     hint: "Consider how you'd want to notify your audience about new content."
-additional_resources:
-  - title: "Claude Projects Documentation"
+  - type: resource
+    title: "Claude Projects Documentation"
     author: "Anthropic"
     url: "https://support.anthropic.com/en/articles/9517075-what-are-projects"
     description: "How to create Claude Projects with custom knowledge."

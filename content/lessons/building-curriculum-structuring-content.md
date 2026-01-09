@@ -4,8 +4,9 @@ slug: structuring-content
 cluster: building-curriculum
 order: 3
 description: "Transform your reading list into a coherent curriculum structure with logical progression."
-key_concepts:
-  - name: "Cluster Design"
+blocks:
+  - type: concept
+    name: "Cluster Design"
     explanation: |
       A cluster is a thematic grouping of 2-5 lessons that share a common focus. Good clusters have:
 
@@ -14,7 +15,8 @@ key_concepts:
       - **Self-contained value**: Could someone read just this cluster and learn something complete?
 
       Think of clusters as chapters in a book—each tells part of the story, but together they form a coherent whole.
-  - name: "Lesson Structure"
+  - type: concept
+    name: "Lesson Structure"
     explanation: |
       Each lesson follows a consistent structure:
 
@@ -25,7 +27,8 @@ key_concepts:
       - **Additional Resources**: Further exploration
 
       This structure ensures every lesson is actionable and complete.
-  - name: "Progressive Complexity"
+  - type: concept
+    name: "Progressive Complexity"
     explanation: |
       Sequence lessons so complexity increases gradually:
 
@@ -35,6 +38,17 @@ key_concepts:
       4. **Connect threads**: Final lessons synthesize earlier concepts
 
       Learners should never feel thrown into the deep end without preparation.
+  - type: check
+    question: "What makes a good cluster theme?"
+    hint: "Think about what unifies the lessons and what a learner gains from completing them."
+  - type: check
+    question: "Why does lesson sequence matter?"
+    hint: "Consider how concepts build on each other and how vocabulary gets established."
+  - type: resource
+    title: "Backward Design in Education"
+    author: "Grant Wiggins & Jay McTighe"
+    url: "https://www.ascd.org/books/understanding-by-design-expanded-2nd-edition"
+    description: "The classic framework for curriculum design—start with outcomes, work backward."
 assignment:
   instructions: |
     Use the Curriculum Structure Prompt to transform your reading list into a complete curriculum structure.
@@ -42,16 +56,6 @@ assignment:
     This is where you make key decisions about organization. Take your time—the structure you choose shapes the learning experience.
   url: /prompts/03-curriculum-structure.md
   reading_title: "Curriculum Structure Prompt"
-knowledge_check:
-  - question: "What makes a good cluster theme?"
-    hint: "Think about what unifies the lessons and what a learner gains from completing them."
-  - question: "Why does lesson sequence matter?"
-    hint: "Consider how concepts build on each other and how vocabulary gets established."
-additional_resources:
-  - title: "Backward Design in Education"
-    author: "Grant Wiggins & Jay McTighe"
-    url: "https://www.ascd.org/books/understanding-by-design-expanded-2nd-edition"
-    description: "The classic framework for curriculum design—start with outcomes, work backward."
 ---
 
 ## From Readings to Structure

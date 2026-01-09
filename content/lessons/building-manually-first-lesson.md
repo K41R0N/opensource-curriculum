@@ -4,8 +4,9 @@ slug: first-lesson
 cluster: building-manually
 order: 4
 description: "Walk through creating a complete lesson from scratch—from reading to published content."
-key_concepts:
-  - name: "The Reading-First Approach"
+blocks:
+  - type: concept
+    name: "The Reading-First Approach"
     explanation: |
       Before writing anything, engage with the reading itself:
 
@@ -15,7 +16,8 @@ key_concepts:
       4. **Find connections**: How does this relate to other readings?
 
       Your lesson content should emerge from your engagement with the text, not be written abstractly.
-  - name: "Writing for Learners"
+  - type: concept
+    name: "Writing for Learners"
     explanation: |
       Your audience hasn't read the text yet. They need:
 
@@ -25,7 +27,8 @@ key_concepts:
       - **Support**: Help with difficult passages
 
       Don't summarize the reading—set learners up to engage with it well.
-  - name: "The Completeness Test"
+  - type: concept
+    name: "The Completeness Test"
     explanation: |
       A lesson is complete when a learner can:
 
@@ -36,7 +39,8 @@ key_concepts:
       5. Go deeper if desired (from additional resources)
 
       If any of these are missing, the lesson has gaps.
-  - name: "Iteration Over Perfection"
+  - type: concept
+    name: "Iteration Over Perfection"
     explanation: |
       Your first lesson won't be perfect. That's fine.
 
@@ -46,6 +50,16 @@ key_concepts:
       - **Build momentum**: Completing one lesson motivates the next
 
       Don't let perfectionism stop you from launching.
+  - type: check
+    question: "Why engage with the reading before writing lesson content?"
+    hint: "Consider where good lesson content comes from."
+  - type: check
+    question: "What makes a lesson 'complete' enough to publish?"
+    hint: "Think about what a learner needs to successfully engage with the reading."
+  - type: resource
+    title: "Working With Content Cluster"
+    url: "/curriculum/working-with-content"
+    description: "Detailed editing workflows for ongoing content work."
 assignment:
   instructions: |
     Create your first complete lesson:
@@ -73,15 +87,6 @@ assignment:
     - Wait 1-2 minutes for deployment
     - Verify it appears on your site
 
-knowledge_check:
-  - question: "Why engage with the reading before writing lesson content?"
-    hint: "Consider where good lesson content comes from."
-  - question: "What makes a lesson 'complete' enough to publish?"
-    hint: "Think about what a learner needs to successfully engage with the reading."
-additional_resources:
-  - title: "Working With Content Cluster"
-    url: "/curriculum/working-with-content"
-    description: "Detailed editing workflows for ongoing content work."
 ---
 
 ## Your First Lesson: A Complete Walkthrough
