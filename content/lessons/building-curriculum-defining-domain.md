@@ -61,7 +61,7 @@ additional_resources:
 ---
 ## The Art of Domain Definition
 
-**_Disclaimer: This cluster outlines methods for using LLMs and agents to create your own personalized curriculum. This platform is built to be AI-optional. If you'd prefer to skip the AI parts, you can just proceed with [the next cluster on deployment](https://byocurriculum.dev/curriculum/deployment-customization) and just manually fill your material in using the built-in CMS._**
+**_Disclaimer: This cluster outlines methods for using LLMs and agents to create your own personalized curriculum. This platform is built to be AI-optional. If you'd prefer to skip the AI parts, you can just proceed with [the next cluster on deployment](https://byocurriculum.dev/curriculum/deployment-customization) and just manually fill in your material using the built-in CMS._**
 
 The most common mistake in curriculum design is being too broad. "A curriculum on philosophy" is too broad. "A curriculum on how 20th-century analytic philosophy addressed the mind-body problem" is focused enough to be useful.
 
