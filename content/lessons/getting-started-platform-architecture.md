@@ -39,7 +39,7 @@ key_concepts:
     explanation: |
       The CMS (Content Management System) provides a visual interface for editing content. It's powered by Sveltia CMS, which:
 
-      - Reads your content schema from `config.yml`
+      - Reads your content schema from a configuration template
       - Provides form-based editing for each field
       - Commits changes directly to your GitHub repository
 
@@ -114,7 +114,7 @@ The entire stack is free or very low cost for typical usage.
 
 | File | Purpose |
 |------|---------|
-| `static/admin/config.yml` | CMS schema definition |
+| `static/admin/config.template.yml` | CMS schema definition (config generated at build time) |
 | `content/settings/site.json` | Site title, description, author |
 | `content/pages/home.md` | Homepage content |
 | `tailwind.config.js` | Color and font customization |

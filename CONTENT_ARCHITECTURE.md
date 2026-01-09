@@ -298,7 +298,7 @@ content/
 static/
 ├── admin/
 │   ├── index.html          # CMS entry point
-│   └── config.yml          # CMS schema (mirrors this doc)
+│   └── config.template.yml # CMS schema template (config.yml generated at build)
 └── images/
     └── lessons/            # Lesson images
 ```

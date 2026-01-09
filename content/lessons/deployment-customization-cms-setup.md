@@ -67,13 +67,14 @@ assignment:
     **Step 3: Configure Worker Environment Variables**
     1. In your Cloudflare Worker settings, go to "Variables"
     2. Add these environment variables:
-       - `CLIENT_ID`: Your GitHub OAuth Client ID
-       - `CLIENT_SECRET`: Your GitHub OAuth Client Secret (mark as encrypted)
-       - `REDIRECT_URI`: Your worker's callback URL
+       - `GITHUB_CLIENT_ID`: Your GitHub OAuth Client ID
+       - `GITHUB_CLIENT_SECRET`: Your GitHub OAuth Client Secret (mark as encrypted)
 
-    **Step 4: Update CMS Config**
-    1. In your repository, edit `static/admin/config.yml`
-    2. Update the `base_url` under `backend` to your worker URL
+    **Step 4: Add Environment Variables in Netlify**
+    1. In your Netlify dashboard, go to Site settings → Environment variables
+    2. Add `CMS_REPO` with your GitHub username/repo (e.g., `myname/my-curriculum`)
+    3. Add `CMS_AUTH_URL` with your Cloudflare Worker URL
+    4. Trigger a redeploy for the changes to take effect
 
     **Step 5: Test the Login**
     1. Go to `your-site.netlify.app/admin/`
@@ -134,8 +135,8 @@ export default {
 
     if (url.pathname === '/auth') {
       const authUrl = new URL('https://github.com/login/oauth/authorize');
-      authUrl.searchParams.set('client_id', env.CLIENT_ID);
-      authUrl.searchParams.set('redirect_uri', env.REDIRECT_URI);
+      authUrl.searchParams.set('client_id', env.GITHUB_CLIENT_ID);
+      authUrl.searchParams.set('redirect_uri', `${url.origin}/callback`);
       authUrl.searchParams.set('scope', 'repo user');
       authUrl.searchParams.set('state', crypto.randomUUID());
       return Response.redirect(authUrl.toString(), 302);
@@ -151,8 +152,8 @@ export default {
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          client_id: env.CLIENT_ID,
-          client_secret: env.CLIENT_SECRET,
+          client_id: env.GITHUB_CLIENT_ID,
+          client_secret: env.GITHUB_CLIENT_SECRET,
           code: code
         })
       });
@@ -193,13 +194,12 @@ export default {
 
 Still in Cloudflare:
 1. Go to your worker's Settings → Variables
-2. Add three environment variables:
+2. Add two environment variables:
 
 | Variable | Value |
 |----------|-------|
-| `CLIENT_ID` | Your GitHub OAuth Client ID |
-| `CLIENT_SECRET` | Your GitHub OAuth Client Secret (encrypt this) |
-| `REDIRECT_URI` | `https://your-worker.workers.dev/callback` |
+| `GITHUB_CLIENT_ID` | Your GitHub OAuth Client ID |
+| `GITHUB_CLIENT_SECRET` | Your GitHub OAuth Client Secret (encrypt this) |
 
 3. Click "Save and Deploy"
 
@@ -208,20 +208,16 @@ Still in Cloudflare:
 Go back to your GitHub OAuth App settings and update:
 - **Authorization callback URL**: `https://your-worker.workers.dev/callback`
 
-### 5. Update CMS Config
+### 5. Add Netlify Environment Variables
 
-In your repository, edit `static/admin/config.yml`:
+In your Netlify dashboard, go to **Site settings → Environment variables** and add:
 
-```yaml
-backend:
-  name: github
-  repo: YOUR_USERNAME/YOUR_REPO
-  branch: main
-  base_url: https://your-worker.workers.dev
-  auth_endpoint: /auth
-```
+| Variable | Value |
+|----------|-------|
+| `CMS_REPO` | Your GitHub username/repo (e.g., `myname/my-curriculum`) |
+| `CMS_AUTH_URL` | Your Cloudflare Worker URL (e.g., `https://my-auth.workers.dev`) |
 
-Commit and push this change. Wait for Netlify to redeploy.
+These variables are used at build time to generate the CMS configuration. After adding them, trigger a redeploy in Netlify (Deploys → Trigger deploy).
 
 ### 6. Test Everything
 
@@ -235,12 +231,13 @@ If it works, you're done! If not, check the troubleshooting section below.
 ## Troubleshooting
 
 **"Failed to fetch" error**
-- Check that your worker URL is correct in `config.yml`
+- Check that `CMS_AUTH_URL` is set correctly in Netlify environment variables
 - Verify the worker is deployed (visit the URL directly)
+- Make sure you redeployed after adding environment variables
 
 **"Bad credentials" error**
-- Verify CLIENT_ID and CLIENT_SECRET are correct
-- Make sure CLIENT_SECRET is the actual secret, not encrypted
+- Verify `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` are correct in Cloudflare
+- Make sure `GITHUB_CLIENT_SECRET` is the actual secret, not encrypted
 
 **Stuck on authorization page**
 - Check the callback URL matches exactly between GitHub and your worker
@@ -248,7 +245,7 @@ If it works, you're done! If not, check the troubleshooting section below.
 
 **Can see CMS but can't save**
 - Verify your GitHub account has write access to the repository
-- Check the `repo` setting in `config.yml` matches your repository
+- Check `CMS_REPO` is set correctly (format: `username/repo-name`)
 
 ## Security Notes
 
