@@ -1,7 +1,7 @@
 ---
 title: Working With Your Content
 slug: working-with-content
-order: 4
+order: 5
 description: "Day-to-day content management, editing workflows, and iterating on your curriculum."
 ---
 

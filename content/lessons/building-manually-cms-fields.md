@@ -1,0 +1,312 @@
+---
+title: Understanding the CMS Fields
+slug: cms-fields
+cluster: building-manually
+order: 3
+description: "What each field in the CMS does, which are required, and what to keep in mind when filling them."
+objectives:
+  - Understand the purpose of each CMS field
+  - Know which fields are required vs. optional
+  - Learn best practices for writing effective content in each field
+key_concepts:
+  - name: "Required vs. Optional Fields"
+    explanation: |
+      **Required** fields must be filled for the lesson to work:
+      - Title, Slug, Cluster, Order, Description
+
+      **Recommended** fields significantly improve the lesson:
+      - Key Concepts, Assignment, Body content
+
+      **Optional** fields add value but aren't essential:
+      - Knowledge Check, Additional Resources, Author, Featured Image
+
+      Start with required fields, add recommended fields, then enhance with optional ones as time permits.
+  - name: "The Slug Field"
+    explanation: |
+      The slug becomes part of the URL: `yoursite.com/curriculum/cluster-slug/lesson-slug`
+
+      Good slugs are:
+      - **Lowercase**: `social-construction` not `Social-Construction`
+      - **Hyphenated**: `finding-readings` not `finding_readings`
+      - **Descriptive**: `phenomenology-tools` not `lesson-3`
+      - **Short but clear**: `media-ecology` not `the-study-of-media-ecology`
+
+      Don't change slugs after publishing—it breaks existing links.
+  - name: "Description vs. Body"
+    explanation: |
+      These serve different purposes:
+
+      **Description** (1-2 sentences):
+      - Appears in lesson cards and lists
+      - Helps learners decide whether to read
+      - Should answer: "What will I learn?"
+
+      **Body** (paragraphs):
+      - Appears at the top of the lesson page
+      - Provides context and introduction
+      - Sets up why the reading matters
+  - name: "Key Concepts Structure"
+    explanation: |
+      Each key concept has two parts:
+
+      **Name**: A short phrase (2-5 words) identifying the concept
+      - "Social Construction"
+      - "The Attention Economy"
+      - "Institutionalization Process"
+
+      **Explanation**: 2-4 paragraphs explaining the concept
+      - What it means
+      - Why it matters for this reading
+      - How to recognize it in the text
+
+      Aim for 3-5 concepts per lesson. More than 5 dilutes focus.
+assignment:
+  instructions: |
+    Familiarize yourself with the CMS by creating a test lesson:
+
+    1. Go to `your-site.netlify.app/admin/`
+    2. Click "Lessons" → "New Lesson"
+    3. Fill in each field according to the guide below
+    4. Save and preview the result
+    5. Delete the test lesson or keep it as a template
+
+    **Use this as a reference while building your actual lessons.**
+knowledge_check:
+  - question: "Why shouldn't you change a slug after publishing?"
+    hint: "Think about how URLs work and what happens to existing links."
+  - question: "What's the difference between a lesson description and its body content?"
+    hint: "Consider where each appears and what purpose it serves."
+additional_resources:
+  - title: "Sveltia CMS Documentation"
+    url: "https://github.com/sveltia/sveltia-cms"
+    description: "Full reference for the CMS interface."
+---
+
+## CMS Field Reference
+
+This is your complete guide to every field in the lesson editor. Keep this open as you create content.
+
+---
+
+## Required Fields
+
+These fields must be filled for the lesson to function.
+
+### Title
+**What it is**: The lesson name displayed on the site
+
+**Best practices**:
+- Be descriptive but concise (5-10 words)
+- Use title case: "The Social Construction of Reality"
+- Don't include lesson numbers—order is handled separately
+
+**Examples**:
+- βœ" "Finding Foundational Readings"
+- βœ" "How Institutions Shape Thought"
+- ✗ "Lesson 3: Readings" (too vague, includes number)
+- ✗ "THE SOCIAL CONSTRUCTION OF REALITY CHAPTER ONE" (too long, all caps)
+
+### Slug
+**What it is**: The URL-friendly identifier for this lesson
+
+**Best practices**:
+- Lowercase letters and hyphens only
+- No spaces, underscores, or special characters
+- Keep it short but recognizable
+- Never change after publishing
+
+**Examples**:
+- βœ" `social-construction`
+- βœ" `finding-readings`
+- ✗ `Social Construction` (spaces, caps)
+- ✗ `lesson_3` (underscore, not descriptive)
+
+### Cluster
+**What it is**: Which cluster this lesson belongs to (dropdown)
+
+**Best practices**:
+- Create clusters before lessons
+- Each lesson belongs to exactly one cluster
+- Changing cluster after publishing is okay
+
+### Order
+**What it is**: Position within the cluster (number)
+
+**Best practices**:
+- Use integers: 1, 2, 3...
+- Gaps are okay: 1, 2, 5 works if you might add lessons later
+- Lower numbers appear first
+
+### Description
+**What it is**: 1-2 sentence summary shown in listings
+
+**Best practices**:
+- Answer "What will I learn from this lesson?"
+- Be specific, not generic
+- Avoid jargon—this is a preview for potential readers
+
+**Examples**:
+- βœ" "How Berger and Luckmann explain the process by which human activity becomes objective social reality."
+- ✗ "An important reading in sociology." (too vague)
+- ✗ "This lesson covers social construction theory including externalization, objectivation, and internalization as described in the 1966 text." (too long for a description)
+
+---
+
+## Recommended Fields
+
+These fields significantly improve lesson quality.
+
+### Key Concepts
+**What it is**: Expandable sections highlighting main ideas
+
+**Structure**:
+```yaml
+key_concepts:
+  - name: "Concept Name"
+    explanation: |
+      Explanation paragraphs here.
+      Can include **markdown** formatting.
+
+      Multiple paragraphs are fine.
+```
+
+**Best practices**:
+- 3-5 concepts per lesson
+- Names should be 2-5 words
+- Explanations should be 2-4 paragraphs
+- Focus on ideas *in the reading*, not general background
+
+**Examples**:
+- βœ" Name: "Externalization" / Explanation: What it means, how to spot it in the text
+- ✗ Name: "A concept from sociology" (too vague for a name)
+
+### Assignment
+**What it is**: Instructions for the primary reading
+
+**Structure**:
+```yaml
+assignment:
+  instructions: |
+    What to read and how to approach it.
+    Markdown formatting works here.
+  url: "https://archive.org/..."
+  reading_title: "Full citation of the reading"
+```
+
+**Best practices**:
+- Include specific page ranges if not reading entire work
+- Suggest what to pay attention to
+- Estimate time if known ("Approximately 90 minutes")
+- Verify the URL works before publishing
+
+### Body Content
+**What it is**: Introductory paragraphs shown at top of lesson
+
+**Best practices**:
+- 2-4 paragraphs
+- Explain why this reading matters
+- Connect to the curriculum's central question
+- Set up what to expect without summarizing
+
+**What to include**:
+- Historical context (when/why was this written?)
+- Significance (why is this foundational?)
+- Connection (how does this relate to other lessons?)
+- Reading guidance (what's the text like to read?)
+
+---
+
+## Optional Fields
+
+These enhance lessons but can be added later.
+
+### Knowledge Check
+**What it is**: Reflection questions for self-assessment
+
+**Structure**:
+```yaml
+knowledge_check:
+  - question: "The question text"
+    hint: "A hint to guide thinking"
+```
+
+**Best practices**:
+- 2-4 questions per lesson
+- Questions should require having done the reading
+- Focus on understanding, not recall
+- Hints should guide without giving answers
+
+**Examples**:
+- βœ" Question: "How does objectivation make human creations feel external?" / Hint: "Consider what happens when a pattern becomes 'the way we do things.'"
+- ✗ Question: "What year was the book published?" (tests recall, not understanding)
+
+### Additional Resources
+**What it is**: Further reading for those who want more
+
+**Structure**:
+```yaml
+additional_resources:
+  - title: "Resource Title"
+    author: "Author Name"
+    url: "https://..."
+    description: "Brief description of what this adds"
+```
+
+**Best practices**:
+- 2-4 resources per lesson
+- Include a mix of types (articles, videos, related books)
+- These are optional—not required for completing the lesson
+- Describe what each resource adds
+
+### Author
+**What it is**: Who wrote this lesson (optional attribution)
+
+**Best practices**:
+- Use if multiple people contribute to the curriculum
+- Leave blank if you're the sole author
+- Can be different from the reading's author
+
+### Featured Image
+**What it is**: Image displayed with the lesson (optional)
+
+**Best practices**:
+- Use if you have a relevant, high-quality image
+- Ensure you have rights to use it
+- Leave blank rather than using a generic placeholder
+
+---
+
+## Field Checklist for New Lessons
+
+When creating a lesson, work through this checklist:
+
+**Must have** (lesson won't work without):
+- [ ] Title
+- [ ] Slug (checked for lowercase, hyphens)
+- [ ] Cluster selected
+- [ ] Order number
+- [ ] Description (1-2 sentences)
+
+**Should have** (significantly improves quality):
+- [ ] Key concepts (3-5 with explanations)
+- [ ] Assignment (instructions + URL + title)
+- [ ] Body content (2-4 introductory paragraphs)
+
+**Nice to have** (add if time permits):
+- [ ] Knowledge check (2-4 questions)
+- [ ] Additional resources (2-4 links)
+- [ ] Author (if relevant)
+- [ ] Featured image (if available)
+
+---
+
+## Common Mistakes
+
+| Mistake | Problem | Fix |
+|---------|---------|-----|
+| Changing slugs | Breaks existing links | Never change after publishing |
+| Vague descriptions | Learners don't know what they'll get | Be specific about what's learned |
+| Too many key concepts | Dilutes focus | Stick to 3-5 most important |
+| Empty body | Lesson feels incomplete | Write at least 2 paragraphs of context |
+| Unverified URLs | Learners can't access reading | Always test links before publishing |
+| Recall-based questions | Doesn't test understanding | Ask about implications and connections |

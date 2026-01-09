@@ -1,7 +1,7 @@
 ---
 title: API & Data Access
 slug: api-data-access
-order: 6
+order: 7
 description: "Programmatic access to your curriculum via JSON APIs, RSS feeds, and structured data."
 ---
 
