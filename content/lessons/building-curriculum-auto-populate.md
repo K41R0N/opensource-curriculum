@@ -75,7 +75,7 @@ assignment:
     4. **Quick review pass**:
        - Verify all links work
        - Check for obvious errors
-       - Don't perfectβ€"just publish
+       - Don't perfect—just publish
 
     Your curriculum is now live. Refinement comes next.
 knowledge_check:
@@ -221,7 +221,7 @@ key_concepts:
     explanation: |
       Berger and Luckmann describe a three-step process by which human activity becomes social reality...
 
-  - name: "Institutional Factsβ€
+  - name: "Institutional Facts"
     explanation: |
       Some facts exist only because we collectively agree they do...
 

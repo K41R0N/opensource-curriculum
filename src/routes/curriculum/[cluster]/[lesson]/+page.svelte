@@ -14,6 +14,11 @@
 
 	$: lesson = data.hasContent ? data.lesson : lessonMeta;
 
+	// Helper to check if a section is hidden
+	function isHidden(section: string): boolean {
+		return lesson?.hidden_sections?.includes(section) ?? false;
+	}
+
 	// Reading progress
 	let scrollProgress = 0;
 
@@ -173,13 +178,13 @@
 		<!-- Article Body -->
 		<article class="lesson-article">
 			{#if data.hasContent}
-				{#if lesson.content}
+				{#if lesson.content && !isHidden('body')}
 					<div class="lesson-content">
 						{@html lesson.content}
 					</div>
 				{/if}
 
-				{#if lesson.objectives && lesson.objectives.length > 0}
+				{#if lesson.objectives && lesson.objectives.length > 0 && !isHidden('objectives')}
 					<div class="lesson-callout lesson-callout-objectives">
 						<div class="callout-icon">
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -198,7 +203,7 @@
 					</div>
 				{/if}
 
-				{#if lesson.key_concepts && lesson.key_concepts.length > 0}
+				{#if lesson.key_concepts && lesson.key_concepts.length > 0 && !isHidden('key_concepts')}
 					<section class="lesson-section">
 						<h2>Key Concepts</h2>
 						{#each lesson.key_concepts as concept}
@@ -220,7 +225,7 @@
 					</section>
 				{/if}
 
-				{#if lesson.assignment}
+				{#if lesson.assignment && !isHidden('assignment')}
 					<section class="lesson-section">
 						<div class="assignment-card">
 							<div class="assignment-header">
@@ -249,7 +254,7 @@
 					</section>
 				{/if}
 
-				{#if lesson.knowledge_check && lesson.knowledge_check.length > 0}
+				{#if lesson.knowledge_check && lesson.knowledge_check.length > 0 && !isHidden('knowledge_check')}
 					<section class="lesson-section">
 						<div class="knowledge-check-section">
 							<div class="knowledge-check-header">
@@ -280,7 +285,7 @@
 					</section>
 				{/if}
 
-				{#if lesson.additional_resources && lesson.additional_resources.length > 0}
+				{#if lesson.additional_resources && lesson.additional_resources.length > 0 && !isHidden('additional_resources')}
 					<section class="lesson-section">
 						<h2>Additional Resources</h2>
 						<p class="section-subtitle">Supplementary materials for deeper exploration.</p>

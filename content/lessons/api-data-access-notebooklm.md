@@ -123,19 +123,24 @@ Both leverage the same insight: structured, well-organized content is easier for
 
 NotebookLM accepts URLs as sources. Your curriculum provides several entry points:
 
-**Option A: Full Curriculum JSON**
+#### Option A: Full Curriculum JSON
+
 ```
 https://yoursite.netlify.app/api/curriculum.json?content=true
 ```
+
 This gives NotebookLM your entire curriculum—all clusters, lessons, objectives, key concepts, and body content in one structured file.
 
-**Option B: Individual Lesson URLs**
+#### Option B: Individual Lesson URLs
+
 Add specific lesson pages as sources. Useful when you want to focus on a particular cluster or compare specific lessons.
 
-**Option C: RSS Feed**
+#### Option C: RSS Feed
+
 ```
 https://yoursite.netlify.app/feed.xml
 ```
+
 The RSS feed includes full lesson content via `content:encoded`. Some tools prefer RSS format.
 
 ### What You Can Do

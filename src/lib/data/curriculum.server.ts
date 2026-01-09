@@ -396,7 +396,8 @@ export async function loadFullLesson(clusterSlug: string, lessonSlug: string): P
 					assignment: parsedAssignment,
 					knowledge_check: Array.isArray(data.knowledge_check) ? data.knowledge_check : undefined,
 					additional_resources: Array.isArray(data.additional_resources) ? data.additional_resources : undefined,
-					content: bodyHtml
+					content: bodyHtml,
+					hidden_sections: Array.isArray(data.hidden_sections) ? data.hidden_sections : undefined
 				};
 
 				return { lesson, hasContent: !!bodyHtml };

@@ -199,6 +199,20 @@ collections:
         required: false
         hint: "Optional header image"
 
+      - label: Hidden Sections
+        name: hidden_sections
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - { label: "Learning Objectives", value: "objectives" }
+          - { label: "Key Concepts", value: "key_concepts" }
+          - { label: "Assignment", value: "assignment" }
+          - { label: "Knowledge Check", value: "knowledge_check" }
+          - { label: "Additional Resources", value: "additional_resources" }
+          - { label: "Introduction", value: "body" }
+        hint: "Temporarily hide sections without deleting content"
+
   # ==========================================================================
   # PAGES
   # Static pages like About and Home

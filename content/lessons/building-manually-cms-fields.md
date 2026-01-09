@@ -288,6 +288,24 @@ additional_resources:
 - Ensure you have rights to use it
 - Leave blank rather than using a generic placeholder
 
+### Hidden Sections
+**What it is**: Toggle visibility of sections without deleting content
+
+**Available options**:
+- Learning Objectives
+- Key Concepts
+- Assignment
+- Knowledge Check
+- Additional Resources
+- Introduction
+
+**Use cases**:
+- Test how lessons look with/without certain sections
+- Temporarily hide content that's in draft state
+- Create cleaner minimal lessons while preserving work-in-progress content
+
+This is a multi-select field—choose any combination of sections to hide.
+
 ---
 
 ## Field Checklist for New Lessons

@@ -61,6 +61,13 @@ An individual learning unit within a cluster. Lessons are the core content of th
 | `knowledge_check` | list[Question] | no | Reflection questions |
 | `additional_resources` | list[Resource] | no | Supplementary materials |
 | `body` | markdown | no | Introduction/overview content |
+| `ask` | string | no | Question prompting critical evaluation |
+| `example` | string | no | Practical example illustrating concepts |
+| `hint` | string | no | Reflection or problem-solving hint |
+| `important` | string | no | Critical note or disclaimer |
+| `question` | string | no | Reflection or quiz question |
+| `when` | string | no | Context or timing guidance |
+| `hidden_sections` | list[string] | no | Sections to hide without deleting content |
 
 **Flexible Rendering**: Optional fields that are empty simply won't render on the page. This allows minimal lessons (just metadata + intro + assignment) or full lessons with all sections.
 
@@ -343,6 +350,7 @@ export interface Lesson {
   knowledge_check?: Question[];
   additional_resources?: Resource[];
   content?: string;        // markdown body
+  hidden_sections?: string[];  // sections to hide without deleting
 }
 
 export interface KeyConcept {

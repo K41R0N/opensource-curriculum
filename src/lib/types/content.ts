@@ -56,6 +56,8 @@ export interface Lesson {
 	additional_resources?: Resource[];
 	/** Introduction/overview (markdown body) */
 	content?: string;
+	/** Sections to hide without deleting content */
+	hidden_sections?: string[];
 }
 
 // ============================================
