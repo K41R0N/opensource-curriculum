@@ -4,8 +4,9 @@ slug: platform-architecture
 cluster: getting-started
 order: 2
 description: "Technical overview of the curriculum platform: content structure, CMS, and deployment."
-key_concepts:
-  - name: "Content Hierarchy"
+blocks:
+  - type: concept
+    name: "Content Hierarchy"
     explanation: |
       The curriculum is organized into two levels:
 
@@ -14,7 +15,8 @@ key_concepts:
       **Lessons** are the atomic units of content. Each lesson typically covers one primary reading or concept. Lessons belong to exactly one cluster and have a defined order within it.
 
       This two-level hierarchy is simple enough to understand immediately but flexible enough to handle complex curricula.
-  - name: "Markdown + Frontmatter"
+  - type: concept
+    name: "Markdown + Frontmatter"
     explanation: |
       All content is stored as Markdown files with YAML frontmatter. For example:
 
@@ -31,7 +33,8 @@ key_concepts:
       ```
 
       This format is human-readable, version-controlled, and works with any text editor. The CMS provides a visual interface, but you can always edit files directly.
-  - name: "Sveltia CMS"
+  - type: concept
+    name: "Sveltia CMS"
     explanation: |
       The CMS (Content Management System) provides a visual interface for editing content. It's powered by Sveltia CMS, which:
 
@@ -40,10 +43,11 @@ key_concepts:
       - Commits changes directly to your GitHub repository
 
       You access the CMS at `yoursite.com/admin`. It requires GitHub authentication to edit.
-knowledge_check:
-  - question: "What's the relationship between clusters and lessons?"
+  - type: check
+    question: "What's the relationship between clusters and lessons?"
     hint: "Think of clusters like chapters containing multiple lessons."
-  - question: "Why use Markdown files instead of a database?"
+  - type: check
+    question: "Why use Markdown files instead of a database?"
     hint: "Consider version control, portability, and editing flexibility."
 ---
 

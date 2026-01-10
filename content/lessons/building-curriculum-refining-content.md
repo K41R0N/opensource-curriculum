@@ -4,8 +4,9 @@ slug: refining-content
 cluster: building-curriculum
 order: 5
 description: "Improve your auto-generated curriculum over time with targeted edits and your unique perspective."
-key_concepts:
-  - name: "The 80/20 of Refinement"
+blocks:
+  - type: concept
+    name: "The 80/20 of Refinement"
     explanation: |
       Not all lessons need equal attention. Prioritize refinement based on:
 
@@ -15,7 +16,8 @@ key_concepts:
       - **Your expertise**: Where do you have unique insight?
 
       Perfect the lessons that matter most. Leave others "good enough."
-  - name: "Adding Your Voice"
+  - type: concept
+    name: "Adding Your Voice"
     explanation: |
       AI-generated content is competent but generic. What's missing is *you*:
 
@@ -25,7 +27,8 @@ key_concepts:
       - **Your emphasis**: What matters most that others might miss?
 
       The curriculum becomes valuable when it reflects your unique understanding.
-  - name: "Iterative Improvement"
+  - type: concept
+    name: "Iterative Improvement"
     explanation: |
       Don't try to perfect everything at once. Instead:
 
@@ -36,7 +39,8 @@ key_concepts:
       5. **Repeat**: Ongoing refinement, not one-time editing
 
       A curriculum that improves over months beats one that never launches.
-  - name: "Common AI Content Issues"
+  - type: concept
+    name: "Common AI Content Issues"
     explanation: |
       Watch for these patterns in generated content:
 
@@ -47,6 +51,16 @@ key_concepts:
       - **Hallucinated citations**: Always verify sources exist
 
       Each fix makes the curriculum more authentically yours.
+  - type: check
+    question: "Why publish imperfect content before refining it?"
+    hint: "Think about feedback loops and motivation."
+  - type: check
+    question: "What makes your perspective valuable in a curriculum that AI helped create?"
+    hint: "Consider what AI cannot know about your experience and judgment."
+  - type: resource
+    title: "Working With Content Cluster"
+    url: "/curriculum/working-with-content"
+    description: "More on editing workflows using the CMS and local tools."
 assignment:
   instructions: |
     Begin refining your auto-generated curriculum:
@@ -70,15 +84,6 @@ assignment:
     - As you or others work through the curriculum, note friction points
     - Fix one thing per week
     - Let the curriculum evolve
-knowledge_check:
-  - question: "Why publish imperfect content before refining it?"
-    hint: "Think about feedback loops and motivation."
-  - question: "What makes your perspective valuable in a curriculum that AI helped create?"
-    hint: "Consider what AI cannot know about your experience and judgment."
-additional_resources:
-  - title: "Working With Content Cluster"
-    url: "/curriculum/working-with-content"
-    description: "More on editing workflows using the CMS and local tools."
 ---
 
 ## The Refinement Mindset

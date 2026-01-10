@@ -1,0 +1,9 @@
+name = "curriculum-cms-auth"
+main = "index.js"
+compatibility_date = "2024-01-01"
+
+# After deployment, add these secrets via Cloudflare dashboard:
+#   wrangler secret put GITHUB_CLIENT_ID
+#   wrangler secret put GITHUB_CLIENT_SECRET
+#
+# Or set them in the Workers dashboard under Settings → Variables

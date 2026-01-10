@@ -4,8 +4,9 @@ slug: endpoints
 cluster: api-data-access
 order: 1
 description: "Explore the built-in APIs that expose your curriculum as structured data."
-key_concepts:
-  - name: "Four Built-In Endpoints"
+blocks:
+  - type: concept
+    name: "Four Built-In Endpoints"
     explanation: |
       Every curriculum automatically exposes its content through machine-readable formats:
 
@@ -17,20 +18,33 @@ key_concepts:
       | `/api/manifest.json` | JSON-LD | Rich snippets in search |
 
       These update automatically when you edit content through the CMS.
-  - name: "The JSON API"
+  - type: concept
+    name: "The JSON API"
     explanation: |
       The primary endpoint is `/api/curriculum.json`. It returns your complete curriculum structure with query parameters for filtering:
 
       - `?cluster=getting-started` — Filter to a single cluster
       - `?urls=false` — Omit URL fields for smaller response
       - `?content=true` — Include full lesson content for AI agents
-  - name: "Discovery & Syndication"
+  - type: concept
+    name: "Discovery & Syndication"
     explanation: |
       The other endpoints enable discovery and distribution:
 
       - **RSS Feed** (`/feed.xml`) — Subscribers get notified of new content. Works with Feedly, automation tools like Zapier, and AI agents.
       - **Sitemap** (`/sitemap.xml`) — Helps Google and other search engines index your content efficiently.
       - **Schema.org Manifest** (`/api/manifest.json`) — Enables rich snippets in search results using structured vocabulary.
+  - type: check
+    question: "Which endpoint would you use to build a mobile app that displays your curriculum?"
+    hint: "You need structured data that's easy to parse in code."
+  - type: check
+    question: "What's the difference between the RSS feed and the JSON API?"
+    hint: "Think about who or what is consuming each format."
+  - type: resource
+    title: "Schema.org Course Type"
+    author: "Schema.org"
+    url: "https://schema.org/Course"
+    description: "Documentation for the Course schema used in the manifest."
 assignment:
   instructions: |
     Explore each endpoint on your deployed site:
@@ -50,16 +64,6 @@ assignment:
     4. **Manifest**: Visit `https://yoursite.netlify.app/api/manifest.json`
        - Notice the Schema.org vocabulary (`@type`, `@context`)
        - Find the `_links` section that references all other endpoints
-knowledge_check:
-  - question: "Which endpoint would you use to build a mobile app that displays your curriculum?"
-    hint: "You need structured data that's easy to parse in code."
-  - question: "What's the difference between the RSS feed and the JSON API?"
-    hint: "Think about who or what is consuming each format."
-additional_resources:
-  - title: "Schema.org Course Type"
-    author: "Schema.org"
-    url: "https://schema.org/Course"
-    description: "Documentation for the Course schema used in the manifest."
 ---
 
 ## Available Endpoints

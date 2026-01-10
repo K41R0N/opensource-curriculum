@@ -4,8 +4,9 @@ slug: advanced-customization
 cluster: making-it-yours
 order: 3
 description: "Border radius, shadows, and custom CSS for when theme variables aren't enough."
-key_concepts:
-  - name: "Border Radius Psychology"
+blocks:
+  - type: concept
+    name: "Border Radius Psychology"
     explanation: |
       Corner roundness communicates mood:
 
@@ -15,7 +16,8 @@ key_concepts:
       - **Rounded (0.75rem+)**: Playful, casual, inviting
 
       The default template uses sharp corners for a minimal, academic feel. Change `--radius-base` to shift the entire mood.
-  - name: "Shadows as Hierarchy"
+  - type: concept
+    name: "Shadows as Hierarchy"
     explanation: |
       Shadows create visual hierarchy by suggesting elevation:
 
@@ -25,7 +27,8 @@ key_concepts:
       - Large shadow: Modal, high importance
 
       The default is flat (no shadows). Enable them for a more dimensional, Material Design-inspired look.
-  - name: "The Custom CSS Escape Hatch"
+  - type: concept
+    name: "The Custom CSS Escape Hatch"
     explanation: |
       When theme variables don't cover your needs, you can add custom CSS rules at the end of `src/app.css`.
 
@@ -36,13 +39,14 @@ key_concepts:
       4. Comment what your custom CSS does
 
       This is an escape hatch—use sparingly. The more custom CSS you add, the more you'll need to maintain.
-knowledge_check:
-  - question: "When would you choose rounded corners over sharp ones?"
+  - type: check
+    question: "When would you choose rounded corners over sharp ones?"
     hint: "Think about the subject matter and intended audience."
-  - question: "Why should custom CSS be added at the end of app.css rather than inline?"
+  - type: check
+    question: "Why should custom CSS be added at the end of app.css rather than inline?"
     hint: "Consider maintainability and what happens during theme updates."
-additional_resources:
-  - title: "Box Shadow CSS Generator"
+  - type: resource
+    title: "Box Shadow CSS Generator"
     author: "CSSmatic"
     url: "https://www.cssmatic.com/box-shadow"
     description: "Visual tool for creating box shadow values."

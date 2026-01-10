@@ -4,8 +4,9 @@ slug: cms-setup
 cluster: deployment-customization
 order: 2
 description: "Configure authentication so you can edit content through the browser-based CMS."
-key_concepts:
-  - name: "What is the CMS?"
+blocks:
+  - type: concept
+    name: "What is the CMS?"
     explanation: |
       The CMS (Content Management System) is a web interface for editing your curriculum. Instead of editing raw files, you get:
 
@@ -14,7 +15,8 @@ key_concepts:
       - **Automatic file management** — no need to know where files go
 
       Access it at `your-site.netlify.app/admin/`. But first, it needs to know you're allowed to edit.
-  - name: "Why Do I Need to Log In?"
+  - type: concept
+    name: "Why Do I Need to Log In?"
     explanation: |
       Your curriculum files live on GitHub. When you save changes in the CMS, it updates those files automatically. But GitHub needs to verify it's really you making changes.
 
@@ -25,7 +27,8 @@ key_concepts:
       4. The CMS can now save changes on your behalf
 
       This is the same process used by thousands of apps that connect to GitHub.
-  - name: "The Three Pieces"
+  - type: concept
+    name: "The Three Pieces"
     explanation: |
       This setup requires three things to work together:
 
@@ -34,6 +37,17 @@ key_concepts:
       3. **Environment Variables** — Tell your site where to find everything
 
       It sounds complex, but you'll just be copying and pasting values between websites. Follow the steps in order, and it will work.
+  - type: check
+    question: "Why does the CMS need you to log in with GitHub?"
+    hint: "Think about who should be allowed to change your curriculum content."
+  - type: check
+    question: "If something goes wrong, where would you check the callback URL?"
+    hint: "The callback URL appears in both GitHub and Cloudflare."
+  - type: resource
+    title: "Cloudflare Workers Documentation"
+    author: "Cloudflare"
+    url: "https://developers.cloudflare.com/workers/"
+    description: "Learn more about the free service that powers authentication."
 assignment:
   instructions: |
     This is the most technical lesson in the curriculum. Set aside 20-30 minutes of focused time.
@@ -48,16 +62,6 @@ assignment:
     - A text file or notes app to temporarily store values you'll copy
 
     Follow each step in order. Don't skip ahead!
-knowledge_check:
-  - question: "Why does the CMS need you to log in with GitHub?"
-    hint: "Think about who should be allowed to change your curriculum content."
-  - question: "If something goes wrong, where would you check the callback URL?"
-    hint: "The callback URL appears in both GitHub and Cloudflare."
-additional_resources:
-  - title: "Cloudflare Workers Documentation"
-    author: "Cloudflare"
-    url: "https://developers.cloudflare.com/workers/"
-    description: "Learn more about the free service that powers authentication."
 ---
 
 ## Before You Begin
