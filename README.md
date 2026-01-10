@@ -10,7 +10,12 @@ A fork-friendly platform for creating depth-first learning experiences. Built wi
 
 **2. Deploy the CMS auth worker:**
 
-[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/YOUR_USERNAME/YOUR_REPO/tree/main/workers/cms-auth)
+After forking, deploy the auth worker to Cloudflare using this URL (replace with your repo):
+```
+https://deploy.workers.cloudflare.com/?url=https://github.com/YOUR_USERNAME/YOUR_REPO/tree/main/workers/cms-auth
+```
+
+Or deploy manually—see [docs/cms-setup.md](./docs/cms-setup.md) for instructions.
 
 After deploying, see [Quick Start](#quick-start) to connect everything.
 

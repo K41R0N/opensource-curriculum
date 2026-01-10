@@ -38,13 +38,18 @@ Setup takes about 10 minutes.
 
 ### Step 2: Deploy Auth Worker
 
-**Option A: One-Click Deploy**
+**Option A: One-Click Deploy (after forking)**
 
-[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/YOUR_USERNAME/YOUR_REPO/tree/main/workers/cms-auth)
+After forking this repository, create your own deploy button by updating this URL with your GitHub username and repo name:
+
+```
+https://deploy.workers.cloudflare.com/?url=https://github.com/YOUR_USERNAME/YOUR_REPO/tree/main/workers/cms-auth
+```
 
 After deploying, add environment variables in the Cloudflare dashboard:
 - `GITHUB_CLIENT_ID` — your OAuth app client ID
 - `GITHUB_CLIENT_SECRET` — your OAuth app client secret (encrypt this)
+- `ALLOWED_ORIGINS` (optional) — comma-separated allowed origins (e.g., `https://my-site.netlify.app`)
 
 **Option B: Manual Deploy**
 
@@ -56,6 +61,7 @@ After deploying, add environment variables in the Cloudflare dashboard:
 6. Go to **Settings** → **Variables** and add:
    - `GITHUB_CLIENT_ID`
    - `GITHUB_CLIENT_SECRET` (click Encrypt)
+   - `ALLOWED_ORIGINS` (optional, e.g., `https://my-site.netlify.app`)
 
 ---
 
@@ -124,6 +130,8 @@ After saving in CMS:
 - Never commit `GITHUB_CLIENT_SECRET` to the repo
 - Use Cloudflare's encrypted environment variables
 - OAuth app only needs `repo` and `user` scopes
+- For production, set `ALLOWED_ORIGINS` to restrict which sites can authenticate
+- The worker validates OAuth state and uses origin-specific postMessage (no wildcard)
 
 ---
 
