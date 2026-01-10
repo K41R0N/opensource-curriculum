@@ -9,11 +9,14 @@ assignment:
     Follow the step-by-step guide below to deploy your curriculum. The whole process takes about 15 minutes.
 
     **Before you start, you'll need:**
+
     - A computer with internet access
     - An email address for creating accounts
     - About 15 minutes of uninterrupted time
 
     No coding or technical knowledge required!
+  url: https://github.com/K41R0N/opensource-curriculum
+  reading_title: BYO Currículum Repo
 blocks:
   - type: concept
     name: What is Forking?
@@ -35,29 +38,17 @@ blocks:
       - **Provides a free URL** like `your-site.netlify.app`
 
       You don't need to understand servers or hosting—Netlify handles everything.
-  - type: concept
-    name: The Automatic Update Flow
-    explanation: |-
-      Once deployed, updates are automatic:
-
-      1. You edit content (via CMS, Obsidian, or directly on GitHub)
-      2. GitHub receives the change
-      3. Netlify detects it and rebuilds your site
-      4. Your live site updates in 1-2 minutes
-
-      You never have to manually "upload" or "publish" your site. It just happens.
   - type: check
     question: Why does the curriculum use static site hosting instead of a traditional server?
     hint: Think about speed, security, cost, and maintenance.
-  - type: check
-    question: What triggers a rebuild of your site?
-    hint: Consider what actions push changes to your repository.
   - type: resource
     title: Netlify Documentation
     author: Netlify
     url: https://docs.netlify.com/
     description: Official documentation for all Netlify features.
 author: ''
+hidden_sections:
+  - blocks
 ---
 ## Before You Begin
 
