@@ -1,13 +1,13 @@
 ---
 title: How This Platform Works
-slug: platform-architecture
 cluster: getting-started
 order: 2
-description: "Technical overview of the curriculum platform: content structure, CMS, and deployment."
+slug: platform-architecture
+description: 'Technical overview of the curriculum platform: content structure, CMS, and deployment.'
 blocks:
   - type: concept
-    name: "Content Hierarchy"
-    explanation: |
+    name: Content Hierarchy
+    explanation: |-
       The curriculum is organized into two levels:
 
       **Clusters** are thematic groupings—like chapters in a book. Each cluster has a title, description, and optional overview text.
@@ -16,8 +16,8 @@ blocks:
 
       This two-level hierarchy is simple enough to understand immediately but flexible enough to handle complex curricula.
   - type: concept
-    name: "Markdown + Frontmatter"
-    explanation: |
+    name: Markdown + Frontmatter
+    explanation: |-
       All content is stored as Markdown files with YAML frontmatter. For example:
 
       ```yaml
@@ -34,8 +34,8 @@ blocks:
 
       This format is human-readable, version-controlled, and works with any text editor. The CMS provides a visual interface, but you can always edit files directly.
   - type: concept
-    name: "Sveltia CMS"
-    explanation: |
+    name: Sveltia CMS
+    explanation: |-
       The CMS (Content Management System) provides a visual interface for editing content. It's powered by Sveltia CMS, which:
 
       - Reads your content schema from a configuration template
@@ -44,13 +44,16 @@ blocks:
 
       You access the CMS at `yoursite.com/admin`. It requires GitHub authentication to edit.
   - type: check
-    question: "What's the relationship between clusters and lessons?"
-    hint: "Think of clusters like chapters containing multiple lessons."
+    question: What's the relationship between clusters and lessons?
+    hint: Think of clusters like chapters containing multiple lessons.
   - type: check
-    question: "Why use Markdown files instead of a database?"
-    hint: "Consider version control, portability, and editing flexibility."
+    question: Why use Markdown files instead of a database?
+    hint: Consider version control, portability, and editing flexibility.
+author: ''
+hidden_sections:
+  - assignment
+  - blocks
 ---
-
 ## Platform Architecture
 
 This platform is built with simplicity and longevity in mind. Here's how the pieces fit together:
@@ -59,7 +62,7 @@ This platform is built with simplicity and longevity in mind. Here's how the pie
 
 All content lives in the `/content` directory as plain Markdown files:
 
-```
+```plain
 content/
 ├── clusters/           # Cluster definitions
 │   ├── getting-started.md
@@ -89,7 +92,7 @@ The result is a fast, secure, static site with no database or server to maintain
 
 ### The CMS Interface
 
-While you *can* edit Markdown files directly, the CMS provides a friendlier interface:
+While you _can_ edit Markdown files directly, the CMS provides a friendlier interface:
 
 - **Visual forms** for each field (title, description, etc.)
 - **Rich text editing** for lesson content
@@ -113,7 +116,7 @@ The entire stack is free or very low cost for typical usage.
 ## Key Files to Know
 
 | File | Purpose |
-|------|---------|
+| --- | --- |
 | `static/admin/config.template.yml` | CMS schema definition (config generated at build time) |
 | `content/settings/site.json` | Site title, description, author |
 | `content/pages/home.md` | Homepage content |
@@ -130,4 +133,4 @@ This platform handles the technical complexity so you can focus on content:
 - **No deployment scripts**: Push to GitHub, site updates automatically
 - **No coding required**: The CMS handles content editing visually
 
-You *can* customize the code if you want to, but it's entirely optional.
+You _can_ customize the code if you want to, but it's entirely optional.
