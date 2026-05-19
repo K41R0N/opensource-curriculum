@@ -4,7 +4,7 @@ Instructions for AI agents working on this project. Read this entire document be
 
 ## Project Overview
 
-A SvelteKit curriculum website with Git-based CMS. Content is stored as Markdown files and dynamically loaded at build/runtime.
+A SvelteKit curriculum website with Git-based CMS. Content is stored as Markdown files and dynamically loaded at build/runtime. This is a **fork-friendly template** — replace the starter content with your own curriculum while keeping the infrastructure.
 
 | Aspect | Details |
 |--------|---------|
@@ -12,6 +12,7 @@ A SvelteKit curriculum website with Git-based CMS. Content is stored as Markdown
 | CMS | Sveltia CMS (Decap/Netlify CMS compatible) |
 | Hosting | Netlify with serverless functions |
 | Content | Markdown files with YAML frontmatter |
+| Auth | Cloudflare Worker (GitHub OAuth) |
 
 ### Key Architecture Principle
 
@@ -33,6 +34,7 @@ content/pages/*.md     ──┘
 | `src/lib/types/content.ts` | TypeScript type definitions | Adding new content fields |
 | `static/admin/config.template.yml` | CMS schema template | Adding new fields (must match types) |
 | `CONTENT_ARCHITECTURE.md` | Content schema documentation | After any schema changes |
+| `CURRICULUM_OUTLINE.md` | Course structure blueprint | When adding/restructuring clusters |
 
 ### Files You Should NOT Modify (Usually)
 
@@ -41,6 +43,29 @@ content/pages/*.md     ──┘
 | `src/lib/data/curriculum.ts` | Just re-exports types; no logic |
 | `netlify.toml` | Build config is correct |
 | `svelte.config.js` | Framework config is correct |
+
+---
+
+## Course Structure Template
+
+This template ships with 7 clusters and 23 lessons demonstrating the platform. Replace with your own curriculum:
+
+| # | Cluster | Type | Purpose |
+|---|---------|------|---------|
+| 1 | Getting Started | Foundation | Why depth-first learning matters |
+| 2 | Building with AI | Foundation | AI-assisted curriculum building |
+| 3 | Building Manually | Foundation | Step-by-step manual approach |
+| 4 | Deployment & Customization | Specialization | Setup and branding |
+| 5 | Working with Content | Specialization | Editing workflows |
+| 6 | Making It Yours | Specialization | Visual customization |
+| 7 | API & Data Access | Specialization | Programmatic access |
+
+### Pedagogical Design
+
+The template demonstrates **deliberate friction** — learners build understanding through effort:
+- Structured reading → reflection → action
+- Foundation clusters establish mental models before specialization
+- Knowledge checks require honest self-evaluation
 
 ---
 
@@ -54,6 +79,7 @@ title: "Cluster Title"           # Required: Display name
 slug: cluster-slug               # Required: URL identifier (unique)
 order: 1                         # Required: Sort position (1-based, unique)
 description: "Brief summary"     # Required: 1-2 sentences
+is_foundation: true              # Required: true for foundation clusters
 ---
 
 Optional markdown body for extended overview...
@@ -70,26 +96,29 @@ order: 1                         # Required: Position within cluster
 description: "Brief summary"     # Required
 author: "Author Name"            # Optional
 featured_image: "/images/..."    # Optional
-objectives:                      # Optional: List of strings
-  - "Objective 1"
-  - "Objective 2"
-key_concepts:                    # Optional: List of objects
-  - name: "Concept Name"
-    explanation: |
-      Markdown explanation...
 assignment:                      # Optional: Object
   instructions: |
     Markdown instructions...
   url: "https://..."
   reading_title: "Title"
-knowledge_check:                 # Optional: List of objects
-  - question: "Question text?"
+blocks:                          # Optional: Typed content blocks (max 15)
+  - type: objectives
+    items: ["Objective 1", "Objective 2"]
+  - type: concept
+    name: "Concept Name"
+    explanation: |
+      Markdown explanation...
+  - type: check
+    question: "Question?"
     hint: "Optional hint"
-additional_resources:            # Optional: List of objects
-  - title: "Resource Title"
-    author: "Author"
+  - type: resource
+    title: "Resource Title"
     url: "https://..."
     description: "Brief description"
+  - type: ask | example | tip | important | reflection | context
+    title: "Optional override title"
+    content: |
+      Markdown content...
 ---
 
 Optional markdown body for introduction...
@@ -100,18 +129,21 @@ Optional markdown body for introduction...
 **Home page** (`home.md`):
 ```yaml
 ---
-hero_title: "Main Headline"
-hero_subtitle: "Supporting text"
+title: "Curriculum Title"        # Book cover title
+tagline: "One-sentence value proposition"
+cta_text: "Begin Reading"
 ---
-Body content...
+
+Optional markdown body for philosophy/approach section...
 ```
 
-**Other pages** (`about.md`, etc.):
+**About page** (`about.md`):
 ```yaml
 ---
 title: "Page Title"
 subtitle: "Optional subtitle"
 ---
+
 Body content...
 ```
 
@@ -146,7 +178,8 @@ Body content...
 1. Create `content/clusters/{slug}.md`
 2. Add YAML frontmatter with required fields
 3. Ensure `order` is unique among clusters
-4. Optionally add lessons that reference this cluster
+4. Set `is_foundation: true` for "Start Here" clusters
+5. Optionally add lessons that reference this cluster
 
 ### Modifying the CMS Schema
 
@@ -238,10 +271,10 @@ Error: Lesson validation errors:
 
 | Content | Pattern | Example |
 |---------|---------|---------|
-| Cluster | `{slug}.md` | `mediation-architecture.md` |
-| Lesson | `{cluster}-{slug}.md` | `mediation-architecture-framing.md` |
+| Cluster | `{slug}.md` | `getting-started.md` |
+| Lesson | `{cluster}-{slug}.md` | `getting-started-why-curriculum.md` |
 | Page | `{name}.md` | `about.md` |
-| Image | Descriptive kebab-case | `social-construction-reality.png` |
+| Image | Descriptive kebab-case | `featured-image.png` |
 
 ---
 
@@ -264,13 +297,14 @@ instructions: |
   Read the author's essay "Title" carefully.
 
 # BAD: Inconsistent indentation
-key_concepts:
-- name: Foo
-   explanation: Bar  # Wrong indent
+blocks:
+  - type: concept
+   name: Foo  # Wrong indent
 
 # GOOD: Consistent 2-space indent
-key_concepts:
-  - name: Foo
+blocks:
+  - type: concept
+    name: Foo
     explanation: Bar
 ```
 
@@ -310,8 +344,8 @@ pnpm check      # TypeScript validation
 
 ```
 content/
-├── clusters/     # 9 cluster files
-├── lessons/      # 25 lesson files
+├── clusters/     # Cluster files (7 default)
+├── lessons/      # Lesson files (23 default)
 ├── pages/        # home.md, about.md
 └── settings/     # site.json
 
@@ -325,6 +359,11 @@ src/lib/
 static/admin/
 └── config.template.yml      # CMS schema template (config.yml generated at build)
 
+workers/
+└── cms-auth/
+    ├── index.js             # OAuth worker code
+    └── wrangler.toml        # Worker config
+
 src/routes/
 ├── +layout.server.ts        # Loads clusters for all pages
 ├── api/                     # JSON endpoints
@@ -337,6 +376,13 @@ src/routes/
 
 ## Related Documentation
 
-- [CONTENT_ARCHITECTURE.md](./CONTENT_ARCHITECTURE.md) — Full schema reference
-- [METHODOLOGY.md](./METHODOLOGY.md) — Guide for building curricula
-- [README.md](./README.md) — Project overview
+| Document | Purpose |
+|----------|---------|
+| [CONTENT_ARCHITECTURE.md](./CONTENT_ARCHITECTURE.md) | Full schema reference with TypeScript types |
+| [CURRICULUM_OUTLINE.md](./CURRICULUM_OUTLINE.md) | Course structure blueprint |
+| [METHODOLOGY.md](./METHODOLOGY.md) | Curriculum-building philosophy |
+| [.impeccable.md](./.impeccable.md) | Brand personality and design system |
+| [DESIGN_TRANSFORMATION.md](./DESIGN_TRANSFORMATION.md) | Visual design documentation |
+| [docs/cms-setup.md](./docs/cms-setup.md) | CMS auth configuration |
+| [docs/styling-guide.md](./docs/styling-guide.md) | Visual customization guide |
+| [README.md](./README.md) | Project overview |
