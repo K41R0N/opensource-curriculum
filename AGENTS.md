@@ -105,6 +105,118 @@ blocks:                          # Optional: max 15 typed content blocks
 The lesson body goes here in markdown. This IS the lesson — not just an intro.
 ```
 
+---
+
+## ⚠️ CRITICAL: Where the Lesson Content Lives
+
+**The markdown body below the `---` frontmatter fence IS the lesson.** This is the most important rule in this entire document.
+
+### The Rule
+
+The markdown body must contain the **full instructional content** — explanations, examples, step-by-step walkthroughs, frameworks, worked scenarios, and the assignment. It is NOT an introduction, NOT a summary, NOT a paragraph that describes what will be taught. It IS the teaching.
+
+### What Goes Where
+
+| Location | Purpose | Length |
+|----------|---------|--------|
+| `description:` (frontmatter) | One-sentence preview shown in listings | 1-2 sentences |
+| **Markdown body** | **THE ACTUAL LESSON — teaches the concepts** | **800-2000 words** |
+| `## Do This Now` (end of body) | The assignment — what the learner does after reading | 100-300 words |
+| `blocks:` (frontmatter) | 0-2 supplementary cards (a key term, a tip) | Brief |
+
+### Correct Example
+
+```markdown
+---
+title: "Decomposing Tasks"
+slug: decomposing-tasks
+cluster: understanding-work
+order: 2
+description: "Learn to break complex deliverables into atomic, observable steps."
+---
+
+Every piece of work you do is actually a chain of smaller steps. When you "write a blog post,"
+you're actually doing 6-10 distinct things: researching, outlining, drafting, finding images,
+formatting, reviewing, publishing. Each of those has different inputs, tools, and decision points.
+
+This matters for AI augmentation because AI is good at some of those steps and bad at others...
+
+## The 6-Field Schema
+
+For each atomic step, capture these six fields:
+
+1. **Description** — What are you actually doing? (verb + object)
+2. **Tools** — What software/platforms do you use?
+3. **Input** — What do you need before you can start?
+4. **Output** — What does "done" look like?
+5. **Time** — How long does this typically take?
+6. **Pain Points** — Where does it get frustrating or slow?
+
+### Worked Example: Writing a Social Media Post
+
+| Field | Value |
+|-------|-------|
+| Description | Draft caption for Instagram carousel |
+| Tools | Google Docs, brand voice guide |
+| Input | Carousel topic, key message, target audience |
+| Output | 150-word caption with CTA and 5 hashtags |
+| Time | 20 minutes |
+| Pain Points | Matching brand voice, hashtag research |
+
+[... 600 more words of explanation, examples, and nuance ...]
+
+## Do This Now
+
+Pick one task you did today. Decompose it into at least 5 atomic steps using the 6-field schema.
+For each step, note whether it feels like something AI could help with and why.
+```
+
+### WRONG Example (What Agents Keep Doing)
+
+```markdown
+---
+title: "Decomposing Tasks"
+slug: decomposing-tasks
+cluster: understanding-work
+order: 2
+description: "Learn to break complex deliverables into atomic, observable steps."
+blocks:
+  - type: objectives
+    items:
+      - "Understand the 6-field schema"
+      - "Learn to decompose tasks"
+      - "Identify decision points"
+  - type: concept
+    name: "6-Field Schema"
+    explanation: "A methodology for documenting tasks."
+  - type: concept
+    name: "Atomic Steps"
+    explanation: "The smallest observable unit of work."
+  - type: tip
+    content: "Start with tasks you do daily."
+  - type: resource
+    title: "Task Analysis Guide"
+    url: "https://example.com"
+    description: "Further reading"
+assignment:
+  instructions: "Decompose a task into 5 steps."
+---
+
+In this lesson, you'll learn how to break down complex tasks into smaller steps.
+This is an important skill for working with AI tools effectively.
+```
+
+**Why this is wrong:**
+- The body is 2 sentences of fluff that describe the lesson instead of teaching it
+- All the substance is crammed into blocks (which render as small sidebar cards)
+- 5 blocks create visual noise — the page is all cards and no content
+- The assignment is a one-liner with no context
+- A learner reading this page learns nothing
+
+### The Test
+
+Before saving a lesson, ask: **"If I deleted all the blocks and the frontmatter, would the markdown body alone teach someone this topic?"** If no, the lesson needs more body content.
+
 ### Page (`content/pages/{name}.md`)
 
 **Home page** (`home.md`):
@@ -144,23 +256,28 @@ Body content...
 
 ## Blocks Discipline
 
-Blocks are **supplementary cards** that render alongside the lesson body. They are NOT the lesson itself.
+Blocks are **supplementary cards** that render alongside the lesson body. They are NOT the lesson itself. They are the equivalent of margin notes in a textbook — helpful, but the textbook works without them.
+
+### The Hard Rule
+
+**0-2 blocks per lesson. No exceptions.** If you find yourself adding a third block, move that content into the markdown body instead.
 
 ### When to use blocks
 
-- **1-2 blocks per lesson maximum.** More than that creates visual noise.
-- Use `objectives` at the start of a cluster's first lesson to set expectations.
-- Use `concept` to define a single key term the lesson introduces.
-- Use `tip` or `important` for a single critical takeaway.
-- Use `resource` to link one essential external reading.
-- Use `check` for a single self-assessment question.
+- `concept` — to define ONE key term the lesson introduces (like a glossary entry)
+- `tip` or `important` — for ONE critical "don't forget this" takeaway
+- `resource` — to link ONE essential external reading
 
 ### When NOT to use blocks
 
 - Do not use blocks to teach the lesson. The markdown body teaches the lesson.
 - Do not use blocks to list every concept. Pick the ONE most important.
-- Do not use `objectives` on every lesson — only where orientation is needed.
+- Do not use `objectives` on every lesson — only on the first lesson of a cluster.
+- Do not use `check` blocks — put questions in the body text instead.
 - Do not use `additional_resources` lists. One resource block is enough.
+- Do not use `reflection` blocks — put reflection prompts in the body.
+- Do not use `example` blocks — put examples in the body where they belong in the narrative flow.
+- Do not use `context` blocks — context belongs in the body's opening paragraphs.
 
 ### The "Do This Now" Convention
 
@@ -246,6 +363,17 @@ The template uses CSS custom properties for all visual tokens. Change these in `
 4. Adjust page-level `<style>` blocks for layout changes
 5. Test all pages: home, curriculum list, cluster, lesson, about
 6. Verify CMS still works at `/admin`
+
+---
+
+## Agent Crawlability
+
+Every lesson page is **fully server-side rendered**. When an agent fetches a lesson URL (e.g., `https://yoursite.com/curriculum/cluster-slug/lesson-slug`), the complete HTML including all body content is in the initial response. No JavaScript execution is required to read the lesson.
+
+This means:
+- Agents can `curl` any lesson URL and get the full content
+- The `/llms-full.txt` endpoint provides all lessons in one request
+- Individual lesson URLs work for "read this and help me" workflows
 
 ---
 
