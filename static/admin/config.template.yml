@@ -121,15 +121,15 @@ collections:
         hint: "1-2 sentences shown in lesson listings"
 
       # ═══════════════════════════════════════════════════════════════════════
-      # CORE CONTENT (What do learners engage with?)
+      # CORE CONTENT (The actual lesson)
       # ═══════════════════════════════════════════════════════════════════════
-      - label: Introduction
+      - label: Lesson Content
         name: body
         widget: markdown
         required: false
-        hint: "Context and significance of the reading (2-4 paragraphs)"
+        hint: "THIS IS THE LESSON. Write 800-2000 words that teach the concepts, walk through examples, and explain frameworks. End with '## Do This Now' for the assignment. This is not an intro — it is the full instructional content."
 
-      - label: Assignment
+      - label: Assignment (Legacy)
         name: assignment
         widget: object
         required: false
@@ -138,20 +138,20 @@ collections:
           - { label: Instructions, name: instructions, widget: markdown }
           - { label: Reading URL, name: url, widget: string, required: false, hint: "Link to access the reading" }
           - { label: Reading Title, name: reading_title, widget: string, required: false, hint: "Full citation" }
-        hint: "The primary reading with access link"
+        hint: "Optional. Prefer writing assignments inline as '## Do This Now' at the end of the lesson body. This structured field exists for backwards compatibility."
 
       # ═══════════════════════════════════════════════════════════════════════
-      # CONTENT BLOCKS (Unified component system)
-      # All card-like components in a single, flexible list
+      # CONTENT BLOCKS (Supplementary cards — NOT the lesson)
+      # These are margin notes. The lesson body teaches; blocks supplement.
       # ═══════════════════════════════════════════════════════════════════════
-      - label: Content Blocks
+      - label: Content Blocks (0-2 max)
         name: blocks
         widget: list
         required: false
         collapsed: true
         minimize_collapsed: true
-        max: 15
-        hint: "Add objectives, concepts, questions, resources, and callouts (max 15)"
+        max: 2
+        hint: "0-2 supplementary cards only. Use for ONE key term or ONE tip. The lesson body does the teaching — blocks are margin notes. If you want a third block, put that content in the body instead."
         types:
           # Learning Objectives Block
           - label: "Learning Objectives"
@@ -253,7 +253,7 @@ collections:
         multiple: true
         required: false
         options:
-          - { label: "Introduction", value: "body" }
+          - { label: "Lesson Content", value: "body" }
           - { label: "Assignment", value: "assignment" }
           - { label: "Content Blocks", value: "blocks" }
         hint: "Temporarily hide sections without deleting content"
