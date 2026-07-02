@@ -316,6 +316,36 @@ function parseMarkdown(content: string): string {
 }
 
 /**
+ * Extract a "## Do This Now" (or "### Do This Now") section from a lesson's
+ * markdown body. Returns the section's content as raw markdown (without the
+ * heading itself), or null if no such section exists.
+ *
+ * This makes assignments machine-readable for AI agents even when the
+ * structured frontmatter `assignment:` field is omitted — assignments can
+ * live inline in the body instead.
+ */
+function extractDoThisNowSection(markdown: string): string | null {
+	if (!markdown) return null;
+	const headingRegex = /^(#{2,3})\s+do\s+this\s+now\s*:?\s*$/im;
+	const match = markdown.match(headingRegex);
+	if (!match || match.index === undefined) return null;
+
+	const headingLevel = match[1].length; // 2 or 3
+	const afterHeadingNewline = markdown.indexOf('\n', match.index);
+	if (afterHeadingNewline < 0) return null;
+
+	const remainder = markdown.slice(afterHeadingNewline + 1);
+	// Stop at the next heading of the same or higher level
+	const stopPattern = new RegExp(`^#{1,${headingLevel}}\\s+`, 'm');
+	const stopMatch = remainder.match(stopPattern);
+	const sectionBody = stopMatch && stopMatch.index !== undefined
+		? remainder.slice(0, stopMatch.index)
+		: remainder;
+	const trimmed = sectionBody.trim();
+	return trimmed || null;
+}
+
+/**
  * Load a complete lesson with all fields for the lesson detail page
  */
 export async function loadFullLesson(clusterSlug: string, lessonSlug: string): Promise<{ lesson: Lesson | null; hasContent: boolean }> {
@@ -363,12 +393,24 @@ export async function loadFullLesson(clusterSlug: string, lessonSlug: string): P
 				const bodyHtml = content.trim() ? await marked(content.trim()) : '';
 
 				// Parse markdown in assignment instructions (with safe checks)
-				let parsedAssignment: { instructions: string; url?: string; reading_title?: string } | undefined;
+				let parsedAssignment: { instructions: string; url?: string; reading_title?: string; source?: 'frontmatter' | 'body' } | undefined;
 				if (data.assignment && typeof data.assignment === 'object' && typeof data.assignment.instructions === 'string') {
 					parsedAssignment = {
 						...data.assignment,
-						instructions: parseMarkdown(data.assignment.instructions)
+						instructions: parseMarkdown(data.assignment.instructions),
+						source: 'frontmatter'
 					};
+				} else {
+					// Fallback: extract the "## Do This Now" section from the lesson body.
+					// This supports courses where assignments are inline in the prose
+					// rather than in a structured frontmatter field.
+					const doThisNow = extractDoThisNowSection(content);
+					if (doThisNow) {
+						parsedAssignment = {
+							instructions: parseMarkdown(doThisNow),
+							source: 'body'
+						};
+					}
 				}
 
 				// Parse unified blocks (with safe checks and markdown parsing)

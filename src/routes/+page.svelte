@@ -71,9 +71,16 @@
 			<span class="book-label">Self-Directed Research</span>
 			<h1 class="book-title">{home.title}</h1>
 			<p class="book-tagline">{home.tagline}</p>
-			<a href={ctaHref} class="book-cta">
-				{home.cta_text}
-			</a>
+				<div class="book-stats">
+					<span class="stat">{clusters.length} clusters</span>
+					<span class="stat-dot">·</span>
+					<span class="stat">{totalLessons} lessons</span>
+					<span class="stat-dot">·</span>
+					<span class="stat">Self-paced</span>
+				</div>
+				<a href={ctaHref} class="book-cta">
+					{home.cta_text}
+				</a>
 		</div>
 	</div>
 </header>
@@ -189,6 +196,19 @@
 		line-height: 1.6;
 		color: var(--color-text-muted);
 		margin: 0;
+	}
+
+	.book-stats {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-family: var(--font-body);
+		font-size: 0.8125rem;
+		color: var(--color-text-muted);
+	}
+
+	.stat-dot {
+		opacity: 0.4;
 	}
 
 	.book-cta {

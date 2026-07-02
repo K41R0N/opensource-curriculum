@@ -1,4 +1,4 @@
-# Agent Instructions
+# AGENTS.md
 
 Instructions for AI agents working on this project. Read this entire document before making changes.
 
@@ -43,29 +43,7 @@ content/pages/*.md     ──┘
 | `src/lib/data/curriculum.ts` | Just re-exports types; no logic |
 | `netlify.toml` | Build config is correct |
 | `svelte.config.js` | Framework config is correct |
-
----
-
-## Course Structure Template
-
-This template ships with 7 clusters and 23 lessons demonstrating the platform. Replace with your own curriculum:
-
-| # | Cluster | Type | Purpose |
-|---|---------|------|---------|
-| 1 | Getting Started | Foundation | Why depth-first learning matters |
-| 2 | Building with AI | Foundation | AI-assisted curriculum building |
-| 3 | Building Manually | Foundation | Step-by-step manual approach |
-| 4 | Deployment & Customization | Specialization | Setup and branding |
-| 5 | Working with Content | Specialization | Editing workflows |
-| 6 | Making It Yours | Specialization | Visual customization |
-| 7 | API & Data Access | Specialization | Programmatic access |
-
-### Pedagogical Design
-
-The template demonstrates **deliberate friction** — learners build understanding through effort:
-- Structured reading → reflection → action
-- Foundation clusters establish mental models before specialization
-- Knowledge checks require honest self-evaluation
+| `workers/cms-auth/*` | Cloudflare Worker config — do not touch |
 
 ---
 
@@ -96,12 +74,15 @@ order: 1                         # Required: Position within cluster
 description: "Brief summary"     # Required
 author: "Author Name"            # Optional
 featured_image: "/images/..."    # Optional
-assignment:                      # Optional: Object
+hidden_sections:                 # Optional: hide without deleting
+  - blocks
+  - assignment
+assignment:                      # Optional: structured assignment
   instructions: |
     Markdown instructions...
   url: "https://..."
   reading_title: "Title"
-blocks:                          # Optional: Typed content blocks (max 15)
+blocks:                          # Optional: max 15 typed content blocks
   - type: objectives
     items: ["Objective 1", "Objective 2"]
   - type: concept
@@ -121,7 +102,7 @@ blocks:                          # Optional: Typed content blocks (max 15)
       Markdown content...
 ---
 
-Optional markdown body for introduction...
+The lesson body goes here in markdown. This IS the lesson — not just an intro.
 ```
 
 ### Page (`content/pages/{name}.md`)
@@ -161,6 +142,137 @@ Body content...
 
 ---
 
+## Blocks Discipline
+
+Blocks are **supplementary cards** that render alongside the lesson body. They are NOT the lesson itself.
+
+### When to use blocks
+
+- **1-2 blocks per lesson maximum.** More than that creates visual noise.
+- Use `objectives` at the start of a cluster's first lesson to set expectations.
+- Use `concept` to define a single key term the lesson introduces.
+- Use `tip` or `important` for a single critical takeaway.
+- Use `resource` to link one essential external reading.
+- Use `check` for a single self-assessment question.
+
+### When NOT to use blocks
+
+- Do not use blocks to teach the lesson. The markdown body teaches the lesson.
+- Do not use blocks to list every concept. Pick the ONE most important.
+- Do not use `objectives` on every lesson — only where orientation is needed.
+- Do not use `additional_resources` lists. One resource block is enough.
+
+### The "Do This Now" Convention
+
+Instead of using the frontmatter `assignment:` field, lessons can include a `## Do This Now` section at the end of their markdown body. The system automatically extracts this section and surfaces it as a structured assignment in the JSON API and for AI agents.
+
+This is preferred because:
+- The assignment is part of the lesson's narrative flow
+- It reads naturally in the rendered page
+- It's still machine-readable for agents via the API
+
+### `hidden_sections`
+
+To hide blocks or assignments without deleting them from the file:
+```yaml
+hidden_sections:
+  - blocks      # Hides all blocks
+  - assignment  # Hides the assignment card
+  - body        # Hides the markdown body (rare)
+```
+
+---
+
+## Theming Guide
+
+The visual design lives entirely in `src/app.css` and the page-level `<style>` blocks. You can completely transform the look without touching content or CMS config.
+
+### Safe to change (will not break CMS or content)
+
+| File | What to customize |
+|------|-------------------|
+| `src/app.css` | CSS variables (colors, fonts, spacing, shadows, radius) |
+| `src/app.html` | Font loading (`<link>` tags for Google Fonts or `@font-face`) |
+| `src/routes/+page.svelte` | Homepage layout and styles |
+| `src/routes/+layout.svelte` | Navigation and footer styles |
+| `src/routes/curriculum/+page.svelte` | Cluster listing styles |
+| `src/routes/curriculum/[cluster]/+page.svelte` | Lesson list styles |
+| `src/routes/curriculum/[cluster]/[lesson]/+page.svelte` | Lesson reading styles |
+| `src/routes/about/+page.svelte` | About page styles |
+
+### NOT safe to change (will break things)
+
+| File | Why |
+|------|-----|
+| `src/lib/data/curriculum.server.ts` | Content loading logic |
+| `src/lib/types/content.ts` | Type definitions |
+| `static/admin/config.template.yml` | CMS field schema |
+| `netlify.toml` | Build/deploy config |
+| `workers/cms-auth/*` | Auth worker config |
+
+### CSS Variable System
+
+The template uses CSS custom properties for all visual tokens. Change these in `:root` to transform the entire site:
+
+```css
+/* Colors */
+--color-primary          /* Main brand color (buttons, links, accents) */
+--color-primary-hover    /* Hover state */
+--color-background       /* Page background */
+--color-surface          /* Card/component backgrounds */
+--color-surface-elevated /* Elevated surfaces */
+--color-text             /* Primary text */
+--color-text-muted       /* Secondary text */
+--color-text-inverse     /* Text on primary-colored backgrounds */
+--color-border           /* Default borders */
+--color-border-light     /* Subtle borders */
+
+/* Typography */
+--font-heading           /* Display/title font family */
+--font-body              /* Body text font family */
+--font-mono              /* Code font family */
+
+/* Shape & Motion */
+--radius-base            /* Corner roundness */
+--shadow-sm / --shadow-md /* Elevation shadows */
+--transition-base        /* Animation timing */
+```
+
+### Design Transformation Workflow
+
+1. Define your brand personality in `.impeccable.md`
+2. Choose fonts and add them to `src/app.html`
+3. Set CSS variables in `src/app.css` `:root`
+4. Adjust page-level `<style>` blocks for layout changes
+5. Test all pages: home, curriculum list, cluster, lesson, about
+6. Verify CMS still works at `/admin`
+
+---
+
+## LLM-Friendly Endpoints
+
+The site exposes content for AI agents at multiple levels of detail:
+
+| Endpoint | Purpose | Best for |
+|----------|---------|----------|
+| `/llms-full.txt` | Every lesson body in one file | One-shot context loading |
+| `/llms.txt` | Course index with URLs and agent guidance | Orientation and navigation |
+| `/api/curriculum.json` | Structured JSON with optional content | Programmatic access |
+| `/api/curriculum.json?content=true` | JSON with full HTML content + assignments | Rich integration |
+| `/api/manifest.json` | Schema.org JSON-LD | Search engines |
+| `/feed.xml` | RSS 2.0 | Syndication |
+| `/sitemap.xml` | URL list | Crawlers |
+
+### Agent Guidance Pattern
+
+The `/llms.txt` and `/llms-full.txt` endpoints include a "How To Help A User" section that instructs agents to:
+1. Read the lesson before guiding the user
+2. Stay faithful to the course's own frameworks
+3. Help the user do the assignment — not do it for them
+4. Reference companion tools when relevant
+
+---
+
 ## Common Tasks
 
 ### Adding a New Lesson
@@ -169,7 +281,9 @@ Body content...
 2. Add YAML frontmatter with all required fields
 3. Ensure `cluster` field matches an existing cluster's slug
 4. Ensure `order` is unique within that cluster
-5. Add markdown body content
+5. Write the lesson body in markdown (this is the actual teaching content)
+6. Optionally add a `## Do This Now` section at the end for the assignment
+7. Optionally add 1-2 blocks for key concepts or resources
 
 **Validation happens at build time.** If required fields are missing or cluster doesn't exist, build fails with descriptive error.
 
@@ -219,23 +333,6 @@ pnpm build
 # Preview production build
 pnpm preview
 ```
-
----
-
-## API Endpoints
-
-The site provides machine-readable content at:
-
-| Endpoint | Returns |
-|----------|---------|
-| `/api/curriculum.json` | Full curriculum JSON with CORS |
-| `/api/manifest.json` | Schema.org JSON-LD |
-| `/feed.xml` | RSS 2.0 feed |
-| `/sitemap.xml` | XML sitemap |
-| `/llms.txt` | Human-readable site guide |
-| `/robots.txt` | Crawler instructions |
-
-These are SvelteKit server endpoints in `src/routes/`. They use the same `loadCurriculum()` function as the website.
 
 ---
 
@@ -344,15 +441,15 @@ pnpm check      # TypeScript validation
 
 ```
 content/
-├── clusters/     # Cluster files (7 default)
-├── lessons/      # Lesson files (23 default)
+├── clusters/     # Cluster files
+├── lessons/      # Lesson files
 ├── pages/        # home.md, about.md
 └── settings/     # site.json
 
 src/lib/
 ├── data/
 │   ├── curriculum.ts        # Type re-exports only
-│   └── curriculum.server.ts # Content loading logic
+│   └── curriculum.server.ts # Content loading + Do This Now extraction
 └── types/
     └── content.ts           # All TypeScript types
 
@@ -362,12 +459,14 @@ static/admin/
 workers/
 └── cms-auth/
     ├── index.js             # OAuth worker code
-    └── wrangler.toml        # Worker config
+    └── wrangler.toml        # Worker config (DO NOT MODIFY)
 
 src/routes/
 ├── +layout.server.ts        # Loads clusters for all pages
 ├── api/                     # JSON endpoints
 ├── feed.xml/                # RSS endpoint
+├── llms.txt/                # Agent guidance (short index)
+├── llms-full.txt/           # Agent guidance (full course dump)
 └── curriculum/[cluster]/[lesson]/
     └── +page.server.ts      # Loads individual lesson
 ```
@@ -381,7 +480,7 @@ src/routes/
 | [CONTENT_ARCHITECTURE.md](./CONTENT_ARCHITECTURE.md) | Full schema reference with TypeScript types |
 | [CURRICULUM_OUTLINE.md](./CURRICULUM_OUTLINE.md) | Course structure blueprint |
 | [METHODOLOGY.md](./METHODOLOGY.md) | Curriculum-building philosophy |
-| [.impeccable.md](./.impeccable.md) | Brand personality and design system |
+| [.impeccable.md](./.impeccable.md) | Brand personality and design system template |
 | [DESIGN_TRANSFORMATION.md](./DESIGN_TRANSFORMATION.md) | Visual design documentation |
 | [docs/cms-setup.md](./docs/cms-setup.md) | CMS auth configuration |
 | [docs/styling-guide.md](./docs/styling-guide.md) | Visual customization guide |

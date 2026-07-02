@@ -427,6 +427,30 @@ The CMS uses its own preview styling. Your theme won't affect the CMS admin inte
 
 ---
 
+## Content Authoring Tips
+
+### Writing Lessons That Teach
+
+The markdown body IS the lesson. It should:
+- Explain concepts step by step with concrete examples
+- Walk through a framework or methodology
+- Show before/after or worked examples
+- End with a "## Do This Now" section for the assignment
+
+The body should NOT:
+- Just describe what will be learned (that's the `description` field)
+- List bullet points of topics without explanation
+- Rely on blocks to carry the teaching load
+
+### Blocks Are Supplements, Not Content
+
+Use 0-2 blocks per lesson. They are sidebar cards, not the main event:
+- One `concept` block to define a key term
+- One `tip` or `important` block for a critical takeaway
+- Or nothing — many lessons need no blocks at all
+
+---
+
 ## Quick Reference
 
 ### File Locations
